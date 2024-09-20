@@ -1,14 +1,19 @@
 package org.firstinspires.ftc.teamcode;
 
 //import com.google.blocks.ftcrobotcontroller.runtime.CRServoAccess;
+import com.acmerobotics.roadrunner.Pose2d;
+import com.acmerobotics.roadrunner.PoseVelocity2d;
+import com.acmerobotics.roadrunner.Vector2d;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.HardwareMap;
 
 @TeleOp
 public class TesterTeleop extends LinearOpMode {
 
-    BaseRobot robot;
+    private com.qualcomm.robotcore.hardware.HardwareMap HardwareMap;
+    BaseRobot robot = new BaseRobot(HardwareMap);
 
     int leftSliderPos = 0;
     int rightSliderPos = 0;
@@ -20,10 +25,10 @@ public class TesterTeleop extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
 
-
-
+        MecanumDrive d = new MecanumDrive(hardwareMap, new Pose2d(0, 0, 0));
         robot = new BaseRobot(hardwareMap);
 
+        //motor encoder setup
         robot.hangArm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.hangArm.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         hangArmPos = robot.hangArm.getCurrentPosition();
@@ -38,12 +43,14 @@ public class TesterTeleop extends LinearOpMode {
         robot.pivotMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.pivotMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         pivotMotorPos = robot.pivotMotor.getCurrentPosition();
+        //end
 
         waitForStart();
 
         while(!isStopRequested() && opModeIsActive()){
 
 
+        robot.drive.setDrivePowers(new PoseVelocity2d(new Vector2d(gamepad1.left_stick_x, gamepad1.left_stick_y), gamepad1.right_stick_y));
 
             //worm gear box
             robot.pivotMotor.setPower(-gamepad1.left_stick_y);
@@ -51,26 +58,24 @@ public class TesterTeleop extends LinearOpMode {
 
             //hang arm
             double hangArmMotorPower = gamepad1.right_trigger - gamepad1.left_trigger;
-            //int hangArmMotorDelta = (int) ()
+            //int hangArmMotorDelta = (int) ((gamepad1.right_trigger - gamepad1.left_trigger) * 10);
             if(hangArmMotorPower > .1){
-                hangArmPos += gamepad1.right_trigger * 10;
+                hangArmPos += gamepad1.right_trigger * 10;//how would i get this to work with trigger
             }
             if(hangArmMotorPower < -.1){
                 hangArmPos -= gamepad1.right_trigger * 10;
             }
             //end hang arm
+            //_____________________________________________________________________________________
 
+            //slides
             int  slidesMotorDelta = (int) (gamepad1.right_stick_y * 10);
 
-            if(slidesMotorDelta > 1){
+
                 leftSliderPos += slidesMotorDelta;
                 rightSliderPos += slidesMotorDelta;
-            }
 
-            if (slidesMotorDelta < -1){
-                leftSliderPos -= slidesMotorDelta;
-                rightSliderPos -= slidesMotorDelta;
-            }
+
 
             robot.leftSlider.setTargetPosition(leftSliderPos);
             robot.rightSlider.setTargetPosition(rightSliderPos);
@@ -95,12 +100,25 @@ public class TesterTeleop extends LinearOpMode {
             }
 
 
+            //end slides
+            //_____________________________________________________________________________________
+
             if (gamepad1.dpad_down){
-                //slidesDown(); //sets slides position to 0
+                robot.slidesDown();//sets slides pos to 0
+            }
+            if (gamepad1.dpad_left){
+                robot.reachToSub();
+            }
+            if (gamepad1.dpad_right){
+                robot.sliderReset();
+            }
+            if (gamepad1.dpad_up){
+                robot.highScoring();
             }
 
 
-
+            //telemetry
+            //_____________________________________________________________________________________
             telemetry.addData("left slides position: ", leftSliderPos);
             telemetry.addData("hang arm position: ", hangArmPos);
             telemetry.addData("right slides position: ", rightSliderPos);
@@ -108,6 +126,8 @@ public class TesterTeleop extends LinearOpMode {
             telemetry.addData("Slides motor delta: ", slidesMotorDelta);
 
             telemetry.update();
+            //end telemetry
+            //_____________________________________________________________________________________
         }
     }
 }

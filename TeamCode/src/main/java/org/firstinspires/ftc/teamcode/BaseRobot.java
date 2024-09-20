@@ -1,11 +1,15 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.acmerobotics.roadrunner.Pose2d;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
-public class BaseRobot {
+
+public class BaseRobot{
+
+    public MecanumDrive drive;
 
     DcMotor leftSlider;//from the perspective of the robot
     DcMotor rightSlider;//from the perspective of the robot
@@ -14,8 +18,14 @@ public class BaseRobot {
 
 
 
+    int slidesMax = 5000;//change
+    int pivotMotorVertical = 0; //change
+    int pivotMotorHorizontal = 0; //change
+
 
     public BaseRobot(HardwareMap hwMap){
+
+        drive = new MecanumDrive(hwMap, new Pose2d(0, 0, 0));
 
         hangArm = hwMap.dcMotor.get("hangArm");
         //hangArm.setPower(1);
@@ -47,6 +57,7 @@ public class BaseRobot {
         rightSlider.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         leftSlider.setTargetPosition(0);
         rightSlider.setTargetPosition(0);
+        pivotMotor.setTargetPosition(pivotMotorVertical);
     }
     public void slidesUp(){
         int slidesMax = 10;//change
@@ -55,17 +66,23 @@ public class BaseRobot {
         leftSlider.setTargetPosition(slidesMax);
         leftSlider.setTargetPosition(slidesMax);
     }
+    public void highScoring(){
+        pivotMotor.setTargetPosition(pivotMotorVertical);
+        leftSlider.setTargetPosition(slidesMax);
+        rightSlider.setTargetPosition(slidesMax);
+
+    }
     public void slidesDown(){
         leftSlider.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         rightSlider.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         leftSlider.setTargetPosition(0);
         leftSlider.setTargetPosition(0);
     }
-    public void sub() {
-
+    public void reachToSub() {
         pivotMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        pivotMotor.setTargetPosition(0);//change
-        //set worm gear down and slides up
+        //pivotMotor.setTargetPosition();
+        //rightSlider.setTargetPosition();//half ish pos
+        //leftSlider.setTargetPosition();//half ish pos
     }
     public void sliderRunTo(int position){
         //leftSlider.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -74,8 +91,5 @@ public class BaseRobot {
         //rightSlider.setTargetPosition(position);
         //leftSlider.setPower(1);
         //rightSlider.setPower(1);
-
-
-
     }
 }
