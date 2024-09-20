@@ -13,7 +13,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 public class TesterTeleop extends LinearOpMode {
 
     private com.qualcomm.robotcore.hardware.HardwareMap HardwareMap;
-    BaseRobot robot = new BaseRobot(HardwareMap);
+    BaseRobot robot;
 
     int leftSliderPos = 0;
     int rightSliderPos = 0;
@@ -50,7 +50,7 @@ public class TesterTeleop extends LinearOpMode {
         while(!isStopRequested() && opModeIsActive()){
 
 
-        robot.drive.setDrivePowers(new PoseVelocity2d(new Vector2d(gamepad1.left_stick_x, gamepad1.left_stick_y), gamepad1.right_stick_y));
+        robot.drive.setDrivePowers(new PoseVelocity2d(new Vector2d(gamepad2.left_stick_x, gamepad2.left_stick_y), gamepad2.right_stick_y));
 
             //worm gear box
             robot.pivotMotor.setPower(-gamepad1.left_stick_y);
@@ -71,9 +71,13 @@ public class TesterTeleop extends LinearOpMode {
             //slides
             int  slidesMotorDelta = (int) (gamepad1.right_stick_y * 10);
 
-
+                if(Math.abs(slidesMotorDelta) > .1) {
                 leftSliderPos += slidesMotorDelta;
                 rightSliderPos += slidesMotorDelta;
+            }
+            if (gamepad1.dpad_down){
+                robot.slidesDown();//sets slides pos to 0
+            }
 
 
 
@@ -93,19 +97,17 @@ public class TesterTeleop extends LinearOpMode {
                 leftSliderPos = 0;
             }
             if(leftSliderPos > 3000) {//change number
-                //leftSliderPos = 3000 change number
+                leftSliderPos = 3000;
             }
             if(rightSliderPos > 3000) {//change number
-                //leftSliderPos = 3000 change number
+                rightSliderPos = 3000;
             }
 
 
             //end slides
             //_____________________________________________________________________________________
 
-            if (gamepad1.dpad_down){
-                robot.slidesDown();//sets slides pos to 0
-            }
+
             if (gamepad1.dpad_left){
                 robot.reachToSub();
             }

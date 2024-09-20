@@ -92,4 +92,19 @@ public class BaseRobot{
         //leftSlider.setPower(1);
         //rightSlider.setPower(1);
     }
+
+    public void updateArmPos() {
+        // Code from teleop that grabs armPos variables and
+        // Uses run to position
+    }
+
+    public void setArmPos(int newPos) {
+        // update the fields (variables) that hold armpos
+        // Like:  leftArmPos = newPos;
+    }
+
+    public void changeArmPos(int deltaPos) {
+        // update the fields (variables) by adding deltaPos
+        // Like: leftArmPos += deltaPos
+    }
 }
