@@ -17,6 +17,7 @@ public class TesterTeleop extends LinearOpMode {
 
     int leftSliderPos = 0;
     int rightSliderPos = 0;
+    int slidesPos = 0;
 
     int hangArmPos = 0;
 
@@ -39,6 +40,7 @@ public class TesterTeleop extends LinearOpMode {
         robot.rightSlider.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         leftSliderPos = robot.leftSlider.getCurrentPosition();
         rightSliderPos = robot.rightSlider.getCurrentPosition();
+        slidesPos = robot.rightSlider.getCurrentPosition();
 
         robot.pivotMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.pivotMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -50,7 +52,7 @@ public class TesterTeleop extends LinearOpMode {
         while(!isStopRequested() && opModeIsActive()){
 
 
-        robot.drive.setDrivePowers(new PoseVelocity2d(new Vector2d(gamepad2.left_stick_x, gamepad2.left_stick_y), gamepad2.right_stick_y));
+        robot.drive.setDrivePowers(new PoseVelocity2d(new Vector2d(-gamepad2.left_stick_y, gamepad2.left_stick_x), gamepad2.right_stick_x));
 
             //worm gear box
             robot.pivotMotor.setPower(-gamepad1.left_stick_y);
@@ -72,17 +74,23 @@ public class TesterTeleop extends LinearOpMode {
             int  slidesMotorDelta = (int) (gamepad1.right_stick_y * 10);
 
                 if(Math.abs(slidesMotorDelta) > .1) {
-                leftSliderPos += slidesMotorDelta;
-                rightSliderPos += slidesMotorDelta;
+                //leftSliderPos += slidesMotorDelta;
+                //rightSliderPos += slidesMotorDelta;
+                slidesPos += slidesMotorDelta;
             }
+
             if (gamepad1.dpad_down){
-                robot.slidesDown();//sets slides pos to 0
+                //robot.slidesDown();//sets slides pos to 0
+                robot.sliderRunTo(0);
+                slidesPos = 0;
             }
 
 
 
-            robot.leftSlider.setTargetPosition(leftSliderPos);
-            robot.rightSlider.setTargetPosition(rightSliderPos);
+            //robot.leftSlider.setTargetPosition(leftSliderPos);
+            //robot.rightSlider.setTargetPosition(rightSliderPos);
+            robot.leftSlider.setTargetPosition(slidesPos);
+            robot.rightSlider.setTargetPosition(slidesPos);
 
             robot.leftSlider.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             robot.rightSlider.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -90,7 +98,7 @@ public class TesterTeleop extends LinearOpMode {
             robot.leftSlider.setPower(1);
             robot.rightSlider.setPower(1);
 
-            if(rightSliderPos < 0){
+            /*if(rightSliderPos < 0){
                 rightSliderPos = 0;
             }
             if(leftSliderPos < 0){
@@ -101,6 +109,12 @@ public class TesterTeleop extends LinearOpMode {
             }
             if(rightSliderPos > 3000) {//change number
                 rightSliderPos = 3000;
+            }*/
+            if (slidesPos < 0){
+                slidesPos = 0;
+            }
+            if (slidesPos > 3000){
+                slidesPos = 3000;//change number
             }
 
 
@@ -115,7 +129,10 @@ public class TesterTeleop extends LinearOpMode {
                 robot.sliderReset();
             }
             if (gamepad1.dpad_up){
-                robot.highScoring();
+                robot.basketScoring();
+            }
+            if (gamepad1.y){
+                robot.specimenScoring();
             }
 
 
