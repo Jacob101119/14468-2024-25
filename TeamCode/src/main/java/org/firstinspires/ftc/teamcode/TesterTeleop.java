@@ -23,6 +23,11 @@ public class TesterTeleop extends LinearOpMode {
 
     int pivotMotorPos = 0;
 
+    double gimbalServoPos = 0;
+    double gimbalServoChange = .05;//change
+
+    double gimbalServoReset = 0; //change
+
     @Override
     public void runOpMode() throws InterruptedException {
 
@@ -47,31 +52,49 @@ public class TesterTeleop extends LinearOpMode {
         pivotMotorPos = robot.pivotMotor.getCurrentPosition();
         //end
 
+        gimbalServoPos = robot.grasperGimbal.getPosition();
+
         waitForStart();
 
         while(!isStopRequested() && opModeIsActive()){
 
 
-        robot.drive.setDrivePowers(new PoseVelocity2d(new Vector2d(-gamepad2.left_stick_y, gamepad2.left_stick_x), gamepad2.right_stick_x));
+        robot.drive.setDrivePowers(new PoseVelocity2d(new Vector2d(-gamepad1.left_stick_y, -gamepad1.left_stick_x), gamepad1.right_stick_x));
 
             //worm gear box
-            robot.pivotMotor.setPower(-gamepad1.left_stick_y);
+            robot.pivotMotor.setPower(-gamepad2.left_stick_y);
             //end worm gear box
 
             //hang arm
-            double hangArmMotorPower = gamepad1.right_trigger - gamepad1.left_trigger;
-            //int hangArmMotorDelta = (int) ((gamepad1.right_trigger - gamepad1.left_trigger) * 10);
-            if(hangArmMotorPower > .1){
-                hangArmPos += gamepad1.right_trigger * 10;//how would i get this to work with trigger
+            int hangArmMotorDelta = (int) ((gamepad2.right_trigger - gamepad2.left_trigger) * 10);
+
+            if(Math.abs(hangArmMotorDelta) > .1){
+                hangArmPos += hangArmMotorDelta;
             }
-            if(hangArmMotorPower < -.1){
-                hangArmPos -= gamepad1.right_trigger * 10;
-            }
+            robot.hangArm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            robot.hangArm.setTargetPosition(hangArmPos);
+            robot.hangArm.setPower(1);
+
             //end hang arm
             //_____________________________________________________________________________________
 
+
+            //gimbal servo
+            if (gamepad2.left_bumper){
+                gimbalServoPos -= gimbalServoChange;
+            }
+            if(gamepad2.right_bumper){
+                gimbalServoPos += gimbalServoChange;
+            }
+            if (gamepad2.a){
+                gimbalServoPos = gimbalServoReset;
+            }
+
+            //end gimbal servo
+
+
             //slides
-            int  slidesMotorDelta = (int) (gamepad1.right_stick_y * 10);
+            int  slidesMotorDelta = (int) (gamepad2.right_stick_y * 10);
 
                 if(Math.abs(slidesMotorDelta) > .1) {
                 //leftSliderPos += slidesMotorDelta;
@@ -85,7 +108,18 @@ public class TesterTeleop extends LinearOpMode {
                 slidesPos = 0;
             }
 
-
+            if(gamepad2.a){
+                robot.axleRotation.setPosition(.6);
+            }
+            if(gamepad2.b){
+                robot.axleRotation.setPosition(0);
+            }
+            if(gamepad2.y){
+                robot.axleRotation.setPosition(.4);
+            }
+            if(gamepad2.x){
+                robot.axleRotation.setPosition(.8);
+            }
 
             //robot.leftSlider.setTargetPosition(leftSliderPos);
             //robot.rightSlider.setTargetPosition(rightSliderPos);

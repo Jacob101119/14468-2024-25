@@ -12,13 +12,14 @@ public class BaseRobot{
     // servo Constants
     double grasperOpen = 0.5;//change
     double grasperClosed = 0;//change
-    double axleServoOut = 0; //change
-    double axleServoUp = 0;//change
-    double axleServoMid = 0; //change
+    double axleServoBack = 0; //change
+    double axleServoUp = 0;//correct
+    double axleServoDown = .8;//correct
+    double getAxleServoOut = .4; //correct
     double gimbalBasketScoring = 0;//change
     double gimbalSpecimenScoring = 0;//change
     double gimbalRestingPos = 0;//change
-    double axleServoDown = 0;//change
+
     //end servo constants
 
     //motor constants
@@ -107,7 +108,7 @@ public class BaseRobot{
         pivotMotor.setTargetPosition(pivotMotorVertical);
         leftSlider.setTargetPosition(slidesMax);//maybe a bit less
         rightSlider.setTargetPosition(slidesMax);//maybe a bit less
-        axleRotation.setPosition(axleServoMid);
+        axleRotation.setPosition(getAxleServoOut);
         grasperGimbal.setPosition(gimbalSpecimenScoring);
     }
     public void slidesDown(){
@@ -146,8 +147,8 @@ public class BaseRobot{
         grasper.setPosition(grasperClosed);
         leftSlider.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         rightSlider.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        leftSlider.setTargetPosition(0);
-        leftSlider.setTargetPosition(0);
+        leftSlider.setTargetPosition(slidesMin);//0
+        leftSlider.setTargetPosition(slidesMin);//0
         grasperGimbal.setPosition(gimbalRestingPos);
         axleRotation.setPosition(axleServoDown);
 
