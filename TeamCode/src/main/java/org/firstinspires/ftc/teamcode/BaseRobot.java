@@ -13,16 +13,18 @@ public class BaseRobot{
     private int leftSliderPos = 0;
     private int rightSliderPos = 0;
     private int pivotMotorPos = 0;
-    private int gimbalPos = 0;
+    private double gimbalPos = 0;
     private int hangArmPos = 0;
 
-    private int deltaLeftPos = 0;
-    private int deltaRightPos = 0;
+    //private int deltaLeftPos = 0;
+    //private int deltaRightPos = 0;
 
-    private double PIVOT_MOTOR_POWER = .8;
+    //motor powers
+    private double PIVOT_MOTOR_POWER = 0.8;
     private double LEFT_SLIDE_POWER = 0.8;
     private double RIGHT_SLIDE_POWER = 0.8;
     private double HANG_ARM_POWER = 0.8;
+    //end
 
     // servo Constants
     double GRASPER_OPEN = 0.5;//change
@@ -34,17 +36,15 @@ public class BaseRobot{
     double GIMBAL_BASKET_SCORING = 0;//change
     double GIMBAL_SPECIMEN_SCORING = 0;//change
     double GIMBAL_RESTING_POS = 0;//change
-
-
     //end servo constants
 
     //motor constants
     int SLIDES_MAX = 3000;//change
+    int SLIDES_MIN = 0;
     int SLIDES_TO_SUB = 60;//change
     int PIVOT_MOTOR_TO_SUB = 0;//change
     int PIVOT_MOTOR_VERTICAL = 0; //change
-    int pivotMotorHorizontal = 0; //change
-    int slidesMin = 0;
+    int PIVOT_MOTOR_HORIZONTAL = 0; //change
     //end motor constants
 
     public MecanumDrive drive;
@@ -55,7 +55,7 @@ public class BaseRobot{
     DcMotor hangArm;//monkey arm
 
     //servos
-    Servo grasper  = null;
+    Servo grasper = null;
     Servo grasperGimbal = null;
     Servo axleRotation = null;
 
@@ -136,23 +136,21 @@ public class BaseRobot{
         grasperGimbal.setPosition(GIMBAL_SPECIMEN_SCORING);
     }
     public void slidesDown(){
-        setSlidesPos(slidesMin);
+        setSlidesPos(SLIDES_MIN);
     }
     public void reachToSub() {
 
         axleRotation.setPosition(AXLE_SERVO_OUT);
-        setSlidesPos(SLIDES_TO_SUB);//change number
-        setPivotMotorPos(PIVOT_MOTOR_TO_SUB);//change
+        setSlidesPos(SLIDES_TO_SUB);
+        setPivotMotorPos(PIVOT_MOTOR_TO_SUB);
         grasper.setPosition(GRASPER_OPEN);
     }
-
-
 
     //hang arm
 
     public void slidesReset(){
         grasper.setPosition(GRASPER_CLOSED);
-        setSlidesPos(slidesMin);
+        setSlidesPos(SLIDES_MIN);
         grasperGimbal.setPosition(GIMBAL_RESTING_POS);
         axleRotation.setPosition(AXLE_SERVO_DOWN);
     }
@@ -195,7 +193,7 @@ public class BaseRobot{
     public void updateGimbalPos() {
         grasperGimbal.setPosition(gimbalPos);
     }
-    public void setGimbalPos(int newPos){
+    public void setGimbalPos(double newPos){
         gimbalPos = newPos;
 
     }
@@ -207,17 +205,17 @@ public class BaseRobot{
 
         // Code from teleop that grabs armPos variables and
         // Uses run to position
-        if(rightSliderPos > 3000){
-            rightSliderPos = 3000;
+        if(rightSliderPos > SLIDES_MAX){
+            rightSliderPos = SLIDES_MAX;
         }
-        if (leftSliderPos > 3000){
-            leftSliderPos = 3000;
+        if (leftSliderPos > SLIDES_MAX){
+            leftSliderPos = SLIDES_MAX;
         }
-        if(rightSliderPos < 0){
-            rightSliderPos = 0;
+        if(rightSliderPos < SLIDES_MIN){
+            rightSliderPos = SLIDES_MIN;
         }
-        if (leftSliderPos < 0){
-            leftSliderPos = 0;
+        if (leftSliderPos < SLIDES_MIN){
+            leftSliderPos = SLIDES_MIN;
         }
 
         rightSlider.setTargetPosition(rightSliderPos);
@@ -257,6 +255,36 @@ public class BaseRobot{
     }
     public int getHangArmPos(){
         return hangArmPos;
+    }
+    public double getGimbalPos(){
+        return gimbalPos;
+    }
+    public double getAXLE_SERVO_OUT(){
+        return AXLE_SERVO_OUT;
+    }
+    public double getAXLE_SERVO_BACK(){
+        return AXLE_SERVO_BACK;
+    }
+    public double getAXLE_SERVO_UP(){
+        return AXLE_SERVO_UP;
+    }
+    public double getAXLE_SERVO_DOWN(){
+        return AXLE_SERVO_DOWN;
+    }
+    public double getGRASPER_OPEN(){
+        return GRASPER_OPEN;
+    }
+    public double getGRASPER_CLOSED(){
+        return GRASPER_CLOSED;
+    }
+    public double getGIMBAL_BASKET_SCORING(){
+        return GIMBAL_BASKET_SCORING;
+    }
+    public double getGIMBAL_SPECIMEN_SCORING(){
+        return GIMBAL_SPECIMEN_SCORING;
+    }
+    public double getGIMBAL_RESTING_POS(){
+        return GIMBAL_RESTING_POS;
     }
 
 

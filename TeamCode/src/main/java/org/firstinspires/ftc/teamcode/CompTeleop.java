@@ -48,10 +48,14 @@ public class CompTeleop extends LinearOpMode {
 
             //slides
             robot.changeSlidesPos((int)(-gamepad2.right_stick_y * 10));
-            robot.changePivotMotorPos((int) (-gamepad2.left_stick_y * 10));
+            robot.changePivotMotorPos((int) (gamepad2.left_stick_y * 10));
             robot.changeHangArmPos((int) ((gamepad2.right_trigger-gamepad2.left_trigger) * 10));
+
             if(gamepad2.dpad_down){
                 robot.slidesReset();
+            }
+            if (gamepad1.dpad_up){
+                robot.slidesMax();
             }
             if(gamepad1.left_bumper){
                 robot.changeGimbalPos(-.1);
@@ -99,6 +103,7 @@ public class CompTeleop extends LinearOpMode {
             telemetry.addData("hang arm position: ", robot.getHangArmPos());
             telemetry.addData("right slides position: ", robot.getRightSliderPos());
             telemetry.addData("pivot motor position: ", robot.getPivotMotorPos());
+            telemetry.addData("gimbal servo pos" , robot.getGimbalPos());
 
 
             telemetry.update();
