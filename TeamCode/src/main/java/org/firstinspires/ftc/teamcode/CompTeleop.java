@@ -94,12 +94,13 @@ public class CompTeleop extends LinearOpMode {
             //telemetry
             //_____________________________________________________________________________________
 
-            /*telemetry.addData("left slides position: ", leftSliderPos);
-            telemetry.addData("hang arm position: ", robot.hangArmPos);
-            telemetry.addData("right slides position: ", rightSliderPos);
-            telemetry.addData("pivot motor position: ", pivotMotorPos);
-            telemetry.addData("Slides motor delta: ", slidesMotorDelta);
-            */
+            telemetry.addData("left slides position: ", robot.getLeftSliderPos());
+            telemetry.addData("right slides position: ", robot.getRightSliderPos());
+            telemetry.addData("hang arm position: ", robot.getHangArmPos());
+            telemetry.addData("right slides position: ", robot.getRightSliderPos());
+            telemetry.addData("pivot motor position: ", robot.getPivotMotorPos());
+
+
             telemetry.update();
             //end telemetry
             //_____________________________________________________________________________________

@@ -245,5 +245,22 @@ public class BaseRobot{
 
     }
 
+    // Accessors
+    public int getRightSliderPos() {
+        return rightSliderPos;
+    }
+    public int getLeftSliderPos(){
+        return leftSliderPos;
+    }
+    public int getPivotMotorPos(){
+        return pivotMotorPos;
+    }
+    public int getHangArmPos(){
+        return hangArmPos;
+    }
+
+
+
+
 
 }
