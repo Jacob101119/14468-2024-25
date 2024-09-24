@@ -94,7 +94,7 @@ public class TesterTeleop extends LinearOpMode {
 
 
             //slides
-            int  slidesMotorDelta = (int) (gamepad2.right_stick_y * 10);
+            int  slidesMotorDelta = (int) (-gamepad2.right_stick_y * 10);
 
                 if(Math.abs(slidesMotorDelta) > .1) {
                 //leftSliderPos += slidesMotorDelta;

@@ -9,6 +9,20 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 public class BaseRobot{
 
+    // Arm Position fields
+    private int leftSliderPos = 0;
+    private int rightSliderPos = 0;
+    private int pivotMotorPos = 0;
+    private int hangArmPos = 0;
+
+    private int deltaLeftPos = 0;
+    private int deltaRightPos = 0;
+
+    private double PIVOT_MOTOR_POWER = .8;
+    private double LEFT_SLIDE_POWER = 0.8;
+    private double RIGHT_SLIDE_POWER = 0.8;
+    private double HANG_ARM_POWER = 0.8;
+
     // servo Constants
     double grasperOpen = 0.5;//change
     double grasperClosed = 0;//change
@@ -60,6 +74,24 @@ public class BaseRobot{
         rightSlider = hwMap.dcMotor.get("rightSlider");
         rightSlider.setDirection(DcMotorSimple.Direction.REVERSE);
 
+        // Set to run with encoders and grab current Position
+        leftSlider.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        leftSlider.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        leftSliderPos = leftSlider.getCurrentPosition();
+
+        rightSlider.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rightSlider.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        rightSliderPos = rightSlider.getCurrentPosition();
+
+        hangArm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        hangArm.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        hangArmPos = hangArm.getCurrentPosition();
+
+        //pivot motor
+        pivotMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        pivotMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        pivotMotorPos= hangArm.getCurrentPosition();
+
         //servos
         grasper = hwMap.servo.get("claw");
         grasper.setPosition(grasperOpen);
@@ -70,12 +102,6 @@ public class BaseRobot{
         axleRotation = hwMap.servo.get("axleRotation");
         axleRotation.setPosition(0);
         //end servos
-
-
-
-
-
-
 
 
 
@@ -133,11 +159,9 @@ public class BaseRobot{
         leftSlider.setPower(1);
         rightSlider.setPower(1);
     }
-    public void pivotRunTo(int position){
-        pivotMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        pivotMotor.setTargetPosition(position);
-        pivotMotor.setPower(1);
-    }
+
+
+    //hang arm
     public void hangArmRunTo(int position){
         hangArm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         hangArm.setTargetPosition(position);
@@ -154,27 +178,64 @@ public class BaseRobot{
 
 
     }
+    //end hang arm
+
+    //hang arm pos
+    public void updateHangArmPos(){
+        hangArm.setTargetPosition(pivotMotorPos);
+        hangArm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        hangArm.setPower(HANG_ARM_POWER);
+    }
+    public void setHangArmPos(int newPos) {
+        hangArmPos = newPos;
+    }
+    public void changeHangArmPos(int deltaPos){
+        hangArmPos += deltaPos;
+    }
+    //end hang arm
 
 
-    /*public void updateSlidesPos() {
+    //pivot motor pos
+    public void updatePivotMotorPos() {
+        pivotMotor.setTargetPosition(pivotMotorPos);
+        pivotMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        pivotMotor.setPower(PIVOT_MOTOR_POWER);
+    }
+    public void setPivotMotorPos(int newPos) {
+        pivotMotorPos = newPos;
+    }
+    public void changePivotMotorPos(int deltaPos){
+        pivotMotorPos += deltaPos;
+    }
+
+
+
+    public void updateSlidesPos() {
 
         // Code from teleop that grabs armPos variables and
         // Uses run to position
-    }
+        rightSlider.setTargetPosition(rightSliderPos);
+        rightSlider.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        leftSlider.setTargetPosition(leftSliderPos);
+        leftSlider.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        leftSlider.setPower(LEFT_SLIDE_POWER);
+        rightSlider.setPower(RIGHT_SLIDE_POWER);
 
+    }
     public void setSlidesPos(int newPos) {
-        //leftSliderPos = newPos;
+        leftSliderPos = newPos;
+        rightSliderPos = newPos;
         //rightSliderPos = newPos;
         // update the fields (variables) that hold armpos
 
     }
 
     public void changeSlidesPos(int deltaPos) {
-        //leftSliderPos += deltaPos;
-        //rightSliderPos += deltaPos;
+        leftSliderPos += deltaPos;
+        rightSliderPos += deltaPos;
         // update the fields (variables) by adding deltaPos
 
     }
 
-     */
+
 }
