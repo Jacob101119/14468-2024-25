@@ -104,7 +104,7 @@ public class TesterTeleop extends LinearOpMode {
 
             if (gamepad1.dpad_down){
                 //robot.slidesDown();//sets slides pos to 0
-                robot.sliderRunTo(0);
+                //robot.(0);
                 slidesPos = 0;
             }
 
@@ -126,11 +126,6 @@ public class TesterTeleop extends LinearOpMode {
             robot.leftSlider.setTargetPosition(slidesPos);
             robot.rightSlider.setTargetPosition(slidesPos);
 
-            robot.leftSlider.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            robot.rightSlider.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
-            robot.leftSlider.setPower(1);
-            robot.rightSlider.setPower(1);
 
             /*if(rightSliderPos < 0){
                 rightSliderPos = 0;
@@ -156,11 +151,11 @@ public class TesterTeleop extends LinearOpMode {
             //_____________________________________________________________________________________
 
 
-            if (gamepad1.dpad_left){
+            /*if (gamepad1.dpad_left){
                 robot.reachToSub();
             }
             if (gamepad1.dpad_right){
-                robot.sliderReset();
+                //robot.sliderReset();
             }
             if (gamepad1.dpad_up){
                 robot.basketScoring();
@@ -168,7 +163,7 @@ public class TesterTeleop extends LinearOpMode {
             if (gamepad1.y){
                 robot.specimenScoring();
             }
-
+            */
 
             //telemetry
             //_____________________________________________________________________________________

@@ -13,6 +13,7 @@ public class BaseRobot{
     private int leftSliderPos = 0;
     private int rightSliderPos = 0;
     private int pivotMotorPos = 0;
+    private int gimbalPos = 0;
     private int hangArmPos = 0;
 
     private int deltaLeftPos = 0;
@@ -24,21 +25,24 @@ public class BaseRobot{
     private double HANG_ARM_POWER = 0.8;
 
     // servo Constants
-    double grasperOpen = 0.5;//change
-    double grasperClosed = 0;//change
-    double axleServoBack = 0; //change
-    double axleServoUp = 0;//correct
-    double axleServoDown = .8;//correct
-    double getAxleServoOut = .4; //correct
-    double gimbalBasketScoring = 0;//change
-    double gimbalSpecimenScoring = 0;//change
-    double gimbalRestingPos = 0;//change
+    double GRASPER_OPEN = 0.5;//change
+    double GRASPER_CLOSED = 0;//change
+    double AXLE_SERVO_BACK = 0; //change
+    double AXLE_SERVO_UP = 0;//correct
+    double AXLE_SERVO_DOWN = .8;//correct
+    double AXLE_SERVO_OUT = .4; //correct
+    double GIMBAL_BASKET_SCORING = 0;//change
+    double GIMBAL_SPECIMEN_SCORING = 0;//change
+    double GIMBAL_RESTING_POS = 0;//change
+
 
     //end servo constants
 
     //motor constants
-    int slidesMax = 3000;//change
-    int pivotMotorVertical = 0; //change
+    int SLIDES_MAX = 3000;//change
+    int SLIDES_TO_SUB = 60;//change
+    int PIVOT_MOTOR_TO_SUB = 0;//change
+    int PIVOT_MOTOR_VERTICAL = 0; //change
     int pivotMotorHorizontal = 0; //change
     int slidesMin = 0;
     //end motor constants
@@ -83,6 +87,7 @@ public class BaseRobot{
         rightSlider.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         rightSliderPos = rightSlider.getCurrentPosition();
 
+        //hang arm
         hangArm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         hangArm.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         hangArmPos = hangArm.getCurrentPosition();
@@ -94,7 +99,7 @@ public class BaseRobot{
 
         //servos
         grasper = hwMap.servo.get("claw");
-        grasper.setPosition(grasperOpen);
+        grasper.setPosition(GRASPER_OPEN);
 
         grasperGimbal = hwMap.servo.get("grasperGimbal");
         grasperGimbal.setPosition(0);
@@ -107,14 +112,7 @@ public class BaseRobot{
 
     }
 
-    public void sliderReset() {
-        //make slider position 0
-        leftSlider.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        rightSlider.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        leftSlider.setTargetPosition(0);
-        rightSlider.setTargetPosition(0);
-        pivotMotor.setTargetPosition(pivotMotorVertical);
-    }
+
     public void slidesUp(){
         int slidesMax = 10;//change
         leftSlider.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -123,66 +121,49 @@ public class BaseRobot{
         leftSlider.setTargetPosition(slidesMax);
     }
     public void basketScoring(){
-        pivotMotor.setTargetPosition(pivotMotorVertical);
-        leftSlider.setTargetPosition(slidesMax);
-        rightSlider.setTargetPosition(slidesMax);
-        axleRotation.setPosition(axleServoUp);
-        grasperGimbal.setPosition(gimbalBasketScoring);
+        pivotMotor.setTargetPosition(PIVOT_MOTOR_VERTICAL);
+        leftSlider.setTargetPosition(SLIDES_MAX);
+        rightSlider.setTargetPosition(SLIDES_MAX);
+        axleRotation.setPosition(AXLE_SERVO_UP);
+        grasperGimbal.setPosition(GIMBAL_BASKET_SCORING);
 
     }
     public void specimenScoring(){
-        pivotMotor.setTargetPosition(pivotMotorVertical);
-        leftSlider.setTargetPosition(slidesMax);//maybe a bit less
-        rightSlider.setTargetPosition(slidesMax);//maybe a bit less
-        axleRotation.setPosition(getAxleServoOut);
-        grasperGimbal.setPosition(gimbalSpecimenScoring);
+        pivotMotor.setTargetPosition(PIVOT_MOTOR_VERTICAL);
+        leftSlider.setTargetPosition(SLIDES_MAX);//maybe a bit less
+        rightSlider.setTargetPosition(SLIDES_MAX);//maybe a bit less
+        axleRotation.setPosition(AXLE_SERVO_OUT);
+        grasperGimbal.setPosition(GIMBAL_SPECIMEN_SCORING);
     }
     public void slidesDown(){
-        leftSlider.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        rightSlider.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        leftSlider.setTargetPosition(0);
-        leftSlider.setTargetPosition(0);
+        setSlidesPos(slidesMin);
     }
     public void reachToSub() {
-        //grasper.setPosition(grasperClosed);
-        //pivotMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        //pivotMotor.setTargetPosition();
-        //rightSlider.setTargetPosition();//half ish pos
-        //leftSlider.setTargetPosition();//half ish pos
-        //axleRotation.setPosition(axleServoOut);
+
+        axleRotation.setPosition(AXLE_SERVO_OUT);
+        setSlidesPos(SLIDES_TO_SUB);//change number
+        setPivotMotorPos(PIVOT_MOTOR_TO_SUB);//change
+        grasper.setPosition(GRASPER_OPEN);
     }
-    public void sliderRunTo(int position){
-        leftSlider.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        rightSlider.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        leftSlider.setTargetPosition(position);
-        rightSlider.setTargetPosition(position);
-        leftSlider.setPower(1);
-        rightSlider.setPower(1);
-    }
+
 
 
     //hang arm
-    public void hangArmRunTo(int position){
-        hangArm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        hangArm.setTargetPosition(position);
-        hangArm.setPower(1);
+
+    public void slidesReset(){
+        grasper.setPosition(GRASPER_CLOSED);
+        setSlidesPos(slidesMin);
+        grasperGimbal.setPosition(GIMBAL_RESTING_POS);
+        axleRotation.setPosition(AXLE_SERVO_DOWN);
     }
-    public void SlidesReset(){
-        grasper.setPosition(grasperClosed);
-        leftSlider.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        rightSlider.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        leftSlider.setTargetPosition(slidesMin);//0
-        leftSlider.setTargetPosition(slidesMin);//0
-        grasperGimbal.setPosition(gimbalRestingPos);
-        axleRotation.setPosition(axleServoDown);
-
-
+    public void slidesMax(){
+        setSlidesPos(SLIDES_MAX);
     }
     //end hang arm
 
     //hang arm pos
     public void updateHangArmPos(){
-        hangArm.setTargetPosition(pivotMotorPos);
+        hangArm.setTargetPosition(hangArmPos);
         hangArm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         hangArm.setPower(HANG_ARM_POWER);
     }
@@ -210,10 +191,35 @@ public class BaseRobot{
 
 
 
+
+    public void updateGimbalPos() {
+        grasperGimbal.setPosition(gimbalPos);
+    }
+    public void setGimbalPos(int newPos){
+        gimbalPos = newPos;
+
+    }
+    public void changeGimbalPos(double deltaPos){
+        gimbalPos += deltaPos;
+    }
+
     public void updateSlidesPos() {
 
         // Code from teleop that grabs armPos variables and
         // Uses run to position
+        if(rightSliderPos > 3000){
+            rightSliderPos = 3000;
+        }
+        if (leftSliderPos > 3000){
+            leftSliderPos = 3000;
+        }
+        if(rightSliderPos < 0){
+            rightSliderPos = 0;
+        }
+        if (leftSliderPos < 0){
+            leftSliderPos = 0;
+        }
+
         rightSlider.setTargetPosition(rightSliderPos);
         rightSlider.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         leftSlider.setTargetPosition(leftSliderPos);
@@ -223,6 +229,7 @@ public class BaseRobot{
 
     }
     public void setSlidesPos(int newPos) {
+
         leftSliderPos = newPos;
         rightSliderPos = newPos;
         //rightSliderPos = newPos;
@@ -233,6 +240,7 @@ public class BaseRobot{
     public void changeSlidesPos(int deltaPos) {
         leftSliderPos += deltaPos;
         rightSliderPos += deltaPos;
+
         // update the fields (variables) by adding deltaPos
 
     }

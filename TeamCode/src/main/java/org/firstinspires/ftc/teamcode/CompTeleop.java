@@ -15,18 +15,7 @@ public class CompTeleop extends LinearOpMode {
     private com.qualcomm.robotcore.hardware.HardwareMap HardwareMap;
     BaseRobot robot;
 
-    int leftSliderPos = 0;
-    int rightSliderPos = 0;
-    int slidesPos = 0;
 
-    int hangArmPos = 0;
-
-    int pivotMotorPos = 0;
-
-    double gimbalServoPos = 0;
-    double gimbalServoChange = .05;//change
-
-    double gimbalServoReset = 0; //change
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -34,25 +23,7 @@ public class CompTeleop extends LinearOpMode {
         MecanumDrive d = new MecanumDrive(hardwareMap, new Pose2d(0, 0, 0));
         robot = new BaseRobot(hardwareMap);
 
-        //motor encoder setup
-        robot.hangArm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        robot.hangArm.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        hangArmPos = robot.hangArm.getCurrentPosition();
 
-        robot.leftSlider.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        robot.leftSlider.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        robot.rightSlider.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        robot.rightSlider.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        leftSliderPos = robot.leftSlider.getCurrentPosition();
-        rightSliderPos = robot.rightSlider.getCurrentPosition();
-        slidesPos = robot.rightSlider.getCurrentPosition();
-
-        robot.pivotMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        robot.pivotMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        pivotMotorPos = robot.pivotMotor.getCurrentPosition();
-        //end
-
-        gimbalServoPos = robot.grasperGimbal.getPosition();
 
         waitForStart();
 
@@ -61,54 +32,32 @@ public class CompTeleop extends LinearOpMode {
 
             robot.drive.setDrivePowers(new PoseVelocity2d(new Vector2d(-gamepad1.left_stick_y, -gamepad1.left_stick_x), gamepad1.right_stick_x));
 
-            //worm gear box
-            robot.pivotMotor.setPower(-gamepad2.left_stick_y);
-            //end worm gear box
 
-            //hang arm
-            int hangArmMotorDelta = (int) ((gamepad2.right_trigger - gamepad2.left_trigger) * 10);
-
-            if(Math.abs(hangArmMotorDelta) > .1){
-                hangArmPos += hangArmMotorDelta;
-            }
-            robot.hangArm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            robot.hangArm.setTargetPosition(hangArmPos);
-            robot.hangArm.setPower(1);
-
-
-            //set constraints for hang arm
-
-            //end hang arm
-            //_____________________________________________________________________________________
+            //updates
+            robot.updateGimbalPos();
+            robot.updateHangArmPos();
+            robot.updatePivotMotorPos();
+            robot.updateSlidesPos();
+            //end
 
 
             //gimbal servo
-            if (gamepad2.left_bumper){
-                gimbalServoPos -= gimbalServoChange;
-            }
-            if(gamepad2.right_bumper){
-                gimbalServoPos += gimbalServoChange;
-            }
-            if (gamepad2.a){
-                gimbalServoPos = gimbalServoReset;
-            }
 
             //end gimbal servo
 
 
             //slides
-            int  slidesMotorDelta = (int) (-gamepad2.right_stick_y * 10);
-
-            if(Math.abs(slidesMotorDelta) > .1) {
-                //leftSliderPos += slidesMotorDelta;
-                //rightSliderPos += slidesMotorDelta;
-                slidesPos += slidesMotorDelta;
+            robot.changeSlidesPos((int)(-gamepad2.right_stick_y * 10));
+            robot.changePivotMotorPos((int) (-gamepad2.left_stick_y * 10));
+            robot.changeHangArmPos((int) ((gamepad2.right_trigger-gamepad2.left_trigger) * 10));
+            if(gamepad2.dpad_down){
+                robot.slidesReset();
             }
-
-            if (gamepad1.dpad_down){
-                //robot.slidesDown();//sets slides pos to 0
-                robot.sliderRunTo(0);
-                slidesPos = 0;
+            if(gamepad1.left_bumper){
+                robot.changeGimbalPos(-.1);
+            }
+            if(gamepad1.right_bumper){
+                robot.changeGimbalPos(.1);
             }
 
             if(gamepad2.a){
@@ -124,35 +73,6 @@ public class CompTeleop extends LinearOpMode {
                 robot.axleRotation.setPosition(.8);
             }
 
-            //robot.leftSlider.setTargetPosition(leftSliderPos);
-            //robot.rightSlider.setTargetPosition(rightSliderPos);
-            robot.leftSlider.setTargetPosition(slidesPos);
-            robot.rightSlider.setTargetPosition(slidesPos);
-
-            robot.leftSlider.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            robot.rightSlider.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
-            robot.leftSlider.setPower(1);
-            robot.rightSlider.setPower(1);
-
-            /*if(rightSliderPos < 0){
-                rightSliderPos = 0;
-            }
-            if(leftSliderPos < 0){
-                leftSliderPos = 0;
-            }
-            if(leftSliderPos > 3000) {//change number
-                leftSliderPos = 3000;
-            }
-            if(rightSliderPos > 3000) {//change number
-                rightSliderPos = 3000;
-            }*/
-            if (slidesPos < 0){
-                slidesPos = 0;
-            }
-            if (slidesPos > 3000){
-                slidesPos = 3000;//change number
-            }
 
 
             //end slides
@@ -162,25 +82,24 @@ public class CompTeleop extends LinearOpMode {
             if (gamepad1.dpad_left){
                 robot.reachToSub();
             }
-            if (gamepad1.dpad_right){
-                robot.sliderReset();
-            }
-            if (gamepad1.dpad_up){
-                robot.basketScoring();
-            }
-            if (gamepad1.y){
-                robot.specimenScoring();
-            }
+
+            //if (gamepad1.dpad_up){
+              //  robot.basketScoring();
+            //}
+            //if (gamepad1.y){
+              //  robot.specimenScoring();
+            //}
 
 
             //telemetry
             //_____________________________________________________________________________________
-            telemetry.addData("left slides position: ", leftSliderPos);
-            telemetry.addData("hang arm position: ", hangArmPos);
+
+            /*telemetry.addData("left slides position: ", leftSliderPos);
+            telemetry.addData("hang arm position: ", robot.hangArmPos);
             telemetry.addData("right slides position: ", rightSliderPos);
             telemetry.addData("pivot motor position: ", pivotMotorPos);
             telemetry.addData("Slides motor delta: ", slidesMotorDelta);
-
+            */
             telemetry.update();
             //end telemetry
             //_____________________________________________________________________________________
