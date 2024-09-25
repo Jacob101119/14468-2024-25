@@ -45,11 +45,19 @@ public class ResetTeleop extends LinearOpMode {
 
 
             //slides
-            robot.changeSlidesPos((int)(-gamepad2.right_stick_y * 2));
-            robot.changePivotMotorPos((int) (-gamepad2.left_stick_y * 2));
-            robot.changeHangArmPos((int) ((gamepad2.right_trigger-gamepad2.left_trigger) * 2));
-           
+            robot.changeSlidesPos((int)(-gamepad1.right_stick_y * 2));
+            robot.changePivotMotorPos((int) (-gamepad1.left_stick_y * 2));
+            robot.changeHangArmPos((int) ((gamepad1.right_trigger-gamepad1.left_trigger) * 2));
+            robot.changeSlidesPos((int)(-gamepad2.right_stick_y * 5));
+            robot.changePivotMotorPos((int) (-gamepad2.left_stick_y * 5));
+            robot.changeHangArmPos((int) ((gamepad2.right_trigger-gamepad2.left_trigger) * 5));
 
+            if (gamepad1.left_bumper){
+                robot.changeGimbalPos(-.05);
+            }
+            if (gamepad1.right_bumper){
+                robot.changeGimbalPos(.05);
+            }
 
 
             //end slides
@@ -61,12 +69,18 @@ public class ResetTeleop extends LinearOpMode {
 
             //telemetry
             //_____________________________________________________________________________________
-
+            telemetry.addLine("Controls: (gamepad1 for slower movements, 2 for faster):");
+            telemetry.addLine("Slides: gamepad1 - right stick");
+            telemetry.addLine("pivot motor: gamepad1 - left stick");
+            telemetry.addLine("gimbal servo: left/right bumper");
+            telemetry.addLine("----------------------------------");
+            telemetry.addLine("Positions:");
             telemetry.addData("left slides position: ", robot.getLeftSliderPos());
             telemetry.addData("right slides position: ", robot.getRightSliderPos());
             telemetry.addData("hang arm position: ", robot.getHangArmPos());
             telemetry.addData("right slides position: ", robot.getRightSliderPos());
             telemetry.addData("pivot motor position: ", robot.getPivotMotorPos());
+            telemetry.addData("gimbal servo position:", robot.getGimbalPos());
 
 
             telemetry.update();

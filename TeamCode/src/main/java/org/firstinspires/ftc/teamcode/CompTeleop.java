@@ -58,10 +58,19 @@ public class CompTeleop extends LinearOpMode {
                 robot.slidesMax();
             }
             if(gamepad1.left_bumper){
-                robot.changeGimbalPos(-.1);
+                robot.changeGimbalPos(-.05);
             }
             if(gamepad1.right_bumper){
-                robot.changeGimbalPos(.1);
+                robot.changeGimbalPos(.05);
+            }
+            if(gamepad1.a){
+                robot.setGimbalPos(0);
+            }
+            if(gamepad1.y){
+                robot.setGimbalPos(1);
+            }
+            if(gamepad1.left_bumper && gamepad1.right_bumper){
+                robot.setGimbalPos(robot.GIMBAL_RESTING_POS);
             }
 
             if(gamepad2.a){

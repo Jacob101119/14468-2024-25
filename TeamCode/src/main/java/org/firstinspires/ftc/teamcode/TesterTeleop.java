@@ -172,6 +172,7 @@ public class TesterTeleop extends LinearOpMode {
             telemetry.addData("right slides position: ", rightSliderPos);
             telemetry.addData("pivot motor position: ", pivotMotorPos);
             telemetry.addData("Slides motor delta: ", slidesMotorDelta);
+            //telemetry.addData("Gimbal servo pos: ", )
 
             telemetry.update();
             //end telemetry

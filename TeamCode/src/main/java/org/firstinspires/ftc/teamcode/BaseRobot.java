@@ -27,7 +27,8 @@ public class BaseRobot{
     //end
 
     // servo Constants
-    double GRASPER_OPEN = 0.5;//change
+    double GRASPER_WIDE_OPEN = 0.5;//change
+    double GRASPER_HALF_OPEN = 0; //change
     double GRASPER_CLOSED = 0;//change
     double AXLE_SERVO_BACK = 0; //change
     double AXLE_SERVO_UP = 0;//correct
@@ -35,7 +36,7 @@ public class BaseRobot{
     double AXLE_SERVO_OUT = .4; //correct
     double GIMBAL_BASKET_SCORING = 0;//change
     double GIMBAL_SPECIMEN_SCORING = 0;//change
-    double GIMBAL_RESTING_POS = 0;//change
+    double GIMBAL_RESTING_POS = .5;//change
     //end servo constants
 
     //motor constants
@@ -69,10 +70,10 @@ public class BaseRobot{
         drive = new MecanumDrive(hwMap, new Pose2d(0, 0, 0));
 
         hangArm = hwMap.dcMotor.get("hangArm");
-        //hangArm.setPower(1);
+
 
         pivotMotor = hwMap.dcMotor.get("pivotMotor");
-        //pivotMotor.setPower(1);
+
 
         leftSlider = hwMap.dcMotor.get("leftSlider");
         rightSlider = hwMap.dcMotor.get("rightSlider");
@@ -95,11 +96,11 @@ public class BaseRobot{
         //pivot motor
         pivotMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         pivotMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        pivotMotorPos= hangArm.getCurrentPosition();
+        pivotMotorPos = hangArm.getCurrentPosition();
 
         //servos
         grasper = hwMap.servo.get("claw");
-        grasper.setPosition(GRASPER_OPEN);
+        grasper.setPosition(GRASPER_HALF_OPEN);
 
         grasperGimbal = hwMap.servo.get("grasperGimbal");
         grasperGimbal.setPosition(0);
@@ -114,24 +115,20 @@ public class BaseRobot{
 
 
     public void slidesUp(){
-        int slidesMax = 10;//change
-        leftSlider.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        rightSlider.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        leftSlider.setTargetPosition(slidesMax);
-        leftSlider.setTargetPosition(slidesMax);
+        setSlidesPos(SLIDES_MAX);
     }
+
+
     public void basketScoring(){
-        pivotMotor.setTargetPosition(PIVOT_MOTOR_VERTICAL);
-        leftSlider.setTargetPosition(SLIDES_MAX);
-        rightSlider.setTargetPosition(SLIDES_MAX);
+        setPivotMotorPos(PIVOT_MOTOR_VERTICAL);
+        setSlidesPos(SLIDES_MAX);
         axleRotation.setPosition(AXLE_SERVO_UP);
         grasperGimbal.setPosition(GIMBAL_BASKET_SCORING);
 
     }
     public void specimenScoring(){
         pivotMotor.setTargetPosition(PIVOT_MOTOR_VERTICAL);
-        leftSlider.setTargetPosition(SLIDES_MAX);//maybe a bit less
-        rightSlider.setTargetPosition(SLIDES_MAX);//maybe a bit less
+        setSlidesPos(SLIDES_MAX);//maybe a bit less
         axleRotation.setPosition(AXLE_SERVO_OUT);
         grasperGimbal.setPosition(GIMBAL_SPECIMEN_SCORING);
     }
@@ -143,7 +140,8 @@ public class BaseRobot{
         axleRotation.setPosition(AXLE_SERVO_OUT);
         setSlidesPos(SLIDES_TO_SUB);
         setPivotMotorPos(PIVOT_MOTOR_TO_SUB);
-        grasper.setPosition(GRASPER_OPEN);
+        grasper.setPosition(GRASPER_WIDE_OPEN);
+        grasperGimbal.setPosition(GIMBAL_RESTING_POS);
     }
 
     //hang arm
@@ -272,7 +270,10 @@ public class BaseRobot{
         return AXLE_SERVO_DOWN;
     }
     public double getGRASPER_OPEN(){
-        return GRASPER_OPEN;
+        return GRASPER_WIDE_OPEN;
+    }
+    public double getGRASPER_HALF_OPEN(){
+        return GRASPER_HALF_OPEN;
     }
     public double getGRASPER_CLOSED(){
         return GRASPER_CLOSED;
