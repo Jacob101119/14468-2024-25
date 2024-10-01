@@ -73,6 +73,7 @@ public class CompTeleop extends LinearOpMode {
                 robot.setGimbalPos(robot.GIMBAL_RESTING_POS);
             }
 
+
             if(gamepad2.a){
                 robot.axleRotation.setPosition(.6);
             }
@@ -94,6 +95,12 @@ public class CompTeleop extends LinearOpMode {
 
             if (gamepad1.dpad_left){
                 robot.reachToSub();
+            }
+            if (gamepad1.dpad_down){
+                robot.resetAll();
+            }
+            if(gamepad1.dpad_up){
+                robot.basketScoring();
             }
 
             //if (gamepad1.dpad_up){

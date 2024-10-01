@@ -37,6 +37,13 @@ public class BaseRobot{
     double GIMBAL_BASKET_SCORING = 0;//change
     double GIMBAL_SPECIMEN_SCORING = 0;//change
     double GIMBAL_RESTING_POS = .5;//change
+    double LEFT_GRASPER_OPEN = 0;//change
+    double LEFT_GRASPER_CLOSED = 0;//change
+    double RIGHT_GRASPER_OPEN = 0;//change
+    double RIGHT_GRASPER_CLOSED = 0;//change
+
+
+
     //end servo constants
 
     //motor constants
@@ -44,8 +51,8 @@ public class BaseRobot{
     int SLIDES_MIN = 0;
     int SLIDES_TO_SUB = 60;//change
     int PIVOT_MOTOR_TO_SUB = 0;//change
-    int PIVOT_MOTOR_VERTICAL = 0; //change
-    int PIVOT_MOTOR_HORIZONTAL = 0; //change
+    int PIVOT_MOTOR_VERTICAL = 2704; //change
+    int PIVOT_MOTOR_HORIZONTAL = 5350; //change
     //end motor constants
 
     public MecanumDrive drive;
@@ -59,6 +66,7 @@ public class BaseRobot{
     Servo grasper = null;
     Servo grasperGimbal = null;
     Servo axleRotation = null;
+
 
     //end servos
 
@@ -96,9 +104,12 @@ public class BaseRobot{
         //pivot motor
         pivotMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         pivotMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        pivotMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         pivotMotorPos = hangArm.getCurrentPosition();
 
         //servos
+
+
         grasper = hwMap.servo.get("claw");
         grasper.setPosition(GRASPER_HALF_OPEN);
 
@@ -139,11 +150,18 @@ public class BaseRobot{
 
         axleRotation.setPosition(AXLE_SERVO_OUT);
         setSlidesPos(SLIDES_TO_SUB);
-        setPivotMotorPos(PIVOT_MOTOR_TO_SUB);
+        setPivotMotorPos(PIVOT_MOTOR_HORIZONTAL);
         grasper.setPosition(GRASPER_WIDE_OPEN);
         grasperGimbal.setPosition(GIMBAL_RESTING_POS);
     }
 
+    public void resetAll(){
+        grasper.setPosition(GRASPER_CLOSED);
+        setSlidesPos(SLIDES_MIN);
+        grasperGimbal.setPosition(GIMBAL_RESTING_POS);
+        axleRotation.setPosition(AXLE_SERVO_DOWN);
+        setPivotMotorPos(0);
+    }
     //hang arm
 
     public void slidesReset(){
@@ -151,6 +169,7 @@ public class BaseRobot{
         setSlidesPos(SLIDES_MIN);
         grasperGimbal.setPosition(GIMBAL_RESTING_POS);
         axleRotation.setPosition(AXLE_SERVO_DOWN);
+        setPivotMotorPos(2240);
     }
     public void slidesMax(){
         setSlidesPos(SLIDES_MAX);
@@ -174,11 +193,20 @@ public class BaseRobot{
 
     //pivot motor pos
     public void updatePivotMotorPos() {
+        if (pivotMotorPos < 0){
+
+        }
+        if (pivotMotorPos > 5350){
+
+        }
         pivotMotor.setTargetPosition(pivotMotorPos);
         pivotMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         pivotMotor.setPower(PIVOT_MOTOR_POWER);
     }
     public void setPivotMotorPos(int newPos) {
+        //if (newPos < 0){
+          //  newPos = 0;
+        //}
         pivotMotorPos = newPos;
     }
     public void changePivotMotorPos(int deltaPos){
