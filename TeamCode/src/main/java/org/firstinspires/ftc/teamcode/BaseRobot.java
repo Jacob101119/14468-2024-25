@@ -206,6 +206,9 @@ public class BaseRobot{
     public void setAxlePos(double newPos){
         axlePos = newPos;
     }
+    public void changeAxlePos(double deltaPos){
+        axlePos += deltaPos;
+    }
     //end axle servo ---------
 
     //grasper servo -------------
@@ -214,6 +217,9 @@ public class BaseRobot{
     }
     public void setGrasperPos(double newPos){
         grasperPos = newPos;
+    }
+    public void changeGrasperPos(double deltaPos){
+        grasperPos += deltaPos;
     }
     //end grasper servo ----------
 
@@ -349,6 +355,12 @@ public class BaseRobot{
     }
     public double getGimbalPos(){
         return gimbalPos;
+    }
+    public double getAxlePos() {
+        return axlePos;
+    }
+    public double getGrasperPos(){
+        return grasperPos;
     }
     public double getAXLE_SERVO_OUT(){
         return AXLE_SERVO_OUT;
