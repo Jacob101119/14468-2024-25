@@ -38,39 +38,44 @@ public class GraysonTeleop extends LinearOpMode {
             robot.updateHangArmPos();
             robot.updatePivotMotorPos();
             robot.updateSlidesPos();
+            robot.updateGrasperPos();
+            robot.updateAxleServoPos();
             //end
 
 
-            //gimbal servo
-
-            //end gimbal servo
 
 
             //slides
             robot.changeSlidesPos((int)(-gamepad2.right_stick_y * 10));
+            robot.changeSlidesPos((int)(gamepad1.right_trigger - gamepad1.left_trigger) * 10);
+
+
+
+            //pivot motor
+            if (gamepad1.right_bumper){
+                robot.changePivotMotorPos(10);
+            }
+            if (gamepad1.left_bumper){
+                robot.changePivotMotorPos(-10);
+            }
+
             robot.changePivotMotorPos((int) (gamepad2.left_stick_y * 10));
             robot.changeHangArmPos((int) ((gamepad2.right_trigger-gamepad2.left_trigger) * 10));
 
 
 
 
-            if(gamepad1.a){
+            if(gamepad1.dpad_right){
                 robot.setGrasperPos(robot.GRASPER_WIDE_OPEN);
             }
-            if(gamepad1.x){
+            if(gamepad1.dpad_left){
                 robot.setGrasperPos(robot.GRASPER_CLOSED);
             }
 
-            if(gamepad2.a){
+            if(gamepad2.dpad_down){
                 robot.setAxlePos(.2);
             }
-            if(gamepad2.b){
-                robot.setAxlePos(0);
-            }
-            if(gamepad2.y){
-                robot.setAxlePos(.7);
-            }
-            if(gamepad2.x){
+            if(gamepad2.dpad_up){
                 robot.setAxlePos(.8);
             }
 
@@ -80,35 +85,30 @@ public class GraysonTeleop extends LinearOpMode {
             if(gamepad2.right_bumper){
                 robot.changeGimbalPos(.05);
             }
-            if(gamepad1.right_stick_button){
+            if(gamepad2.left_bumper && gamepad2.right_bumper){
                 robot.setGimbalPos(robot.GIMBAL_RESTING_POS);
             }
 
+            if (gamepad2.a){
+
+            }
+            if (gamepad2.x){
+
+            }
+            if (gamepad2.y){
+
+            }
+            if (gamepad2.b){
+
+            }
 
 
             //end slides
             //_____________________________________________________________________________________
 
-            /*
-            if (gamepad1.dpad_left){
-                robot.reachToSub();
-            }
-            if (gamepad1.dpad_down){
-                robot.resetAll();
-            }
-            if(gamepad1.dpad_up){
-                robot.basketScoring();
-
-            }
-            */
 
 
-            //if (gamepad1.dpad_up){
-            //  robot.basketScoring();
-            //}
-            //if (gamepad1.y){
-            //  robot.specimenScoring();
-            //}
+
 
 
             //telemetry
