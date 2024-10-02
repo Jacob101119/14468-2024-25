@@ -71,8 +71,9 @@ public class TesterTeleop extends LinearOpMode {
             if(Math.abs(hangArmMotorDelta) > .1){
                 hangArmPos += hangArmMotorDelta;
             }
-            robot.hangArm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
             robot.hangArm.setTargetPosition(hangArmPos);
+            //robot.hangArm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             robot.hangArm.setPower(1);
 
             //end hang arm
@@ -102,11 +103,11 @@ public class TesterTeleop extends LinearOpMode {
                 slidesPos += slidesMotorDelta;
             }
 
-            if (gamepad1.dpad_down){
+            //if (gamepad1.dpad_down){
                 //robot.slidesDown();//sets slides pos to 0
                 //robot.(0);
-                slidesPos = 0;
-            }
+              //  slidesPos = 0;
+            //}
 
             if(gamepad2.a){
                 robot.axleRotation.setPosition(.6);
@@ -119,6 +120,25 @@ public class TesterTeleop extends LinearOpMode {
             }
             if(gamepad2.x){
                 robot.axleRotation.setPosition(.8);
+            }
+            if(gamepad1.a){
+                robot.grasper.setPosition(.65);
+            }
+
+            if(gamepad1.x){
+                robot.grasper.setPosition(.85);
+            }
+            if(gamepad1.dpad_up){
+                robot.grasper.setPosition(.3);
+            }
+            if(gamepad1.dpad_down){
+                robot.grasper.setPosition(.5);
+            }
+            if(gamepad1.dpad_right){
+                robot.grasper.setPosition(.7);
+            }
+            if(gamepad1.dpad_left){
+                robot.grasper.setPosition(.9);
             }
 
             //robot.leftSlider.setTargetPosition(leftSliderPos);

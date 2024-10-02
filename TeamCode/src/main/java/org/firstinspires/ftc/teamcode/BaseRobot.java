@@ -1,6 +1,11 @@
 package org.firstinspires.ftc.teamcode;
 
+import androidx.annotation.NonNull;
+
+import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
+import com.acmerobotics.roadrunner.Action;
 import com.acmerobotics.roadrunner.Pose2d;
+import com.acmerobotics.roadrunner.ftc.Actions;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -13,8 +18,18 @@ public class BaseRobot{
     private int leftSliderPos = 0;
     private int rightSliderPos = 0;
     private int pivotMotorPos = 0;
-    private double gimbalPos = 0;
     private int hangArmPos = 0;
+    //end arm pos fields
+
+    //servo positions
+    private double gimbalPos = 0;
+    private double axlePos = 0;
+    private double grasperPos = 0;
+    //end servo positions
+
+
+
+
 
     //private int deltaLeftPos = 0;
     //private int deltaRightPos = 0;
@@ -27,9 +42,9 @@ public class BaseRobot{
     //end
 
     // servo Constants
-    double GRASPER_WIDE_OPEN = 0.5;//change
-    double GRASPER_HALF_OPEN = 0; //change
-    double GRASPER_CLOSED = 0;//change
+    double GRASPER_WIDE_OPEN = 0.65;//change
+    double GRASPER_HALF_OPEN = .65; //change
+    double GRASPER_CLOSED = .85;//change
     double AXLE_SERVO_BACK = 0; //change
     double AXLE_SERVO_UP = 0;//correct
     double AXLE_SERVO_DOWN = .8;//correct
@@ -67,7 +82,9 @@ public class BaseRobot{
     Servo grasperGimbal = null;
     Servo axleRotation = null;
 
+    Servo leftGrasper = null;
 
+    Servo rightGrasper = null;
     //end servos
 
 
@@ -113,11 +130,17 @@ public class BaseRobot{
         grasper = hwMap.servo.get("claw");
         grasper.setPosition(GRASPER_HALF_OPEN);
 
+        rightGrasper = hwMap.servo.get("rightGrasper");
+        rightGrasper.setPosition(RIGHT_GRASPER_OPEN);
+
+        leftGrasper = hwMap.servo.get("leftGrasper");
+        leftGrasper.setPosition(LEFT_GRASPER_OPEN);
+
         grasperGimbal = hwMap.servo.get("grasperGimbal");
         grasperGimbal.setPosition(0);
 
         axleRotation = hwMap.servo.get("axleRotation");
-        axleRotation.setPosition(0);
+        axleRotation.setPosition(1);
         //end servos
 
 
@@ -125,58 +148,7 @@ public class BaseRobot{
     }
 
 
-    public void slidesUp(){
-        setSlidesPos(SLIDES_MAX);
-    }
-
-
-    public void basketScoring(){
-        setPivotMotorPos(PIVOT_MOTOR_VERTICAL);
-        setSlidesPos(SLIDES_MAX);
-        axleRotation.setPosition(AXLE_SERVO_UP);
-        grasperGimbal.setPosition(GIMBAL_BASKET_SCORING);
-
-    }
-    public void specimenScoring(){
-        pivotMotor.setTargetPosition(PIVOT_MOTOR_VERTICAL);
-        setSlidesPos(SLIDES_MAX);//maybe a bit less
-        axleRotation.setPosition(AXLE_SERVO_OUT);
-        grasperGimbal.setPosition(GIMBAL_SPECIMEN_SCORING);
-    }
-    public void slidesDown(){
-        setSlidesPos(SLIDES_MIN);
-    }
-    public void reachToSub() {
-
-        axleRotation.setPosition(AXLE_SERVO_OUT);
-        setSlidesPos(SLIDES_TO_SUB);
-        setPivotMotorPos(PIVOT_MOTOR_HORIZONTAL);
-        grasper.setPosition(GRASPER_WIDE_OPEN);
-        grasperGimbal.setPosition(GIMBAL_RESTING_POS);
-    }
-
-    public void resetAll(){
-        grasper.setPosition(GRASPER_CLOSED);
-        setSlidesPos(SLIDES_MIN);
-        grasperGimbal.setPosition(GIMBAL_RESTING_POS);
-        axleRotation.setPosition(AXLE_SERVO_DOWN);
-        setPivotMotorPos(0);
-    }
-    //hang arm
-
-    public void slidesReset(){
-        grasper.setPosition(GRASPER_CLOSED);
-        setSlidesPos(SLIDES_MIN);
-        grasperGimbal.setPosition(GIMBAL_RESTING_POS);
-        axleRotation.setPosition(AXLE_SERVO_DOWN);
-        setPivotMotorPos(2240);
-    }
-    public void slidesMax(){
-        setSlidesPos(SLIDES_MAX);
-    }
-    //end hang arm
-
-    //hang arm pos
+    //hang arm pos --------------
     public void updateHangArmPos(){
         hangArm.setTargetPosition(hangArmPos);
         hangArm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -188,10 +160,10 @@ public class BaseRobot{
     public void changeHangArmPos(int deltaPos){
         hangArmPos += deltaPos;
     }
-    //end hang arm
+    //end hang arm -----------------
 
 
-    //pivot motor pos
+    //pivot motor pos ------------------
     public void updatePivotMotorPos() {
         if (pivotMotorPos < 0){
 
@@ -212,21 +184,41 @@ public class BaseRobot{
     public void changePivotMotorPos(int deltaPos){
         pivotMotorPos += deltaPos;
     }
+    //end pivot motor pos ------------------
 
-
-
-
+    //gimbal pos ----------------
     public void updateGimbalPos() {
         grasperGimbal.setPosition(gimbalPos);
     }
     public void setGimbalPos(double newPos){
         gimbalPos = newPos;
-
     }
     public void changeGimbalPos(double deltaPos){
         gimbalPos += deltaPos;
     }
+    //end gimbal pos ------------
 
+
+    //axle servo ---------
+    public void updateAxleServoPos(){
+        axleRotation.setPosition(axlePos);
+    }
+    public void setAxlePos(double newPos){
+        axlePos = newPos;
+    }
+    //end axle servo ---------
+
+    //grasper servo -------------
+    public void updateGrasperPos(){
+        grasper.setPosition(grasperPos);
+    }
+    public void setGrasperPos(double newPos){
+        grasperPos = newPos;
+    }
+    //end grasper servo ----------
+
+
+    //slides -----------------
     public void updateSlidesPos() {
 
         // Code from teleop that grabs armPos variables and
@@ -260,7 +252,6 @@ public class BaseRobot{
         // update the fields (variables) that hold armpos
 
     }
-
     public void changeSlidesPos(int deltaPos) {
         leftSliderPos += deltaPos;
         rightSliderPos += deltaPos;
@@ -268,6 +259,80 @@ public class BaseRobot{
         // update the fields (variables) by adding deltaPos
 
     }
+    //end slides -----------------
+
+
+    //end motor positions
+    //____________________________________________________________________________________________________________________
+
+
+
+
+    public void slidesUp(){
+        setSlidesPos(SLIDES_MAX);
+    }
+
+
+    public void basketScoring(){
+        setPivotMotorPos(PIVOT_MOTOR_VERTICAL);
+        setSlidesPos(SLIDES_MAX);
+        axleRotation.setPosition(AXLE_SERVO_UP);
+        grasperGimbal.setPosition(GIMBAL_BASKET_SCORING);
+
+    }
+    public void specimenScoring(){
+        pivotMotor.setTargetPosition(PIVOT_MOTOR_VERTICAL);
+        setSlidesPos(SLIDES_MAX);//maybe a bit less
+        axleRotation.setPosition(AXLE_SERVO_OUT);
+        grasperGimbal.setPosition(GIMBAL_SPECIMEN_SCORING);
+    }
+    public void slidesDown(){
+        setSlidesPos(SLIDES_MIN);
+    }
+    public void reachToSub() {
+
+        axleRotation.setPosition(AXLE_SERVO_OUT);
+
+        setPivotMotorPos(PIVOT_MOTOR_HORIZONTAL);
+        //while(Math.abs(pivotMotor.getCurrentPosition()-PIVOT_MOTOR_HORIZONTAL)>200){
+
+        //}
+        setSlidesPos(SLIDES_TO_SUB);
+
+
+
+        grasper.setPosition(GRASPER_WIDE_OPEN);
+        grasperGimbal.setPosition(GIMBAL_RESTING_POS);
+    }
+
+    public void resetAll(){
+        grasper.setPosition(GRASPER_CLOSED);
+        setSlidesPos(SLIDES_MIN);
+        grasperGimbal.setPosition(GIMBAL_RESTING_POS);
+        axleRotation.setPosition(AXLE_SERVO_DOWN);
+        setPivotMotorPos(0);
+    }
+    //hang arm
+
+    public void slidesReset(){
+        grasper.setPosition(GRASPER_CLOSED);
+        setSlidesPos(SLIDES_MIN);
+        grasperGimbal.setPosition(GIMBAL_RESTING_POS);
+        axleRotation.setPosition(AXLE_SERVO_DOWN);
+        setPivotMotorPos(2240);
+    }
+    public void slidesMax(){
+        setSlidesPos(SLIDES_MAX);
+    }
+    //end hang arm
+
+    //end presets
+    //____________________________________________________________________________________________________________________
+
+
+
+
+
 
     // Accessors
     public int getRightSliderPos() {
@@ -316,6 +381,8 @@ public class BaseRobot{
         return GIMBAL_RESTING_POS;
     }
 
+    //end accessors
+    //____________________________________________________________________________________________________________________
 
 
 
