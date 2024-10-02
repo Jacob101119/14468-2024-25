@@ -188,6 +188,12 @@ public class BaseRobot{
 
     //gimbal pos ----------------
     public void updateGimbalPos() {
+        if(gimbalPos > 1){
+            gimbalPos = 1;
+        }
+        if(gimbalPos < 0){
+            gimbalPos = 0;
+        }
         grasperGimbal.setPosition(gimbalPos);
     }
     public void setGimbalPos(double newPos){
@@ -201,6 +207,12 @@ public class BaseRobot{
 
     //axle servo ---------
     public void updateAxleServoPos(){
+        if(axlePos > 1){
+            axlePos = 1;
+        }
+        if(axlePos < 0){
+            axlePos = 0;
+        }
         axleRotation.setPosition(axlePos);
     }
     public void setAxlePos(double newPos){
@@ -213,6 +225,13 @@ public class BaseRobot{
 
     //grasper servo -------------
     public void updateGrasperPos(){
+
+        if(grasperPos > 1){
+            grasperPos = 1;
+        }
+        if(grasperPos < 0){
+            grasperPos = 0;
+        }
         grasper.setPosition(grasperPos);
     }
     public void setGrasperPos(double newPos){
