@@ -35,7 +35,7 @@ public class BaseRobot{
     //private int deltaRightPos = 0;
 
     //motor powers
-    private double PIVOT_MOTOR_POWER = 0.8;
+    private double PIVOT_MOTOR_POWER = 0.6;
     private double LEFT_SLIDE_POWER = 0.8;
     private double RIGHT_SLIDE_POWER = 0.8;
     private double HANG_ARM_POWER = 0.8;
@@ -48,7 +48,7 @@ public class BaseRobot{
     double AXLE_SERVO_BACK = 0; //change
     double AXLE_SERVO_UP = 0;//correct
     double AXLE_SERVO_DOWN = .8;//correct
-    double AXLE_SERVO_OUT = .4; //correct
+    //double AXLE_SERVO_OUT = .4; //correct
     double GIMBAL_BASKET_SCORING = 0;//change
     double GIMBAL_SPECIMEN_SCORING = 0;//change
     double GIMBAL_RESTING_POS = .5;//change
@@ -82,9 +82,8 @@ public class BaseRobot{
     Servo grasperGimbal = null;
     Servo axleRotation = null;
 
-    Servo leftGrasper = null;
-
-    Servo rightGrasper = null;
+    Servo leftGrasper = null;//unused
+    Servo rightGrasper = null;//unused
     //end servos
 
 
@@ -133,14 +132,14 @@ public class BaseRobot{
         rightGrasper = hwMap.servo.get("rightGrasper");
         rightGrasper.setPosition(RIGHT_GRASPER_OPEN);
 
-        leftGrasper = hwMap.servo.get("leftGrasper");
-        leftGrasper.setPosition(LEFT_GRASPER_OPEN);
+        leftGrasper = hwMap.servo.get("leftGrasper");//unused
+        leftGrasper.setPosition(LEFT_GRASPER_OPEN);//unused
 
         grasperGimbal = hwMap.servo.get("grasperGimbal");
-        grasperGimbal.setPosition(0);
+        grasperGimbal.setPosition(GIMBAL_RESTING_POS);
 
         axleRotation = hwMap.servo.get("axleRotation");
-        axleRotation.setPosition(1);
+        axleRotation.setPosition(AXLE_SERVO_BACK);
         //end servos
 
 
@@ -195,6 +194,7 @@ public class BaseRobot{
             gimbalPos = 0;
         }
         grasperGimbal.setPosition(gimbalPos);
+
     }
     public void setGimbalPos(double newPos){
         gimbalPos = newPos;
@@ -308,7 +308,7 @@ public class BaseRobot{
     public void specimenScoring(){
         pivotMotor.setTargetPosition(PIVOT_MOTOR_VERTICAL);
         setSlidesPos(SLIDES_MAX);//maybe a bit less
-        axleRotation.setPosition(AXLE_SERVO_OUT);
+        axleRotation.setPosition(AXLE_SERVO_UP);
         grasperGimbal.setPosition(GIMBAL_SPECIMEN_SCORING);
     }
     public void slidesDown(){
@@ -316,7 +316,7 @@ public class BaseRobot{
     }
     public void reachToSub() {
 
-        axleRotation.setPosition(AXLE_SERVO_OUT);
+        axleRotation.setPosition(AXLE_SERVO_DOWN);
 
         setPivotMotorPos(PIVOT_MOTOR_HORIZONTAL);
         //while(Math.abs(pivotMotor.getCurrentPosition()-PIVOT_MOTOR_HORIZONTAL)>200){
@@ -381,9 +381,9 @@ public class BaseRobot{
     public double getGrasperPos(){
         return grasperPos;
     }
-    public double getAXLE_SERVO_OUT(){
-        return AXLE_SERVO_OUT;
-    }
+    //public double getAXLE_SERVO_OUT(){
+        //return AXLE_SERVO_OUT;
+    //}
     public double getAXLE_SERVO_BACK(){
         return AXLE_SERVO_BACK;
     }

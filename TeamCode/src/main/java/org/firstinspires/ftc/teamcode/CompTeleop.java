@@ -20,12 +20,16 @@ public class CompTeleop extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
 
-        MecanumDrive d = new MecanumDrive(hardwareMap, new Pose2d(0, 0, 0));
-        robot = new BaseRobot(hardwareMap);
+
 
 
 
         waitForStart();
+
+        //moved these two lines after wait for start so robot doesn't move on init
+        MecanumDrive d = new MecanumDrive(hardwareMap, new Pose2d(0, 0, 0));
+        robot = new BaseRobot(hardwareMap);
+        //-
 
         while(!isStopRequested() && opModeIsActive()){
 
