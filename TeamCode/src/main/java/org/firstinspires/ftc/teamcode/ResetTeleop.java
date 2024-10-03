@@ -32,8 +32,6 @@ public class ResetTeleop extends LinearOpMode {
 
 
             //updates
-            robot.updateGimbalPos();
-            robot.updateHangArmPos();
             robot.updatePivotMotorPos();
             robot.updateSlidesPos();
             //end
@@ -47,10 +45,10 @@ public class ResetTeleop extends LinearOpMode {
             //slides
             robot.changeSlidesPos((int)(-gamepad1.right_stick_y * 2));
             robot.changePivotMotorPos((int) (-gamepad1.left_stick_y * 2));
-            robot.changeHangArmPos((int) ((gamepad1.right_trigger-gamepad1.left_trigger) * 2));
+
             robot.changeSlidesPos((int)(-gamepad2.right_stick_y * 5));
             robot.changePivotMotorPos((int) (-gamepad2.left_stick_y * 5));
-            robot.changeHangArmPos((int) ((gamepad2.right_trigger-gamepad2.left_trigger) * 5));
+
 
             if (gamepad1.left_bumper){
                 robot.changeGimbalPos(-.05);

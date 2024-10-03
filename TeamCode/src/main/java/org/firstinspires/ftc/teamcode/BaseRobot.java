@@ -42,9 +42,9 @@ public class BaseRobot{
     //end
 
     // servo Constants
-    double GRASPER_WIDE_OPEN = 0.65;//change
-    double GRASPER_HALF_OPEN = .65; //change
-    double GRASPER_CLOSED = .4;//change
+    double GRASPER_WIDE_OPEN = 0.75;//correct
+    double GRASPER_HALF_OPEN = .65; //correct
+    double GRASPER_CLOSED = .4;//correct
     double AXLE_SERVO_BACK = 0; //correct
     double AXLE_SERVO_UP = .27;//change
     double AXLE_SERVO_DOWN = .7;//correct
@@ -52,10 +52,10 @@ public class BaseRobot{
     double GIMBAL_BASKET_SCORING = 0;//change
     double GIMBAL_SPECIMEN_SCORING = 0;//change
     double GIMBAL_RESTING_POS = .5;//change
-    double LEFT_GRASPER_OPEN = 0;//change
-    double LEFT_GRASPER_CLOSED = 0;//change
-    double RIGHT_GRASPER_OPEN = 0;//change
-    double RIGHT_GRASPER_CLOSED = 0;//change
+    //double LEFT_GRASPER_OPEN = 0;//change
+    //double LEFT_GRASPER_CLOSED = 0;//change
+    //double RIGHT_GRASPER_OPEN = 0;//change
+    //double RIGHT_GRASPER_CLOSED = 0;//change
 
 
 
@@ -130,10 +130,10 @@ public class BaseRobot{
         grasper.setPosition(GRASPER_HALF_OPEN);
 
         rightGrasper = hwMap.servo.get("rightGrasper");
-        rightGrasper.setPosition(RIGHT_GRASPER_OPEN);
+        //rightGrasper.setPosition(RIGHT_GRASPER_OPEN);
 
         leftGrasper = hwMap.servo.get("leftGrasper");//unused
-        leftGrasper.setPosition(LEFT_GRASPER_OPEN);//unused
+        //leftGrasper.setPosition(LEFT_GRASPER_OPEN);//unused
 
         grasperGimbal = hwMap.servo.get("grasperGimbal");
         grasperGimbal.setPosition(GIMBAL_RESTING_POS);
