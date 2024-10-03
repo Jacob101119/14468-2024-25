@@ -61,9 +61,7 @@ public class GraysonTeleop extends LinearOpMode {
 
             robot.changePivotMotorPos((int) (gamepad2.left_stick_y * 10));
             robot.changeHangArmPos((int) ((gamepad2.right_trigger-gamepad2.left_trigger) * 10));
-
-
-
+            
 
             if(gamepad1.dpad_right){
                 robot.setGrasperPos(robot.GRASPER_WIDE_OPEN);
@@ -73,33 +71,33 @@ public class GraysonTeleop extends LinearOpMode {
             }
 
             if(gamepad2.dpad_down){
-                robot.setAxlePos(.2);
+                robot.setAxlePos(robot.getAXLE_SERVO_UP());
             }
             if(gamepad2.dpad_up){
-                robot.setAxlePos(.8);
+                robot.setAxlePos(robot.getAXLE_SERVO_BACK());
             }
 
             if(gamepad2.left_bumper){
-                robot.changeGimbalPos(-.05);
+                robot.changeGimbalPos(-.1);
             }
             if(gamepad2.right_bumper){
-                robot.changeGimbalPos(.05);
+                robot.changeGimbalPos(.1);
             }
             if(gamepad2.left_bumper && gamepad2.right_bumper){
                 robot.setGimbalPos(robot.GIMBAL_RESTING_POS);
             }
 
             if (gamepad2.a){
-
+                robot.setGimbalPos(.2);
             }
             if (gamepad2.x){
-
+                robot.setGimbalPos(.4);
             }
             if (gamepad2.y){
-
+                robot.setGimbalPos(.6);
             }
             if (gamepad2.b){
-
+                robot.setGimbalPos(.8);
             }
 
 

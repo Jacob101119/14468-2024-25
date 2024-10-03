@@ -44,10 +44,10 @@ public class BaseRobot{
     // servo Constants
     double GRASPER_WIDE_OPEN = 0.65;//change
     double GRASPER_HALF_OPEN = .65; //change
-    double GRASPER_CLOSED = .85;//change
-    double AXLE_SERVO_BACK = 0; //change
-    double AXLE_SERVO_UP = 0;//correct
-    double AXLE_SERVO_DOWN = .8;//correct
+    double GRASPER_CLOSED = .4;//change
+    double AXLE_SERVO_BACK = 0; //correct
+    double AXLE_SERVO_UP = .27;//change
+    double AXLE_SERVO_DOWN = .7;//correct
     //double AXLE_SERVO_OUT = .4; //correct
     double GIMBAL_BASKET_SCORING = 0;//change
     double GIMBAL_SPECIMEN_SCORING = 0;//change

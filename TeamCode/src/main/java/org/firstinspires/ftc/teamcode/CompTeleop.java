@@ -61,10 +61,10 @@ public class CompTeleop extends LinearOpMode {
             //if (gamepad1.dpad_up){
               //  robot.slidesMax();
             //}
-            //if(gamepad1.left_bumper){
-              //  robot.changeGimbalPos(-.05);
-            //}
-            /*if(gamepad1.right_bumper){
+            if(gamepad1.left_bumper){
+                robot.changeGimbalPos(-.05);
+            }
+            if(gamepad1.right_bumper){
                 robot.changeGimbalPos(.05);
             }
             if(gamepad1.a){
@@ -76,7 +76,7 @@ public class CompTeleop extends LinearOpMode {
             if(gamepad1.left_bumper && gamepad1.right_bumper){
                 robot.setGimbalPos(robot.GIMBAL_RESTING_POS);
             }
-            */
+
 
             if(gamepad1.a){
                 robot.grasper.setPosition(robot.GRASPER_WIDE_OPEN);
@@ -86,16 +86,16 @@ public class CompTeleop extends LinearOpMode {
             }
 
             if(gamepad2.a){
-                robot.axleRotation.setPosition(.2);
+                robot.axleRotation.setPosition(robot.getAXLE_SERVO_UP());
             }
             if(gamepad2.b){
-                robot.axleRotation.setPosition(0);
+                robot.axleRotation.setPosition(robot.getAXLE_SERVO_BACK());
             }
             if(gamepad2.y){
-                robot.axleRotation.setPosition(.7);
+                robot.axleRotation.setPosition(robot.getAXLE_SERVO_DOWN());
             }
             if(gamepad2.x){
-                robot.axleRotation.setPosition(.8);
+                robot.axleRotation.setPosition(.5);
             }
 
 
