@@ -20,12 +20,13 @@ public class GraysonTeleop extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
 
-        MecanumDrive d = new MecanumDrive(hardwareMap, new Pose2d(0, 0, 0));
-        robot = new BaseRobot(hardwareMap);
 
 
 
         waitForStart();
+
+        MecanumDrive d = new MecanumDrive(hardwareMap, new Pose2d(0, 0, 0));
+        robot = new BaseRobot(hardwareMap);
 
         while(!isStopRequested() && opModeIsActive()){
 
@@ -61,7 +62,7 @@ public class GraysonTeleop extends LinearOpMode {
 
             robot.changePivotMotorPos((int) (gamepad2.left_stick_y * 10));
             robot.changeHangArmPos((int) ((gamepad2.right_trigger-gamepad2.left_trigger) * 10));
-            
+
 
             if(gamepad1.dpad_right){
                 robot.setGrasperPos(robot.GRASPER_WIDE_OPEN);
