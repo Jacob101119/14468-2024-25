@@ -66,6 +66,12 @@ public class meetOneTeleop extends LinearOpMode {
                 robot.setGrasperPos(robot.GRASPER_WIDE_OPEN);
             }
             if(gamepad1.dpad_left){
+                //robot.setGrasperPos(1);
+            }
+            if(gamepad1.dpad_up){
+                //robot.setGrasperPos(0);
+            }
+            if(gamepad1.dpad_down){
                 robot.setGrasperPos(robot.GRASPER_CLOSED);
             }
 
@@ -88,6 +94,7 @@ public class meetOneTeleop extends LinearOpMode {
 
             if (gamepad2.a){
 
+                robot.setPivotMotorPos(10);
 
             }
             if (gamepad2.x){
@@ -114,6 +121,7 @@ public class meetOneTeleop extends LinearOpMode {
 
             telemetry.addLine("Motors: ");
             telemetry.addLine();
+
 
             telemetry.addLine("Slides: ");
             telemetry.addData("left slides position: ", robot.getLeftSliderPos());
@@ -142,6 +150,7 @@ public class meetOneTeleop extends LinearOpMode {
 
             telemetry.addLine("controls: ");
             telemetry.addLine("i'll put them in later");
+
             telemetry.update();
             //end telemetry
             //_____________________________________________________________________________________

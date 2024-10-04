@@ -42,8 +42,8 @@ public class BaseRobot{
     //end
 
     // servo Constants
-    double GRASPER_WIDE_OPEN = 0.75;//correct
-    double GRASPER_HALF_OPEN = .65; //correct
+    double GRASPER_WIDE_OPEN = .7;//correct
+    double GRASPER_HALF_OPEN = .6; //correct
     double GRASPER_CLOSED = .4;//correct
     double AXLE_SERVO_BACK = 0; //correct
     double AXLE_SERVO_UP = .27;//change
@@ -67,7 +67,7 @@ public class BaseRobot{
     int SLIDES_TO_SUB = 60;//change
     int PIVOT_MOTOR_TO_SUB = 0;//change
     int PIVOT_MOTOR_VERTICAL = 2248;
-    int PIVOT_MOTOR_HORIZONTAL = 5403;
+    int PIVOT_MOTOR_HORIZONTAL = 5003;
     //end motor constants
 
     public MecanumDrive drive;
@@ -143,7 +143,7 @@ public class BaseRobot{
         grasperGimbal.setPosition(GIMBAL_RESTING_POS);
 
         axleRotation = hwMap.servo.get("axleRotation");
-        axleRotation.setPosition(AXLE_SERVO_BACK);
+        axleRotation.setPosition(AXLE_SERVO_DOWN);
         //end servos
 
 
@@ -173,8 +173,8 @@ public class BaseRobot{
 
         }
 
-        if (pivotMotorPos > PIVOT_MOTOR_HORIZONTAL){
-            pivotMotorPos = PIVOT_MOTOR_HORIZONTAL;
+        if (pivotMotorPos > PIVOT_MOTOR_HORIZONTAL + 400){
+            pivotMotorPos = PIVOT_MOTOR_HORIZONTAL + 400;
         }
 
         pivotMotor.setTargetPosition(pivotMotorPos);
@@ -214,6 +214,9 @@ public class BaseRobot{
 
     //axle servo ---------
     public void updateAxleServoPos(){
+        if(pivotMotorPos < PIVOT_MOTOR_VERTICAL) {
+            axlePos = getAXLE_SERVO_UP();
+        }
         if(axlePos > 1){
             axlePos = 1;
         }
