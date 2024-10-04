@@ -35,7 +35,7 @@ public class BaseRobot{
     //private int deltaRightPos = 0;
 
     //motor powers
-    private double PIVOT_MOTOR_POWER = 0.6;
+    private double PIVOT_MOTOR_POWER = 0.4;
     private double LEFT_SLIDE_POWER = 0.8;
     private double RIGHT_SLIDE_POWER = 0.8;
     private double HANG_ARM_POWER = 0.8;
@@ -66,8 +66,8 @@ public class BaseRobot{
     int SLIDES_MIN = 0;
     int SLIDES_TO_SUB = 60;//change
     int PIVOT_MOTOR_TO_SUB = 0;//change
-    int PIVOT_MOTOR_VERTICAL = 2704; //change
-    int PIVOT_MOTOR_HORIZONTAL = 5350; //change
+    int PIVOT_MOTOR_VERTICAL = 2248;
+    int PIVOT_MOTOR_HORIZONTAL = 5403;
     //end motor constants
 
     public MecanumDrive drive;
@@ -123,6 +123,10 @@ public class BaseRobot{
         pivotMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         pivotMotorPos = hangArm.getCurrentPosition();
 
+        if(pivotMotorPos > PIVOT_MOTOR_VERTICAL + 200){
+            SLIDES_MAX = 400;
+        }
+
         //servos
 
 
@@ -147,6 +151,7 @@ public class BaseRobot{
     }
 
 
+
     //hang arm pos --------------
     public void updateHangArmPos(){
         hangArm.setTargetPosition(hangArmPos);
@@ -167,9 +172,11 @@ public class BaseRobot{
         if (pivotMotorPos < 0){
 
         }
-        if (pivotMotorPos > 5350){
 
+        if (pivotMotorPos > PIVOT_MOTOR_HORIZONTAL){
+            pivotMotorPos = PIVOT_MOTOR_HORIZONTAL;
         }
+
         pivotMotor.setTargetPosition(pivotMotorPos);
         pivotMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         pivotMotor.setPower(PIVOT_MOTOR_POWER);
@@ -411,6 +418,17 @@ public class BaseRobot{
     public double getGIMBAL_RESTING_POS(){
         return GIMBAL_RESTING_POS;
     }
+
+    public double getRIGHT_SLIDE_POWER(){
+        return RIGHT_SLIDE_POWER;
+    }
+    public double getLEFT_SLIDE_POWER(){
+        return LEFT_SLIDE_POWER;
+    }
+    public double getPIVOT_MOTOR_POWER(){
+        return PIVOT_MOTOR_POWER;
+    }
+
 
     //end accessors
     //____________________________________________________________________________________________________________________
