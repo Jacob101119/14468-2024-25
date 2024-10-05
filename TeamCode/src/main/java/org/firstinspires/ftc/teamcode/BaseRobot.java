@@ -214,9 +214,9 @@ public class BaseRobot{
 
     //axle servo ---------
     public void updateAxleServoPos(){
-        if(pivotMotorPos < PIVOT_MOTOR_VERTICAL) {
-            axlePos = getAXLE_SERVO_UP();
-        }
+        //if(pivotMotorPos < PIVOT_MOTOR_VERTICAL && axlePos > ) {
+          //  axlePos = getAXLE_SERVO_UP();
+        //}
         if(axlePos > 1){
             axlePos = 1;
         }
