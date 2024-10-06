@@ -65,6 +65,7 @@ public class BaseRobot{
     int SLIDES_MAX = 3000;//change
     int SLIDES_MIN = 0;
     int SLIDES_TO_SUB = 60;//change
+    int SLIDES_TO_HIGH_RUNG = 2500;
     int PIVOT_MOTOR_TO_SUB = 0;//change
     int PIVOT_MOTOR_VERTICAL = 2248;
     int PIVOT_MOTOR_HORIZONTAL = 5003;
@@ -430,6 +431,10 @@ public class BaseRobot{
     }
     public double getPIVOT_MOTOR_POWER(){
         return PIVOT_MOTOR_POWER;
+    }
+
+    public int getSLIDES_TO_HIGH_RUNG(){
+        return SLIDES_TO_HIGH_RUNG;
     }
 
 
