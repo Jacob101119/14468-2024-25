@@ -16,37 +16,61 @@ import org.firstinspires.ftc.teamcode.MecanumDrive;
     @Autonomous
     public final class SpecimenHighRung extends LinearOpMode {
 
-        BaseRobot robot = new BaseRobot(hardwareMap);
-        MecanumDrive drive = new MecanumDrive(hardwareMap, new Pose2d(-12, -60, 90));
+        BaseRobot robot;
+        MecanumDrive drive;
         @Override
 
         public void runOpMode() throws InterruptedException {
-
+                robot = new BaseRobot(hardwareMap);
+                drive = new MecanumDrive(hardwareMap, new Pose2d(-60, -12, 0));
 
                 waitForStart();
 //new updates to run movements
                 Actions.runBlocking(
                         drive.actionBuilder(drive.pose)
 
-
-
-                                .splineTo(new Vector2d(-10.50, -40.00), Math.toRadians(90.00))//move to sub for high rung placement
+                                .strafeToLinearHeading(new Vector2d(-40, -12), 0)
+                                //.strafeToLinearHeading(new Vector2d(-40, -12, 90))//move to sub for high rung placement /-10.5
                                 //slides up, move forward a tiny bit, slides down a bit, back up, move back, slides down
                                 //robot.setSlidesPos(robot.getSLIDES_TO_HIGH_RUNG())
 
-                                .splineTo(new Vector2d(-14.08, -38.61), Math.toRadians(212.28))//turn to go grab 1st yellow sample
+
+                                .strafeToLinearHeading(new Vector2d(-38.61, -9.98), Math.toRadians(122.28))//turn to go grab 1st yellow sample
                                 //pivot motor horizontal
 
-                                .splineTo(new Vector2d(-49.21, -48), Math.toRadians(90.00))//lined up for first yellow sample
+                                .strafeToLinearHeading(new Vector2d(-48, 25.21), Math.toRadians(0))//lined up for first yellow sample
                                 //grab, pivot motor vertical
+                                //robot.setPivotMotorPos(5003)
 
-                                .splineTo(new Vector2d(-50.00, -49.10), Math.toRadians(225.00))//after grabbing sample, turn
+                                .strafeToLinearHeading(new Vector2d(-49.10, 26), Math.toRadians(135))//after grabbing sample, turn
 
 
-                                .splineTo(new Vector2d(-56.18, -55.78), Math.toRadians(224.91))//move to high bucket
+                                .strafeToLinearHeading(new Vector2d(-55.78,32.18), Math.toRadians(134.91))//move to high bucket
                                 //slides up, move forward, grasper open, move back, slides down
 
+
+                                .strafeToLinearHeading(new Vector2d(-48, 25.21), Math.toRadians(0))//lined up for second yellow sample
+
+                                .strafeToLinearHeading(new Vector2d(-49.10, 26), Math.toRadians(135))//after grabbing sample, turn
+
+
+                                .strafeToLinearHeading(new Vector2d(-55.78,32.18), Math.toRadians(134.91))//move to high bucket
+                                //slides up, move forward, grasper open, move back, slides down
+
+                                .strafeToLinearHeading(new Vector2d(-48, 25.21), Math.toRadians(0))//lined up for third yellow sample
+
+                                .strafeToLinearHeading(new Vector2d(-49.10, 26), Math.toRadians(135))//after grabbing sample, turn
+
+
+                                .strafeToLinearHeading(new Vector2d(-55.78,32.18), Math.toRadians(134.91))//move to high bucket
+                                //slides up, move forward, grasper open, move back, slides down
+
+
+
+
                                 .build());
+
+
 
                 /*
 

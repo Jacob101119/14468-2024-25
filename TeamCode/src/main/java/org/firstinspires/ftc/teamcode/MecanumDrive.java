@@ -62,7 +62,7 @@ public final class MecanumDrive {
         public RevHubOrientationOnRobot.UsbFacingDirection usbFacingDirection =
                 RevHubOrientationOnRobot.UsbFacingDirection.UP;
         // drive model parameters
-        public double inPerTick = 0.002933397826477;
+        public double inPerTick = 0.00295005647;
         public double lateralInPerTick = 0.002039347766119609;
         public double trackWidthTicks = 5143.295814974604;
 
@@ -444,6 +444,7 @@ public final class MecanumDrive {
     public PoseVelocity2d updatePoseEstimate() {
         Twist2dDual<Time> twist = localizer.update();
         pose = pose.plus(twist.value());
+        pose = new Pose2d(pose.position,Math.toRadians(lazyImu.get().getRobotYawPitchRollAngles().getYaw()));
 
         poseHistory.add(pose);
         while (poseHistory.size() > 100) {
