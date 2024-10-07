@@ -48,6 +48,28 @@ import org.firstinspires.ftc.teamcode.MecanumDrive;
 
                                 .build());
 
+                /*
+
+                //auto on human player wing side
+                //start posnew Pose2d(12.00, -60.00, Math.toRadians(90.00)))
+
+                    .splineTo(new Vector2d(10.73, -40.00), Math.toRadians(90.00)) //move to place preloaded specimen on high rung
+                    //slides up, move forward a tiny bit, slides down a tiny bit, slides up, move back, slides down
+
+                    .splineTo(new Vector2d(19.71, -40.00), Math.toRadians(0.00))
+
+                    .splineTo(new Vector2d(35.53, -35.53), Math.toRadians(90.00))
+                    .splineTo(new Vector2d(44.11, -14.88), Math.toRadians(-90.00))
+                    .splineTo(new Vector2d(49.00, -14.21), Math.toRadians(-90.00))
+                    
+                    .splineTo(new Vector2d(49, -58, Math.toRadians(-90))
+
+
+                    .build();
+
+
+                 */
+
 
 
 
