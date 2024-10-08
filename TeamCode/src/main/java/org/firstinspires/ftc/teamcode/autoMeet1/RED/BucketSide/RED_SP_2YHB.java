@@ -36,8 +36,9 @@ public final class RED_SP_2YHB extends LinearOpMode {
         waitForStart();
 //new updates to run movements
         Actions.runBlocking(moveToSubAction);
-
-        robot.setSlidesPos(817);
+        robot.setPivotMotorPos(robot.getPIVOT_MOTOR_VERTICAL());
+        //add delay
+        robot.setSlidesPos(robot.getSLIDES_ABOVE_HIGH_RUNG());
         //slides up
 
         Actions.runBlocking(robot.drive.actionBuilder(robot.drive.pose)//move farther to high rung
@@ -45,11 +46,11 @@ public final class RED_SP_2YHB extends LinearOpMode {
                 .strafeToConstantHeading(new Vector2d(-11, -36))
                 .build());
         //----
-        robot.setSlidesPos(790);
+        robot.setSlidesPos(robot.getSLIDES_PUT_SAMPLE_ON_HIGH_RUNG());
         robot.setGrasperPos(robot.getGRASPER_OPEN());
-        robot.setSlidesPos(830);
+        robot.setSlidesPos(robot.getSLIDES_ABOVE_HIGH_RUNG());
 
-        Actions.runBlocking(robot.drive.actionBuilder(robot.drive.pose)
+        Actions.runBlocking(robot.drive.actionBuilder(robot.drive.pose)//move back
 
                 .strafeToConstantHeading(new Vector2d(-11.00, -41.00))
                 .build());
@@ -62,10 +63,8 @@ public final class RED_SP_2YHB extends LinearOpMode {
                         .build());
 
         robot.setPivotMotorPos(robot.getPIVOT_MOTOR_HORIZONTAL());
-        robot.setSlidesPos(50);
+        robot.setAxlePos(robot.getAXLE_SERVO_UP());
         robot.setGrasperPos(robot.getGRASPER_CLOSED());
-        robot.setPivotMotorPos(robot.getPIVOT_MOTOR_HORIZONTAL()-100);
-        robot.setSlidesPos(0);
         robot.setPivotMotorPos(robot.getPIVOT_MOTOR_VERTICAL());
 
 
@@ -75,24 +74,45 @@ public final class RED_SP_2YHB extends LinearOpMode {
                 .build());
 
         robot.setSlidesPos(robot.getSLIDES_MAX());
+        //move forward?
         robot.setGrasperPos(robot.getGRASPER_OPEN());
 
         Actions.runBlocking(robot.drive.actionBuilder(robot.drive.pose)
 
-                .strafeToLinearHeading(new Vector2d(-59, -45), 90)
+                .strafeToLinearHeading(new Vector2d(-59, -45), 90)//to second yellow sample
                 .build());
 
+        //grab second sample
         robot.setPivotMotorPos(robot.getPIVOT_MOTOR_HORIZONTAL());
         robot.setGrasperPos(robot.getGRASPER_CLOSED());
         robot.setPivotMotorPos(robot.getPIVOT_MOTOR_VERTICAL());
 
+
+        //move to bucket
         Actions.runBlocking(robot.drive.actionBuilder(robot.drive.pose)
 
                 .strafeToLinearHeading(new Vector2d(-56, -56), 225)//move to bucket
                 .build());
 
+        //score
         robot.setSlidesPos(robot.getSLIDES_MAX());
         robot.setGrasperPos(robot.getGRASPER_OPEN());
+
+
+        Actions.runBlocking(robot.drive.actionBuilder(robot.drive.pose)//move back a little bit
+
+                .strafeToConstantHeading(new Vector2d(-54, -54))
+
+                .build());
+
+        robot.setSlidesPos(0);
+        robot.setPivotMotorPos(0);
+
+        Actions.runBlocking(robot.drive.actionBuilder(robot.drive.pose)//move close to sub
+
+                .strafeToLinearHeading(new Vector2d(-12, -47), 90)
+
+                .build());
 
 
 
