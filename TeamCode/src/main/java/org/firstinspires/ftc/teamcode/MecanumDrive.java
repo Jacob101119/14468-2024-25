@@ -121,6 +121,10 @@ public final class MecanumDrive {
     private final DownsampledWriter driveCommandWriter = new DownsampledWriter("DRIVE_COMMAND", 50_000_000);
     private final DownsampledWriter mecanumCommandWriter = new DownsampledWriter("MECANUM_COMMAND", 50_000_000);
 
+
+    double headingOffset = 0;//imu updates
+    double initialHeading = 0;//imu updates
+
     public class DriveLocalizer implements Localizer {
         public final Encoder leftFront, leftBack, rightBack, rightFront;
         public final IMU imu;
@@ -140,6 +144,10 @@ public final class MecanumDrive {
             // TODO: reverse encoders if needed
             //   leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
         }
+
+
+
+
 
         @Override
         public Twist2dDual<Time> update() {
@@ -207,6 +215,7 @@ public final class MecanumDrive {
 
     public MecanumDrive(HardwareMap hardwareMap, Pose2d pose) {
         this.pose = pose;
+        initialHeading = Math.toDegrees(pose.heading.log());//new imu updates
 
         LynxFirmware.throwIfModulesAreOutdated(hardwareMap);
 
@@ -444,7 +453,9 @@ public final class MecanumDrive {
     public PoseVelocity2d updatePoseEstimate() {
         Twist2dDual<Time> twist = localizer.update();
         pose = pose.plus(twist.value());
-        pose = new Pose2d(pose.position,Math.toRadians(lazyImu.get().getRobotYawPitchRollAngles().getYaw()));
+        //pose = new Pose2d(pose.position,Math.toRadians(lazyImu.get().getRobotYawPitchRollAngles().getYaw()));
+
+        pose = new Pose2d(pose.position,Rotation2d.exp(getHeading()));
 
         poseHistory.add(pose);
         while (poseHistory.size() > 100) {
@@ -473,6 +484,10 @@ public final class MecanumDrive {
         c.strokePolyline(xPoints, yPoints);
     }
 
+
+
+
+
     public TrajectoryActionBuilder actionBuilder(Pose2d beginPose) {
         return new TrajectoryActionBuilder(
                 TurnAction::new,
@@ -487,5 +502,19 @@ public final class MecanumDrive {
                 defaultTurnConstraints,
                 defaultVelConstraint, defaultAccelConstraint
         );
+
+
     }
+
+    //new imu stuff
+    public double getHeading(){
+        return lazyImu.get().getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS)+Math.toRadians(initialHeading)-Math.toRadians(headingOffset);
+    }
+
+    public void resetHeading(){
+        headingOffset = Math.toDegrees(lazyImu.get().getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS));
+    }
+    //end new imu stuff
+
+
 }
