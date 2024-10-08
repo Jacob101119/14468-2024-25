@@ -14,7 +14,7 @@ import org.firstinspires.ftc.teamcode.MecanumDrive;
 
 
     @Autonomous
-    public final class SpecimenHighRung extends LinearOpMode {
+    public final class RED_SP_3YHB extends LinearOpMode {
 
         BaseRobot robot;
         MecanumDrive drive;
