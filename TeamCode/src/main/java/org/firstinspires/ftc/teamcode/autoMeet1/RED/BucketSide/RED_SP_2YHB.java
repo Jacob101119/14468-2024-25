@@ -15,7 +15,7 @@ import org.firstinspires.ftc.teamcode.MecanumDrive;
 
 
 @Autonomous
-public final class redo extends LinearOpMode {
+public final class RED_SP_2YHB extends LinearOpMode {
 
     BaseRobot robot;
     MecanumDrive drive;
@@ -71,8 +71,29 @@ public final class redo extends LinearOpMode {
 
         Actions.runBlocking(robot.drive.actionBuilder(robot.drive.pose)
 
-                .strafeToLinearHeading(new Vector2d(-56, -56), 225)
+                .strafeToLinearHeading(new Vector2d(-56, -56), 225)//move to bucket
                 .build());
+
+        robot.setSlidesPos(robot.getSLIDES_MAX());
+        robot.setGrasperPos(robot.getGRASPER_OPEN());
+
+        Actions.runBlocking(robot.drive.actionBuilder(robot.drive.pose)
+
+                .strafeToLinearHeading(new Vector2d(-59, -45), 90)
+                .build());
+
+        robot.setPivotMotorPos(robot.getPIVOT_MOTOR_HORIZONTAL());
+        robot.setGrasperPos(robot.getGRASPER_CLOSED());
+        robot.setPivotMotorPos(robot.getPIVOT_MOTOR_VERTICAL());
+
+        Actions.runBlocking(robot.drive.actionBuilder(robot.drive.pose)
+
+                .strafeToLinearHeading(new Vector2d(-56, -56), 225)//move to bucket
+                .build());
+
+        robot.setSlidesPos(robot.getSLIDES_MAX());
+        robot.setGrasperPos(robot.getGRASPER_OPEN());
+
 
 
     }
