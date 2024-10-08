@@ -52,7 +52,7 @@ public class BaseRobot{
     //double AXLE_SERVO_OUT = .4; //correct
     double GIMBAL_BASKET_SCORING = 0;//change
     double GIMBAL_SPECIMEN_SCORING = 0;//change
-    double GIMBAL_RESTING_POS = .5;//change
+    double GIMBAL_RESTING_POS = .55;//change
     //double LEFT_GRASPER_OPEN = 0;//change
     //double LEFT_GRASPER_CLOSED = 0;//change
     //double RIGHT_GRASPER_OPEN = 0;//change
@@ -63,8 +63,8 @@ public class BaseRobot{
     //end servo constants
 
     //motor constants
-    int SLIDES_ABOVE_HIGH_RUNG = 817;//change
-    int SLIDES_PUT_SAMPLE_ON_HIGH_RUNG = 790;//change
+    int SLIDES_ABOVE_HIGH_RUNG = 900;//change
+    int SLIDES_PUT_SP_ON_HIGH_RUNG = 80;//change
     int SLIDES_MAX = 3000;//change
     int SLIDES_MIN = 0;
     int SLIDES_TO_SUB = 60;//change
@@ -149,7 +149,7 @@ public class BaseRobot{
         grasperGimbal.setPosition(GIMBAL_RESTING_POS);
 
         axleRotation = hwMap.servo.get("axleRotation");
-        axleRotation.setPosition(AXLE_SERVO_UP);
+        axleRotation.setPosition(AXLE_SERVO_DOWN);
         //end servos
 
 
@@ -441,8 +441,8 @@ public class BaseRobot{
     public int getSLIDES_ABOVE_HIGH_RUNG(){
         return SLIDES_ABOVE_HIGH_RUNG;
     }
-    public int getSLIDES_PUT_SAMPLE_ON_HIGH_RUNG(){
-        return SLIDES_PUT_SAMPLE_ON_HIGH_RUNG;
+    public int getSLIDES_PUT_SP_ON_HIGH_RUNG(){
+        return SLIDES_PUT_SP_ON_HIGH_RUNG;
     }
 
     public int getSLIDES_MAX(){

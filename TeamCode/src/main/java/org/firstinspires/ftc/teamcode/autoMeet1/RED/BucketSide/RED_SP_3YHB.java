@@ -42,6 +42,8 @@ import org.firstinspires.ftc.teamcode.MecanumDrive;
                                 //grab, pivot motor vertical
                                 //robot.setPivotMotorPos(5003)
 
+
+
                                 .strafeToLinearHeading(new Vector2d(-49.10, 26), Math.toRadians(135))//after grabbing sample, turn
 
 
