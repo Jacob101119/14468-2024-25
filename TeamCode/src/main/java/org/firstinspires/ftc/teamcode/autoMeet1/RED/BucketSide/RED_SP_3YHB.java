@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.autoMeet1;
+package org.firstinspires.ftc.teamcode.autoMeet1.RED.BucketSide;
 
 
 import com.acmerobotics.roadrunner.Pose2d;
@@ -75,7 +75,7 @@ import org.firstinspires.ftc.teamcode.MecanumDrive;
                 /*
 
                 //auto on human player wing side
-                //start posnew Pose2d(12.00, -60.00, Math.toRadians(90.00)))
+                //start pos new Pose2d(12.00, -60.00, Math.toRadians(90.00)))
 
                     .splineTo(new Vector2d(10.73, -40.00), Math.toRadians(90.00)) //move to place preloaded specimen on high rung
                     //slides up, move forward a tiny bit, slides down a tiny bit, slides up, move back, slides down

@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.autoMeet1;
+package org.firstinspires.ftc.teamcode.autoMeet1.RED.ObservationSide;
 
 
 import com.acmerobotics.roadrunner.Pose2d;
@@ -31,6 +31,7 @@ public final class RED_SP_2R_OZ extends LinearOpMode {
 
 
                         .strafeToLinearHeading(new Vector2d(23.75, 1), 0)//to sub
+
 
                         .strafeToLinearHeading(new Vector2d(23.75, -24), 0)//strafe right
 
