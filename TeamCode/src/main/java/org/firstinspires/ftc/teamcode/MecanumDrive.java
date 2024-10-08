@@ -212,12 +212,10 @@ public final class MecanumDrive {
             );
         }
     }
-
-    public MecanumDrive(HardwareMap hardwareMap, Pose2d pose) {
+    public MecanumDrive(HardwareMap hardwareMap, Pose2d pose){
         this.pose = pose;
         initialHeading = Math.toDegrees(pose.heading.log());//new imu updates
 
-        LynxFirmware.throwIfModulesAreOutdated(hardwareMap);
 
         for (LynxModule module : hardwareMap.getAll(LynxModule.class)) {
             module.setBulkCachingMode(LynxModule.BulkCachingMode.AUTO);

@@ -10,6 +10,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 
 public class BaseRobot{
@@ -90,11 +91,13 @@ public class BaseRobot{
     //end servos
 
 
-
-
     public BaseRobot(HardwareMap hwMap){
+        this(hwMap, new Pose2d(0,0,0));
+    }
 
-        drive = new MecanumDrive(hwMap, new Pose2d(0, 0, 0));
+    public BaseRobot(HardwareMap hwMap, Pose2d pose){
+
+        drive = new MecanumDrive(hwMap, pose);
 
         hangArm = hwMap.dcMotor.get("hangArm");
 
@@ -134,7 +137,7 @@ public class BaseRobot{
 
 
         grasper = hwMap.servo.get("claw");
-        grasper.setPosition(GRASPER_HALF_OPEN);
+        grasper.setPosition(GRASPER_CLOSED);
 
         rightGrasper = hwMap.servo.get("rightGrasper");
         //rightGrasper.setPosition(RIGHT_GRASPER_OPEN);
@@ -146,7 +149,7 @@ public class BaseRobot{
         grasperGimbal.setPosition(GIMBAL_RESTING_POS);
 
         axleRotation = hwMap.servo.get("axleRotation");
-        axleRotation.setPosition(AXLE_SERVO_DOWN);
+        axleRotation.setPosition(AXLE_SERVO_UP);
         //end servos
 
 
@@ -457,7 +460,14 @@ public class BaseRobot{
     //end accessors
     //____________________________________________________________________________________________________________________
 
+    public void delay(double seconds){
+        ElapsedTime timer = new ElapsedTime();
+        timer.reset();
+        while(timer.seconds() < seconds){
 
+        }
+
+    }
 
 
 }

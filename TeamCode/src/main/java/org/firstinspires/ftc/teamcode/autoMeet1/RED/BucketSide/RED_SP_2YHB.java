@@ -22,12 +22,13 @@ public final class RED_SP_2YHB extends LinearOpMode {
     @Override
 
 
-    public void runOpMode() throws InterruptedException {
-        robot = new BaseRobot(hardwareMap);
-        drive = new MecanumDrive(hardwareMap, new Pose2d(-12.60, -62.48, 90));
+    public void runOpMode() throws InterruptedException{
+        robot = new BaseRobot(hardwareMap, new Pose2d(-12.60, -62.48, 90));
 
+        robot.setAxlePos(robot.getAXLE_SERVO_UP());
+        robot.updateAxleServoPos();
 
-        Action moveToSubAction = robot.drive.actionBuilder(drive.pose)
+        Action moveToSubAction = robot.drive.actionBuilder(robot.drive.pose)
 
                 .strafeToConstantHeading(new Vector2d(-11.00, -41.00))
                 .build();
@@ -37,8 +38,14 @@ public final class RED_SP_2YHB extends LinearOpMode {
 //new updates to run movements
         Actions.runBlocking(moveToSubAction);
         robot.setPivotMotorPos(robot.getPIVOT_MOTOR_VERTICAL());
+        robot.updatePivotMotorPos();
+        robot.delay(2);
         //add delay
         robot.setSlidesPos(robot.getSLIDES_ABOVE_HIGH_RUNG());
+
+        robot.updateSlidesPos();
+        robot.delay(.5);
+
         //slides up
 
         Actions.runBlocking(robot.drive.actionBuilder(robot.drive.pose)//move farther to high rung
@@ -47,8 +54,12 @@ public final class RED_SP_2YHB extends LinearOpMode {
                 .build());
         //----
         robot.setSlidesPos(robot.getSLIDES_PUT_SAMPLE_ON_HIGH_RUNG());
+        robot.updateSlidesPos();
+        robot.delay(2);
         robot.setGrasperPos(robot.getGRASPER_OPEN());
+        robot.updateGrasperPos();
         robot.setSlidesPos(robot.getSLIDES_ABOVE_HIGH_RUNG());
+        robot.updateSlidesPos();
 
         Actions.runBlocking(robot.drive.actionBuilder(robot.drive.pose)//move back
 
@@ -57,8 +68,9 @@ public final class RED_SP_2YHB extends LinearOpMode {
 
         robot.setSlidesPos(0);
 
-        Actions.runBlocking(robot.drive.actionBuilder(robot.drive.pose)
 
+        Actions.runBlocking(robot.drive.actionBuilder(robot.drive.pose)
+                        .strafeToConstantHeading(new Vector2d(-11, -48))
                         .strafeToConstantHeading(new Vector2d(-49, -45))//move to first yellow sample
                         .build());
 
@@ -70,7 +82,7 @@ public final class RED_SP_2YHB extends LinearOpMode {
 
         Actions.runBlocking(robot.drive.actionBuilder(robot.drive.pose)
 
-                .strafeToLinearHeading(new Vector2d(-56, -56), 225)//move to bucket
+                .strafeToLinearHeading(new Vector2d(-56, -56), 135)//move to bucket
                 .build());
 
         robot.setSlidesPos(robot.getSLIDES_MAX());

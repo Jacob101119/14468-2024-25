@@ -65,7 +65,7 @@ import org.firstinspires.ftc.teamcode.MecanumDrive;
                                 .strafeToLinearHeading(new Vector2d(-55.78,32.18), Math.toRadians(134.91))//move to high bucket
                                 //slides up, move forward, grasper open, move back, slides down
 
-
+                                .strafeToLinearHeading(new Vector2d(-60, -12), 0)
 
 
                                 .build());
