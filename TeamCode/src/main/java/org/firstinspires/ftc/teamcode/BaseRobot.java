@@ -220,6 +220,9 @@ public class BaseRobot{
         //if(pivotMotorPos < PIVOT_MOTOR_VERTICAL && axlePos > ) {
           //  axlePos = getAXLE_SERVO_UP();
         //}
+        if (pivotMotorPos < 600 && axlePos < AXLE_SERVO_UP){
+            axlePos = getAXLE_SERVO_UP();
+        }
         if(axlePos > 1){
             axlePos = 1;
         }
