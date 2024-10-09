@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.BaseRobot;
-import org.firstinspires.ftc.teamcode.MecanumDrive;
+import org.firstinspires.ftc.teamcode.Drive.MecanumDrive;
 
 
 
@@ -76,6 +76,7 @@ public final class BLUE_SP_2B_OZ extends LinearOpMode {
 
         Actions.runBlocking(moveToSub);
 
+
         robot.setPivotMotorPos(robot.getPIVOT_MOTOR_VERTICAL());//set pivot motor to vertical
         robot.updatePivotMotorPos();
 
@@ -126,7 +127,18 @@ public final class BLUE_SP_2B_OZ extends LinearOpMode {
         Actions.runBlocking(moveSecondSampleToOZ);
         robot.delay(.2);
 
-        Actions.runBlocking();
+        Actions.runBlocking(turnAround);
+
+
+        robot.resetAll();
+        //servos
+        robot.updateAxleServoPos();
+        robot.updateGimbalPos();
+        robot.updateGrasperPos();
+        //motors
+        robot.updatePivotMotorPos();
+        robot.updateSlidesPos();
+
 
 
 

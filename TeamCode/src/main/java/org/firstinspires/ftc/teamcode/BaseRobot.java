@@ -1,16 +1,13 @@
 package org.firstinspires.ftc.teamcode;
 
-import androidx.annotation.NonNull;
-
-import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
-import com.acmerobotics.roadrunner.Action;
 import com.acmerobotics.roadrunner.Pose2d;
-import com.acmerobotics.roadrunner.ftc.Actions;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
+
+import org.firstinspires.ftc.teamcode.Drive.MecanumDrive;
 
 
 public class BaseRobot{
@@ -347,10 +344,10 @@ public class BaseRobot{
     }
 
     public void resetAll(){
-        grasper.setPosition(GRASPER_CLOSED);
+        setGrasperPos(GRASPER_CLOSED);
         setSlidesPos(SLIDES_MIN);
-        grasperGimbal.setPosition(GIMBAL_RESTING_POS);
-        axleRotation.setPosition(AXLE_SERVO_DOWN);
+        setGimbalPos(GIMBAL_RESTING_POS);
+        setAxlePos(AXLE_SERVO_DOWN);
         setPivotMotorPos(0);
     }
     //hang arm
@@ -376,6 +373,8 @@ public class BaseRobot{
 
 
     // Accessors
+
+    //MOTOR POSITIONS
     public int getRightSliderPos() {
         return rightSliderPos;
     }
@@ -388,6 +387,9 @@ public class BaseRobot{
     public int getHangArmPos(){
         return hangArmPos;
     }
+    //END MOTOR POSITIONS
+
+    //SERVO POSITIONS
     public double getGimbalPos(){
         return gimbalPos;
     }
@@ -397,37 +399,9 @@ public class BaseRobot{
     public double getGrasperPos(){
         return grasperPos;
     }
-    //public double getAXLE_SERVO_OUT(){
-        //return AXLE_SERVO_OUT;
-    //}
-    public double getAXLE_SERVO_BACK(){
-        return AXLE_SERVO_BACK;
-    }
-    public double getAXLE_SERVO_UP(){
-        return AXLE_SERVO_UP;
-    }
-    public double getAXLE_SERVO_DOWN(){
-        return AXLE_SERVO_DOWN;
-    }
-    public double getGRASPER_OPEN(){
-        return GRASPER_WIDE_OPEN;
-    }
-    public double getGRASPER_HALF_OPEN(){
-        return GRASPER_HALF_OPEN;
-    }
-    public double getGRASPER_CLOSED(){
-        return GRASPER_CLOSED;
-    }
-    public double getGIMBAL_BASKET_SCORING(){
-        return GIMBAL_BASKET_SCORING;
-    }
-    public double getGIMBAL_SPECIMEN_SCORING(){
-        return GIMBAL_SPECIMEN_SCORING;
-    }
-    public double getGIMBAL_RESTING_POS(){
-        return GIMBAL_RESTING_POS;
-    }
+    //END SERVO POSITIONS
 
+    //MOTOR POWERS
     public double getRIGHT_SLIDE_POWER(){
         return RIGHT_SLIDE_POWER;
     }
@@ -437,6 +411,49 @@ public class BaseRobot{
     public double getPIVOT_MOTOR_POWER(){
         return PIVOT_MOTOR_POWER;
     }
+    //END MOTOR POWERS
+
+
+    //AXLE SERVO
+    public double getAXLE_SERVO_BACK(){
+        return AXLE_SERVO_BACK;
+    }
+    public double getAXLE_SERVO_UP(){
+        return AXLE_SERVO_UP;
+    }
+    public double getAXLE_SERVO_DOWN(){
+        return AXLE_SERVO_DOWN;
+    }
+    //END AXLE SERVO
+
+    //GRASPER
+    public double getGRASPER_OPEN(){
+        return GRASPER_WIDE_OPEN;
+    }
+    public double getGRASPER_HALF_OPEN(){
+        return GRASPER_HALF_OPEN;
+    }
+    public double getGRASPER_CLOSED(){
+        return GRASPER_CLOSED;
+    }
+    public double getGRASPER_WIDE_OPEN(){
+        return GRASPER_WIDE_OPEN;
+    }
+    //END GRASPER
+
+    //GIMBAL SERVO
+    public double getGIMBAL_BASKET_SCORING(){
+        return GIMBAL_BASKET_SCORING;
+    }
+    public double getGIMBAL_SPECIMEN_SCORING(){
+        return GIMBAL_SPECIMEN_SCORING;
+    }
+    public double getGIMBAL_RESTING_POS(){
+        return GIMBAL_RESTING_POS;
+    }
+    //END GIMBAL SERVO
+
+    //SLIDES
 
     public int getSLIDES_ABOVE_HIGH_RUNG(){
         return SLIDES_ABOVE_HIGH_RUNG;
@@ -444,18 +461,28 @@ public class BaseRobot{
     public int getSLIDES_PUT_SP_ON_HIGH_RUNG(){
         return SLIDES_PUT_SP_ON_HIGH_RUNG;
     }
-
     public int getSLIDES_MAX(){
         return SLIDES_MAX;
     }
+    public int getSLIDES_MIN(){
+        return SLIDES_MIN;
+    }
+    public int getSLIDES_TO_SUB(){
+        return SLIDES_TO_SUB;
+    }
+    //END SLIDES
 
+    //PIVOT MOTOR
     public int getPIVOT_MOTOR_HORIZONTAL(){
         return PIVOT_MOTOR_HORIZONTAL;
     }
     public int getPIVOT_MOTOR_VERTICAL(){
         return PIVOT_MOTOR_VERTICAL;
     }
-
+    public int getPIVOT_MOTOR_TO_SUB(){
+        return PIVOT_MOTOR_TO_SUB;
+    }
+    //END PIVOT MOTOR
 
     //end accessors
     //____________________________________________________________________________________________________________________

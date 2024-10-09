@@ -7,6 +7,8 @@ import com.acmerobotics.roadrunner.Vector2d;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
+import org.firstinspires.ftc.teamcode.Drive.MecanumDrive;
+
 @TeleOp
 public class meetOneTeleop extends LinearOpMode {
 
@@ -23,7 +25,7 @@ public class meetOneTeleop extends LinearOpMode {
 
         waitForStart();
 
-        MecanumDrive d = new MecanumDrive(hardwareMap, new Pose2d(0, 0, 0));
+        MecanumDrive drive = new MecanumDrive(hardwareMap, new Pose2d(0, 0, 0));
         robot = new BaseRobot(hardwareMap);
 
         while(!isStopRequested() && opModeIsActive()){
@@ -47,7 +49,7 @@ public class meetOneTeleop extends LinearOpMode {
             //slides
             robot.changeSlidesPos((int)(-gamepad2.right_stick_y * 10));
             robot.changeSlidesPos((int)(gamepad1.right_trigger - gamepad1.left_trigger) * 10);
-
+            //slides position changes from inputs gamepad1 triggers and gamepad 2 right stick
 
 
             //pivot motor
@@ -62,16 +64,12 @@ public class meetOneTeleop extends LinearOpMode {
             robot.changeHangArmPos((int) ((gamepad2.right_trigger-gamepad2.left_trigger) * 10));
 
 
-            if(gamepad1.dpad_right){
+            if(gamepad2.dpad_right){
                 robot.setGrasperPos(robot.GRASPER_WIDE_OPEN);
             }
-            if(gamepad1.dpad_left){
-                //robot.setGrasperPos(1);
-            }
-            if(gamepad1.dpad_up){
-                //robot.setGrasperPos(0);
-            }
-            if(gamepad1.dpad_down){
+
+
+            if(gamepad2.dpad_left){
                 robot.setGrasperPos(robot.GRASPER_CLOSED);
             }
 
@@ -93,9 +91,7 @@ public class meetOneTeleop extends LinearOpMode {
             }
 
             if (gamepad2.a){
-
-                robot.setPivotMotorPos(10);
-
+                robot.setPivotMotorPos(0);
             }
             if (gamepad2.x){
 
@@ -119,9 +115,18 @@ public class meetOneTeleop extends LinearOpMode {
             //telemetry
             //_____________________________________________________________________________________
 
-            telemetry.addLine("Motors: ");
+
+
+            telemetry.addLine("robot position (starting at x: 0, y: 0, heading: 0)");
+            telemetry.addData("x:", drive.pose.position.x);
+            telemetry.addData("y:", drive.pose.position.y);
+            telemetry.addData("heading (deg):", Math.toDegrees(drive.pose.heading.toDouble()));
+            telemetry.addLine();
             telemetry.addLine();
 
+
+            telemetry.addLine("Motors: ");
+            telemetry.addLine();
 
             telemetry.addLine("Slides: ");
             telemetry.addData("left slides position: ", robot.getLeftSliderPos());
@@ -149,7 +154,24 @@ public class meetOneTeleop extends LinearOpMode {
             telemetry.addLine();
 
             telemetry.addLine("controls: ");
-            telemetry.addLine("i'll put them in later");
+            telemetry.addLine();
+
+            telemetry.addLine("Gamepad1:");
+            telemetry.addLine("right/left stick: drive");
+            telemetry.addLine("right/left trigger: slides");
+            telemetry.addLine();
+
+            telemetry.addLine("Gamepad2:");
+            telemetry.addLine("left stick: pivot motor");
+            telemetry.addLine("right stick: slides");
+            telemetry.addLine("dpad_up/down: axle rotation servo");
+            telemetry.addLine("dpad_left/right: grasper");
+            telemetry.addLine("a: pivot motor back");
+            telemetry.addLine("y: pivot motor vertical");
+            telemetry.addLine("b: pivot motor horizontal");
+            telemetry.addLine("left/right bumper: change gimbal pos");
+            telemetry.addLine("left&right bumper at the same time: reset gimbal pos");
+
 
             telemetry.update();
             //end telemetry
