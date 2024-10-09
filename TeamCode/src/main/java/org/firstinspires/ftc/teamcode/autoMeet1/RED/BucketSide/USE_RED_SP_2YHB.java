@@ -37,7 +37,7 @@ public final class USE_RED_SP_2YHB extends LinearOpMode {
                 .build();
 
         Action moveSlidesOverHighRung = robot.drive.actionBuilder(robot.drive.pose)
-                .strafeToConstantHeading(new Vector2d(-12.60, -35.9))
+                .strafeToConstantHeading(new Vector2d(-12.60, -36))
                 .build();
 
         Action moveBackAwayFromSub = robot.drive.actionBuilder(robot.drive.pose)
@@ -89,19 +89,19 @@ public final class USE_RED_SP_2YHB extends LinearOpMode {
         //slides up
 
         Actions.runBlocking(moveSlidesOverHighRung);
-
+        robot.delay(.5);
         //----
-        robot.setSlidesPos(robot.getSLIDES_PUT_SP_ON_HIGH_RUNG());//clip specimen
+        robot.setSlidesPos(robot.getSLIDES_PUT_SP_ON_HIGH_RUNG()-40);//clip specimen
         robot.updateSlidesPos();
         robot.delay(2);
 
         robot.setGrasperPos(robot.getGRASPER_OPEN());//release specimen
         robot.updateGrasperPos();
-        robot.delay(.2);
+        robot.delay(2);
 
-        robot.setSlidesPos(robot.getSLIDES_ABOVE_HIGH_RUNG());//slides back up
-        robot.updateSlidesPos();
-        robot.delay(.3);
+        //robot.setSlidesPos(robot.getSLIDES_ABOVE_HIGH_RUNG());//slides back up
+        //robot.updateSlidesPos();
+        //robot.delay();
 
         Actions.runBlocking(moveBackAwayFromSub);
 

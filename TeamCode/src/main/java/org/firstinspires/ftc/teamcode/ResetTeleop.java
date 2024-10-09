@@ -43,7 +43,7 @@ public class ResetTeleop extends LinearOpMode {
 
 
             //slides
-            robot.changeSlidesPos((int)(-gamepad1.right_stick_y * 2));
+            robot.changeSlidesPos((int)(-gamepad1.right_stick_y * 1));
             robot.changePivotMotorPos((int) (-gamepad1.left_stick_y * 2));
 
             robot.changeSlidesPos((int)(-gamepad2.right_stick_y * 5));

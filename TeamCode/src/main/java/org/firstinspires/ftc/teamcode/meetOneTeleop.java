@@ -74,10 +74,10 @@ public class meetOneTeleop extends LinearOpMode {
             }
 
             if(gamepad2.dpad_down){
-                robot.setAxlePos(robot.getAXLE_SERVO_UP());
+                robot.setAxlePos(0);
             }
             if(gamepad2.dpad_up){
-                robot.setAxlePos(robot.getAXLE_SERVO_BACK());
+                robot.setAxlePos(.3);
             }
 
             if(gamepad2.left_bumper){

@@ -44,8 +44,8 @@ public class BaseRobot{
     double GRASPER_HALF_OPEN = .6; //correct
     double GRASPER_CLOSED = .4;//correct
     double AXLE_SERVO_BACK = 0; //correct
-    double AXLE_SERVO_UP = .27;//change
-    double AXLE_SERVO_DOWN = .7;//correct
+    double AXLE_SERVO_UP = .3;//change
+    double AXLE_SERVO_DOWN = .8;//correct
     //double AXLE_SERVO_OUT = .4; //correct
     double GIMBAL_BASKET_SCORING = 0;//change
     double GIMBAL_SPECIMEN_SCORING = 0;//change
@@ -61,7 +61,7 @@ public class BaseRobot{
 
     //motor constants
     int SLIDES_ABOVE_HIGH_RUNG = 900;//change
-    int SLIDES_PUT_SP_ON_HIGH_RUNG = 80;//change
+    int SLIDES_PUT_SP_ON_HIGH_RUNG = 250;//change
     int SLIDES_MAX = 3000;//change
     int SLIDES_MIN = 0;
     int SLIDES_TO_SUB = 60;//change
