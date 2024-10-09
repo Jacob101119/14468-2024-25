@@ -33,9 +33,9 @@ public class BaseRobot{
     //private int deltaRightPos = 0;
 
     //motor powers
-    private double PIVOT_MOTOR_POWER = 0.4;
-    private double LEFT_SLIDE_POWER = 0.8;
-    private double RIGHT_SLIDE_POWER = 0.8;
+    private double PIVOT_MOTOR_POWER = 0.5;
+    private double LEFT_SLIDE_POWER = 0.9;
+    private double RIGHT_SLIDE_POWER = 0.9;
     private double HANG_ARM_POWER = 0.8;
     //end
 

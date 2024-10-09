@@ -48,9 +48,12 @@ public final class USE_RED_SP_2YHB extends LinearOpMode {
 
         Actions.runBlocking(moveToSubAction);
 
-        robot.setPivotMotorPos(robot.getPIVOT_MOTOR_VERTICAL()+60);
+        robot.setPivotMotorPos(robot.getPIVOT_MOTOR_VERTICAL()+300);
         robot.updatePivotMotorPos();
+
         robot.delay(.1);
+        robot.setPivotMotorPos(robot.getPIVOT_MOTOR_VERTICAL());
+        robot.delay(1);
         robot.setAxlePos(robot.getAXLE_SERVO_UP());
         robot.updateAxleServoPos();
         robot.delay(2);
@@ -70,7 +73,7 @@ public final class USE_RED_SP_2YHB extends LinearOpMode {
         //Actions.runBlocking(moveSlidesOverHighRung);
         robot.delay(.5);
         //----
-        robot.setSlidesPos(robot.getSLIDES_PUT_SP_ON_HIGH_RUNG()-100);//clip specimen
+        robot.setSlidesPos(robot.getSLIDES_PUT_SP_ON_HIGH_RUNG()-30);//clip specimen
         robot.updateSlidesPos();
         robot.delay(2);
 
@@ -124,7 +127,7 @@ public final class USE_RED_SP_2YHB extends LinearOpMode {
 
         Action moveToHighBucket1 = robot.drive.actionBuilder(robot.drive.pose)
                 .strafeToLinearHeading(new Vector2d(-49, -45), Math.toRadians(-90))
-                .strafeToLinearHeading(new Vector2d(-54, -54), Math.toRadians(225))
+                .strafeToLinearHeading(new Vector2d(-56, -56), Math.toRadians(225))
                 .build();
         Actions.runBlocking(moveToHighBucket1);
 
@@ -145,18 +148,18 @@ public final class USE_RED_SP_2YHB extends LinearOpMode {
 
         robot.setSlidesPos(0);
         robot.updateSlidesPos();
-        robot.delay(.3);
+        robot.delay(.6);
 
         Action moveToSecondYellowSample = robot.drive.actionBuilder(robot.drive.pose)
                 .strafeToLinearHeading(new Vector2d(-56, -56), Math.toRadians(90))
-                .strafeToLinearHeading(new Vector2d(-59.5, -45), Math.toRadians(90))
+                .strafeToLinearHeading(new Vector2d(-56, -45), Math.toRadians(90))
                 .build();
         Actions.runBlocking(moveToSecondYellowSample);
 
         //grab second sample
         robot.setPivotMotorPos(robot.getPIVOT_MOTOR_HORIZONTAL());
         robot.updatePivotMotorPos();
-        robot.delay(1);
+        robot.delay(3);
 
         robot.setGrasperPos(robot.getGRASPER_CLOSED());
         robot.updateGrasperPos();
@@ -164,7 +167,7 @@ public final class USE_RED_SP_2YHB extends LinearOpMode {
 
         robot.setPivotMotorPos(robot.getPIVOT_MOTOR_VERTICAL());
         robot.updatePivotMotorPos();
-        robot.delay(.5);
+        robot.delay(2);
 
 
         Action moveToHighBucket2 = robot.drive.actionBuilder(robot.drive.pose)
@@ -176,21 +179,19 @@ public final class USE_RED_SP_2YHB extends LinearOpMode {
         robot.setSlidesPos(robot.getSLIDES_MAX());
         robot.updateSlidesPos();
         //move forward?
-        robot.delay(1);
+        robot.delay(3);
         robot.setGrasperPos(robot.getGRASPER_OPEN());
         robot.updateGrasperPos();
         robot.delay(.2);
 
+        Action moveBackFromHB2 = robot.drive.actionBuilder(robot.drive.pose)
+                .strafeToConstantHeading(new Vector2d(-54, -54))
+                .build();
         Actions.runBlocking(moveBackFromHB);//move back from net zone a bit
         robot.delay(.2);
 
-        robot.setSlidesPos(0);
-        robot.updateSlidesPos();
-        robot.delay(.3);
 
 
-        Actions.runBlocking(moveBackFromHB);//move back from net zone a bit
-        robot.delay(.5);
 
 
         robot.resetAll();
