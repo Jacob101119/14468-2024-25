@@ -47,7 +47,7 @@ public class meetOneTeleop extends LinearOpMode {
 
 
             //slides
-            robot.changeSlidesPos((int)(-gamepad2.right_stick_y * 10));
+            //robot.changeSlidesPos((int)(-gamepad2.right_stick_y * 10));
             robot.changeSlidesPos((int)(gamepad1.right_trigger - gamepad1.left_trigger) * 10);
             //slides position changes from inputs gamepad1 triggers and gamepad 2 right stick
 
@@ -60,7 +60,7 @@ public class meetOneTeleop extends LinearOpMode {
                 robot.changePivotMotorPos(-10);
             }
 
-            robot.changePivotMotorPos((int) (gamepad2.left_stick_y * 10));
+            robot.changePivotMotorPos((int) (-gamepad2.left_stick_y * 10));
             robot.changeHangArmPos((int) ((gamepad2.right_trigger-gamepad2.left_trigger) * 10));
 
 
@@ -74,10 +74,10 @@ public class meetOneTeleop extends LinearOpMode {
             }
 
             if(gamepad2.dpad_down){
-                robot.setAxlePos(0);
+                robot.setAxlePos(robot.getAXLE_SERVO_DOWN());
             }
             if(gamepad2.dpad_up){
-                robot.setAxlePos(.3);
+                robot.setAxlePos(robot.AXLE_SERVO_UP);
             }
 
             if(gamepad2.left_bumper){
