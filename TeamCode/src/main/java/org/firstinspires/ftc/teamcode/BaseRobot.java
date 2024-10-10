@@ -279,9 +279,10 @@ public class BaseRobot{
         if(pivotMotorPos > PIVOT_MOTOR_VERTICAL + 300 && leftSliderPos > 400){
             leftSliderPos = 400;//slides cant go far when pivot motor down
         }
-        if(pivotMotorPos< getPIVOT_MOTOR_VERTICAL()-100 && leftSliderPos > 0){
+        if(pivotMotorPos< getPIVOT_MOTOR_VERTICAL()-500 && leftSliderPos > 0){
             leftSliderPos = 0;//slides cant go up when pivot motor is back
         }
+
 
         rightSlider.setTargetPosition(rightSliderPos);
         rightSlider.setMode(DcMotor.RunMode.RUN_TO_POSITION);
