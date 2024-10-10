@@ -110,7 +110,6 @@ public final class RED_SP_2YHB extends LinearOpMode {
         //*note* delete these 3 lines once specimen works
         //robot.setPivotMotorPos(0);//pivot motor back
         //robot.updatePivotMotorPos();
-        //robot.delay(4);
         //end note
 
         Action moveToFirstYellowSample = robot.drive.actionBuilder(robot.drive.pose)
@@ -189,8 +188,8 @@ public final class RED_SP_2YHB extends LinearOpMode {
 
 
         Action moveToHighBucket2 = robot.drive.actionBuilder(robot.drive.pose)
-                .strafeToLinearHeading(new Vector2d(-59.5, -45), Math.toRadians(-90))
-                .strafeToLinearHeading(new Vector2d(-56, -56), Math.toRadians(225))
+                .strafeToLinearHeading(new Vector2d(-54, -45), Math.toRadians(-90))
+                .strafeToLinearHeading(new Vector2d(-52, -52), Math.toRadians(225))
                 .build();
         Actions.runBlocking(moveToHighBucket2);//bring yellow sample to HB
 
@@ -203,7 +202,7 @@ public final class RED_SP_2YHB extends LinearOpMode {
         robot.delay(.2);
 
         Action moveBackFromHB2 = robot.drive.actionBuilder(robot.drive.pose)
-                .strafeToConstantHeading(new Vector2d(-54, -54))
+                .strafeToConstantHeading(new Vector2d(-50, -50))
                 .build();
         Actions.runBlocking(moveBackFromHB);//move back from net zone a bit
         robot.delay(.2);
