@@ -43,9 +43,9 @@ public class BaseRobot{
     double GRASPER_WIDE_OPEN = .7;//correct
     double GRASPER_HALF_OPEN = .6; //correct
     double GRASPER_CLOSED = .4;//correct
-    double AXLE_SERVO_BACK = 0; //correct
-    double AXLE_SERVO_UP = .3;//change
-    double AXLE_SERVO_DOWN = .8;//correct
+    double AXLE_SERVO_BACK = .3; //correct
+    double AXLE_SERVO_UP = .7;//change
+    double AXLE_SERVO_DOWN = 1;//correct
     //double AXLE_SERVO_OUT = .4; //correct
     double GIMBAL_BASKET_SCORING = 0;//change
     double GIMBAL_SPECIMEN_SCORING = 0;//change
@@ -359,6 +359,20 @@ public class BaseRobot{
         setGimbalPos(GIMBAL_RESTING_POS);
         setAxlePos(AXLE_SERVO_DOWN);
         setPivotMotorPos(0);
+        updateAll();
+    }
+
+    public void updateAll(){
+        //servos
+        updateAxleServoPos();
+        updateGrasperPos();
+        updateGimbalPos();
+
+        //motors
+        updatePivotMotorPos();
+        updateSlidesPos();
+
+        //updateHangArmPos();
     }
     //hang arm
 

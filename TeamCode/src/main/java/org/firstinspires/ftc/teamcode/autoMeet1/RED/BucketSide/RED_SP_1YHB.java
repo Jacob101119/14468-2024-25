@@ -62,21 +62,10 @@ public final class RED_SP_1YHB extends LinearOpMode {
         robot.updateSlidesPos();
         robot.delay(1);
 
-        //slides up
 
-//don't use anymore, moves forward farther but not necessary
-        Action moveSlidesOverHighRung = robot.drive.actionBuilder(robot.drive.pose)
-                .strafeToLinearHeading(new Vector2d(-12.60, -36), Math.toRadians(90))
-                .build();
-
-
-        //Actions.runBlocking(moveSlidesOverHighRung);
-        //robot.delay(.5);
-        //----
-        robot.setSlidesPos(robot.getSLIDES_PUT_SP_ON_HIGH_RUNG()-100);//clip specimen
+        robot.setSlidesPos(robot.getSLIDES_PUT_SP_ON_HIGH_RUNG()-200);//clip specimen
         robot.updateSlidesPos();
         robot.delay(1);
-
         Action moveAnInch = robot.drive.actionBuilder(robot.drive.pose)
                         .strafeToConstantHeading(new Vector2d(-12.5, -39.5))
                                 .build();
@@ -91,9 +80,6 @@ public final class RED_SP_1YHB extends LinearOpMode {
         robot.updateGrasperPos();
         robot.delay(.3);
 
-        //robot.setSlidesPos(robot.getSLIDES_ABOVE_HIGH_RUNG());//slides back up
-        //robot.updateSlidesPos();
-        //robot.delay();
 
 
 
@@ -115,7 +101,7 @@ public final class RED_SP_1YHB extends LinearOpMode {
 
         Action moveToFirstYellowSample = robot.drive.actionBuilder(robot.drive.pose)
                 .strafeToConstantHeading(new Vector2d(-14, -48))
-                .strafeToConstantHeading(new Vector2d(-53, -55.5))//move to first yellow sample
+                .strafeToConstantHeading(new Vector2d(-52.4, -54.5))//move to first yellow sample
                 .build();
         Actions.runBlocking(moveToFirstYellowSample);
 
@@ -125,7 +111,7 @@ public final class RED_SP_1YHB extends LinearOpMode {
 
         robot.setAxlePos(robot.getAXLE_SERVO_UP());
         robot.updateAxleServoPos();
-        robot.delay(4);
+        robot.delay(3);
 
         robot.setGrasperPos(robot.getGRASPER_CLOSED());
         robot.updateGrasperPos();
@@ -133,11 +119,11 @@ public final class RED_SP_1YHB extends LinearOpMode {
 
         robot.setPivotMotorPos(robot.getPIVOT_MOTOR_VERTICAL());
         robot.updatePivotMotorPos();
-        robot.delay(1);
+        robot.delay(.8);
 
         Action moveToHighBucket1 = robot.drive.actionBuilder(robot.drive.pose)
                 .strafeToLinearHeading(new Vector2d(-48, -45), Math.toRadians(-90))
-                .strafeToLinearHeading(new Vector2d(-49, -49), Math.toRadians(225))
+                .strafeToLinearHeading(new Vector2d(-49.5, -49.5), Math.toRadians(225))
                 .build();
         Actions.runBlocking(moveToHighBucket1);
 
@@ -146,6 +132,7 @@ public final class RED_SP_1YHB extends LinearOpMode {
         robot.delay(.2);
         robot.setAxlePos(robot.getAXLE_SERVO_BACK());
         robot.updateAxleServoPos();
+        robot.delay(2);
 
         Action moveForwardAtHB1 = robot.drive.actionBuilder(robot.drive.pose)
                 //.strafeToLinearHeading(new Vector2d(-48, -45), Math.toRadians(-90))
