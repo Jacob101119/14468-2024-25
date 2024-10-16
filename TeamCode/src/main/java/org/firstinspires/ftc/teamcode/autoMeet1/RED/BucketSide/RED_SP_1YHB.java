@@ -33,7 +33,7 @@ public final class RED_SP_1YHB extends LinearOpMode {
 
         Action moveToSubAction = robot.drive.actionBuilder(robot.drive.pose)
 
-                .strafeToConstantHeading(new Vector2d(-12.5, -43.5))
+                .strafeToConstantHeading(new Vector2d(-12, -43.5))
                 .build();
 
 
@@ -48,7 +48,7 @@ public final class RED_SP_1YHB extends LinearOpMode {
 
         Actions.runBlocking(moveToSubAction);
 
-        robot.setPivotMotorPos(robot.getPIVOT_MOTOR_VERTICAL()+260);
+        robot.setPivotMotorPos(robot.getPIVOT_MOTOR_VERTICAL()+290);
         robot.updatePivotMotorPos();
 
         robot.delay(.1);
@@ -60,7 +60,7 @@ public final class RED_SP_1YHB extends LinearOpMode {
         //add delay
         robot.setSlidesPos(robot.getSLIDES_ABOVE_HIGH_RUNG());
         robot.updateSlidesPos();
-        robot.delay(1);
+        robot.delay(1.4);
 
 
         robot.setSlidesPos(robot.getSLIDES_PUT_SP_ON_HIGH_RUNG()-200);//clip specimen

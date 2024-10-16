@@ -67,7 +67,8 @@ public class BaseRobot{
     int SLIDES_TO_SUB = 60;//change
 
     int PIVOT_MOTOR_TO_SUB = 0;//change
-    int PIVOT_MOTOR_VERTICAL = 2248;
+    //int PIVOT_MOTOR_VERTICAL = 2248;//old before gearbox change, should be the same
+    int PIVOT_MOTOR_VERTICAL = 2848;//after gearbox change
     int PIVOT_MOTOR_HORIZONTAL = 5003;
     //end motor constants
 
@@ -278,9 +279,11 @@ public class BaseRobot{
         }
         if(pivotMotorPos > PIVOT_MOTOR_VERTICAL + 300 && leftSliderPos > 400){
             leftSliderPos = 400;//slides cant go far when pivot motor down
+            rightSliderPos = 400;
         }
         if(pivotMotorPos< getPIVOT_MOTOR_VERTICAL()-500 && leftSliderPos > 0){
             leftSliderPos = 0;//slides cant go up when pivot motor is back
+            rightSliderPos = 0;
         }
 
 

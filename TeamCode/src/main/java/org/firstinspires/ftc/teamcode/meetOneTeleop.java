@@ -49,6 +49,7 @@ public class meetOneTeleop extends LinearOpMode {
             //slides
             //robot.changeSlidesPos((int)(-gamepad2.right_stick_y * 10));
             robot.changeSlidesPos((int)(gamepad1.right_trigger - gamepad1.left_trigger) * 10);
+            robot.changeSlidesPos((int)(gamepad2.left_stick_y) * 10);
             //slides position changes from inputs gamepad1 triggers and gamepad 2 right stick
 
 
