@@ -96,7 +96,7 @@ public final class RED_BLUE_2SP_V2 extends LinearOpMode {
         robot.updateAxleServoPos();
         robot.setSlidesPos(0);//slides down
         robot.updateSlidesPos();
-        robot.setPivotMotorPos(robot.getPIVOT_MOTOR_GRAB_FROM_WALL());
+        robot.setPivotMotorPos(robot.getPIVOT_MOTOR_GRAB_FROM_WALL()+200);
         robot.updatePivotMotorPos();
 
 
@@ -110,7 +110,7 @@ public final class RED_BLUE_2SP_V2 extends LinearOpMode {
                 .strafeToLinearHeading(new Vector2d(18.00, -43.5), Math.toRadians(50.00))
                 .strafeToLinearHeading(new Vector2d(31.11, -40), Math.toRadians(10.00))
                 .strafeToLinearHeading(new Vector2d(49, -40), Math.toRadians(-90.00))
-                .strafeToLinearHeading(new Vector2d(48.3, -43.7), Math.toRadians(-90.00))
+                .strafeToLinearHeading(new Vector2d(47.6, -43.7), Math.toRadians(-90.00))
                 .build();
         Action updatedMoveToOZ = robot.drive.actionBuilder(robot.drive.pose)
                         .strafeToLinearHeading(new Vector2d(49, -40), Math.toRadians(-90))
@@ -136,7 +136,7 @@ public final class RED_BLUE_2SP_V2 extends LinearOpMode {
                 .strafeToLinearHeading(new Vector2d(6, -46), Math.toRadians(90.00))
                 .build();
         Action updatedMoveToSub2 = robot.drive.actionBuilder(robot.drive.pose)
-                        .strafeToLinearHeading(new Vector2d(6, -47), Math.toRadians(90))
+                        .strafeToLinearHeading(new Vector2d(2, -46), Math.toRadians(90))
                                 .build();
         Actions.runBlocking(updatedMoveToSub2);//TODO: see if new path is ok
         robot.setPivotMotorPos(robot.getPIVOT_MOTOR_TO_HIGH_CHAMBER());
@@ -151,7 +151,7 @@ public final class RED_BLUE_2SP_V2 extends LinearOpMode {
 
         robot.setAxlePos(robot.getAXLE_SERVO_UP());
         robot.updateAxleServoPos();
-        robot.delay(.5);
+        robot.delay(.8);
 
         robot.setSlidesPos(robot.getSLIDES_PUT_SP_ON_HIGH_RUNG());//clip specimen
         robot.updateSlidesPos();
@@ -164,7 +164,7 @@ public final class RED_BLUE_2SP_V2 extends LinearOpMode {
 
 
         Action moveBackAwayFromSub2 = robot.drive.actionBuilder(robot.drive.pose)
-                .strafeToConstantHeading(new Vector2d(7, -50))
+                .strafeToConstantHeading(new Vector2d(0, -50))
                 .build();
         Actions.runBlocking(moveBackAwayFromSub2);
 
