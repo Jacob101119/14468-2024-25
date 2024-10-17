@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.autoMeet1.RED.BucketSide;
+package org.firstinspires.ftc.teamcode.autoMeet1.BucketSide;
 
 
 import com.acmerobotics.roadrunner.Action;
@@ -48,7 +48,7 @@ public final class RED_SP_1YHB extends LinearOpMode {
 
         Actions.runBlocking(moveToSubAction);
 
-        robot.setPivotMotorPos(robot.getPIVOT_MOTOR_VERTICAL()+290);
+        robot.setPivotMotorPos(robot.getPIVOT_MOTOR_TO_HIGH_CHAMBER());
         robot.updatePivotMotorPos();
 
         robot.delay(.1);
@@ -63,15 +63,17 @@ public final class RED_SP_1YHB extends LinearOpMode {
         robot.delay(1.4);
 
 
-        robot.setSlidesPos(robot.getSLIDES_PUT_SP_ON_HIGH_RUNG()-200);//clip specimen
+        robot.setSlidesPos(robot.getSLIDES_PUT_SP_ON_HIGH_RUNG());//clip specimen
         robot.updateSlidesPos();
         robot.delay(1);
-        Action moveAnInch = robot.drive.actionBuilder(robot.drive.pose)
+
+
+        /*Action moveAnInch = robot.drive.actionBuilder(robot.drive.pose)
                         .strafeToConstantHeading(new Vector2d(-12.5, -39.5))
                                 .build();
         Actions.runBlocking(moveAnInch);
         robot.delay(.2);
-        robot.setSlidesPos(robot.getSLIDES_PUT_SP_ON_HIGH_RUNG()-300);//clip specimen
+        robot.setSlidesPos(robot.getSLIDES_PUT_SP_ON_HIGH_RUNG()-100);//clip specimen
         robot.setPivotMotorPos(robot.getPIVOT_MOTOR_VERTICAL()+400);
         robot.updateSlidesPos();
         robot.updatePivotMotorPos();
@@ -79,6 +81,7 @@ public final class RED_SP_1YHB extends LinearOpMode {
         robot.setGrasperPos(robot.getGRASPER_OPEN());//release specimen
         robot.updateGrasperPos();
         robot.delay(.3);
+         */
 
 
 

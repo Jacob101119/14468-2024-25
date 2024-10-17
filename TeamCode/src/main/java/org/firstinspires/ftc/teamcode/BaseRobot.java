@@ -40,16 +40,18 @@ public class BaseRobot{
     //end
 
     // servo Constants
-    double GRASPER_WIDE_OPEN = .7;//correct
-    double GRASPER_HALF_OPEN = .6; //correct
-    double GRASPER_CLOSED = .4;//correct
-    double AXLE_SERVO_BACK = .3; //correct
-    double AXLE_SERVO_UP = .7;//change
-    double AXLE_SERVO_DOWN = 1;//correct
-    //double AXLE_SERVO_OUT = .4; //correct
-    double GIMBAL_BASKET_SCORING = 0;//change
-    double GIMBAL_SPECIMEN_SCORING = 0;//change
-    double GIMBAL_RESTING_POS = .55;//change
+    double GRASPER_WIDE_OPEN = .7;
+    double GRASPER_HALF_OPEN = .6;
+    double GRASPER_CLOSED = .4;
+    double AXLE_SERVO_BACK = .3;
+    double AXLE_SERVO_UP = .7;
+    double AXLE_SERVO_DOWN = 1;
+    double AXLE_SERVO_GRAB_FROM_WALL = .38;//may need minor adjustments
+
+    double GIMBAL_BASKET_SCORING = .55;
+    double GIMBAL_SPECIMEN_SCORING = .55;
+    double GIMBAL_RESTING_POS = .55;
+
     //double LEFT_GRASPER_OPEN = 0;//change
     //double LEFT_GRASPER_CLOSED = 0;//change
     //double RIGHT_GRASPER_OPEN = 0;//change
@@ -61,7 +63,7 @@ public class BaseRobot{
 
     //motor constants
     int SLIDES_ABOVE_HIGH_RUNG = 900;//change
-    int SLIDES_PUT_SP_ON_HIGH_RUNG = 250;//change
+    int SLIDES_PUT_SP_ON_HIGH_RUNG = 50;//change
     int SLIDES_MAX = 3000;//change
     int SLIDES_MIN = 0;
     int SLIDES_TO_SUB = 60;//change
@@ -70,6 +72,8 @@ public class BaseRobot{
     //int PIVOT_MOTOR_VERTICAL = 2248;//old before gearbox change, should be the same
     int PIVOT_MOTOR_VERTICAL = 2848;//after gearbox change
     int PIVOT_MOTOR_HORIZONTAL = 5003;
+    int PIVOT_MOTOR_GRAB_FROM_WALL = 5243;
+    int PIVOT_MOTOR_TO_HIGH_CHAMBER = 3148;//maybe 3148
     //end motor constants
 
     public MecanumDrive drive;
@@ -451,6 +455,9 @@ public class BaseRobot{
     public double getAXLE_SERVO_DOWN(){
         return AXLE_SERVO_DOWN;
     }
+    public double getAXLE_SERVO_GRAB_FROM_WALL(){
+        return AXLE_SERVO_GRAB_FROM_WALL;
+    }
     //END AXLE SERVO
 
     //GRASPER
@@ -508,6 +515,12 @@ public class BaseRobot{
     }
     public int getPIVOT_MOTOR_TO_SUB(){
         return PIVOT_MOTOR_TO_SUB;
+    }
+    public int getPIVOT_MOTOR_GRAB_FROM_WALL(){
+        return PIVOT_MOTOR_GRAB_FROM_WALL;
+    }
+    public int getPIVOT_MOTOR_TO_HIGH_CHAMBER(){
+        return PIVOT_MOTOR_TO_HIGH_CHAMBER;
     }
     //END PIVOT MOTOR
 
