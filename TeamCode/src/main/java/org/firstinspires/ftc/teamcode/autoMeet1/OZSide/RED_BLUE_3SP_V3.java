@@ -166,100 +166,19 @@ public final class RED_BLUE_3SP_V3 extends LinearOpMode {
                 .build();
         Actions.runBlocking(moveBackAwayFromSub2);
 
-
-
-
-
-        //second specimen
-        //_____________________________________________________________________________________________________
-
-        //move to observation zone
-        /*Action moveToFirstRed = robot.drive.actionBuilder(robot.drive.pose)
-                .strafeToConstantHeading(new Vector2d(37, -40))
-                .strafeToConstantHeading(new Vector2d(37, -10))
-                .strafeToLinearHeading(new Vector2d(48, -12),Math.toRadians(-90))
-                .build();
-        Actions.runBlocking(moveToFirstRed);
-        robot.delay(2);
-        Action pushToOZ = robot.drive.actionBuilder(robot.drive.pose)
-                .strafeToConstantHeading(new Vector2d(48, -57))
-                .strafeToConstantHeading(new Vector2d(48, -40))
-                .build();
-
-        robot.setAxlePos(robot.getAXLE_SERVO_GRAB_FROM_WALL());
-        robot.updateAxleServoPos();
-        robot.setSlidesPos(0);//slides down
-        robot.updateSlidesPos();
-        robot.setPivotMotorPos(robot.getPIVOT_MOTOR_GRAB_FROM_WALL()+200);
+        robot.setPivotMotorPos(4500);
         robot.updatePivotMotorPos();
-        /*
-
-
-        Action MoveToOZ2 = robot.drive.actionBuilder(robot.drive.pose)
-                .strafeToLinearHeading(new Vector2d(18.00, -43.5), Math.toRadians(50.00))
-                .strafeToLinearHeading(new Vector2d(31.11, -40), Math.toRadians(10.00))
-                .strafeToLinearHeading(new Vector2d(49, -40), Math.toRadians(-90.00))
-                .strafeToLinearHeading(new Vector2d(47.6, -43.7), Math.toRadians(-90.00))
-                .build();
-        Action updatedMoveToOZ2 = robot.drive.actionBuilder(robot.drive.pose)
-                .strafeToLinearHeading(new Vector2d(47.8, -36), Math.toRadians(-90))
-                .strafeToLinearHeading(new Vector2d(47.8, -43.8), Math.toRadians(-90))
-                .build();
-        Actions.runBlocking(updatedMoveToOZ2);//TODO: see if this new movement works without running into stuff
         robot.delay(.2);
-        //grab specimen, pivot motor up
-        robot.setGrasperPos(robot.getGRASPER_CLOSED());
-        robot.updateGrasperPos();
-        robot.delay(.2);
-        robot.setPivotMotorPos(robot.getPIVOT_MOTOR_VERTICAL());
-        robot.updatePivotMotorPos();
-        robot.delay(.2);//TODO: see if this is too little
-
-
-
-
-        Action moveToSub3 = robot.drive.actionBuilder(robot.drive.pose)
-                .strafeToLinearHeading(new Vector2d(50.95, -41.00), Math.toRadians(-90.00))
-                .strafeToLinearHeading(new Vector2d(30.17, -49.34), Math.toRadians(180.00))
-                .strafeToLinearHeading(new Vector2d(9, -55), Math.toRadians(90))
-                .strafeToLinearHeading(new Vector2d(6, -45.5), Math.toRadians(90.00))
-                .build();
-        Action updatedMoveToSub3 = robot.drive.actionBuilder(robot.drive.pose)
-                .strafeToLinearHeading(new Vector2d(0, -45.5), Math.toRadians(90))
-                .build();
-        Actions.runBlocking(updatedMoveToSub3);//TODO: see if new path is ok
-        robot.setPivotMotorPos(robot.getPIVOT_MOTOR_TO_HIGH_CHAMBER());
-        robot.updatePivotMotorPos();
-
-        robot.delay(.3);//TODO: see if this too low
-
-
-        robot.setSlidesPos(robot.getSLIDES_ABOVE_HIGH_RUNG());
-        robot.updateSlidesPos();
-        robot.delay(.3);
 
         robot.setAxlePos(robot.getAXLE_SERVO_UP());
         robot.updateAxleServoPos();
-        robot.delay(.8);
-
-        robot.setSlidesPos(robot.getSLIDES_PUT_SP_ON_HIGH_RUNG());//clip specimen
-        robot.updateSlidesPos();
-        robot.delay(.4);
-
-        robot.setGrasperPos(robot.getGRASPER_OPEN());
-        robot.updateGrasperPos();
-        //robot.delay(.2);
+        robot.delay(3);
 
 
 
-        Action moveBackAwayFromSub3 = robot.drive.actionBuilder(robot.drive.pose)
-                .strafeToConstantHeading(new Vector2d(-2, -50))
-                .build();
-        Actions.runBlocking(moveBackAwayFromSub3);
 
 
 
-         */
         Action moveToFirstRedSample= robot.drive.actionBuilder(robot.drive.pose)
                 .strafeToConstantHeading(new Vector2d(14, -48))
                 .strafeToConstantHeading(new Vector2d(48, -48))//move to first yellow sample
@@ -268,11 +187,8 @@ public final class RED_BLUE_3SP_V3 extends LinearOpMode {
 
         robot.setPivotMotorPos(5151);
         robot.updatePivotMotorPos();
-        robot.delay(.2);
+        robot.delay(2);
 
-        robot.setAxlePos(robot.getAXLE_SERVO_UP());
-        robot.updateAxleServoPos();
-        robot.delay(3);
 
         robot.setGrasperPos(robot.getGRASPER_CLOSED());
         robot.updateGrasperPos();
@@ -286,28 +202,68 @@ public final class RED_BLUE_3SP_V3 extends LinearOpMode {
 
         //robot.delay(.8);
 
-        Action updatedMoveToOZ2 = robot.drive.actionBuilder(robot.drive.pose)
+        Action bringRed1ToOZ = robot.drive.actionBuilder(robot.drive.pose)
                 //.strafeToLinearHeading(new Vector2d(47.8, -36), Math.toRadians(-90))
                 .strafeToLinearHeading(new Vector2d(47.8, -54.8), Math.toRadians(90))
                 .build();
-        Actions.runBlocking(updatedMoveToOZ2);
+        Actions.runBlocking(bringRed1ToOZ);
         robot.delay(2);
 
         robot.setGrasperPos(robot.getGRASPER_OPEN());
         robot.updateGrasperPos();
         robot.delay(.3);
 
-        robot.resetAll();
-        Action moveBack = robot.drive.actionBuilder(robot.drive.pose)
+        robot.setPivotMotorPos(4500);
+        robot.updatePivotMotorPos();
+
+        robot.setAxlePos(robot.getAXLE_SERVO_UP());
+        robot.delay(2);
+
+        //robot.resetAll();
+        Action moveForward = robot.drive.actionBuilder(robot.drive.pose)
                 //.strafeToLinearHeading(new Vector2d(47.8, -36), Math.toRadians(-90))
                 .strafeToLinearHeading(new Vector2d(47.8, -45), Math.toRadians(90))
                 .build();
-        Actions.runBlocking(moveBack);
+        Actions.runBlocking(moveForward);
+
+
+
+
+
+
+
+
+        Action moveToSecondRed = robot.drive.actionBuilder(robot.drive.pose)
+                .strafeToConstantHeading(new Vector2d(50, -48))
+                .build();
+        Actions.runBlocking(moveToSecondRed);
+
+        robot.setPivotMotorPos(5151);
+        robot.updatePivotMotorPos();
         robot.delay(2);
 
 
+        robot.setGrasperPos(robot.getGRASPER_CLOSED());
+        robot.updateGrasperPos();
+        robot.delay(.3);
+
+        robot.setPivotMotorPos(0);
+        robot.updatePivotMotorPos();
+
+        robot.setAxlePos(robot.getAXLE_SERVO_BACK());
+        robot.updateAxleServoPos();
+
+        Action moveRed2ToOZ = robot.drive.actionBuilder(robot.drive.pose)
+                .strafeToConstantHeading(new Vector2d(50, -54.8))
+                .build();
+        Actions.runBlocking(moveRed2ToOZ);
+
+        Action moveForward2 = robot.drive.actionBuilder(robot.drive.pose)
+                .strafeToConstantHeading(new Vector2d(50, -40))
+                .build();
+        robot.delay(.5);
         Action park = robot.drive.actionBuilder(robot.drive.pose)
-                .strafeToConstantHeading(new Vector2d(47.8, -51))
+                .strafeToConstantHeading(new Vector2d(50, -51))
                 .build();
         Actions.runBlocking(park);
 
