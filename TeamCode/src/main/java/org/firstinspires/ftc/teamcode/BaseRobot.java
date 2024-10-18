@@ -225,9 +225,9 @@ public class BaseRobot{
         //if(pivotMotorPos < PIVOT_MOTOR_VERTICAL && axlePos > ) {
           //  axlePos = getAXLE_SERVO_UP();
         //}
-        if (pivotMotorPos < 600 && axlePos < AXLE_SERVO_UP){
-            axlePos = getAXLE_SERVO_UP();
-        }
+        //if (pivotMotorPos < 600 && axlePos < AXLE_SERVO_UP){
+          //  axlePos = getAXLE_SERVO_UP();
+        //}
         if(axlePos > 1){
             axlePos = 1;
         }
@@ -281,11 +281,11 @@ public class BaseRobot{
         if (leftSliderPos < SLIDES_MIN){
             leftSliderPos = SLIDES_MIN;
         }
-        if(pivotMotorPos > PIVOT_MOTOR_VERTICAL + 300 && leftSliderPos > 400){
+        if(pivotMotorPos > PIVOT_MOTOR_VERTICAL + 400 && leftSliderPos > 400){
             leftSliderPos = 400;//slides cant go far when pivot motor down
             rightSliderPos = 400;
         }
-        if(pivotMotorPos< getPIVOT_MOTOR_VERTICAL()-500 && leftSliderPos > 0){
+        if(pivotMotorPos < getPIVOT_MOTOR_VERTICAL()-1000 && leftSliderPos > 0){
             leftSliderPos = 0;//slides cant go up when pivot motor is back
             rightSliderPos = 0;
         }
