@@ -24,17 +24,22 @@ public final class RED_SP_1YHB extends LinearOpMode {
 
     public void runOpMode() throws InterruptedException{
         robot = new BaseRobot(hardwareMap, new Pose2d(-12, -62.48,Math.toRadians(90)));
-
         robot.setGrasperPos(robot.getGRASPER_CLOSED());
         robot.updateGrasperPos();
         robot.setAxlePos(robot.getAXLE_SERVO_DOWN());
         robot.updateAxleServoPos();
+        robot.setGimbalPos(robot.getGIMBAL_RESTING_POS());
+        robot.updateGimbalPos();
 
 
-        Action moveToSubAction = robot.drive.actionBuilder(robot.drive.pose)
 
-                .strafeToConstantHeading(new Vector2d(-12, -43.5))
-                .build();
+
+
+
+
+
+
+
 
 
 
@@ -45,53 +50,43 @@ public final class RED_SP_1YHB extends LinearOpMode {
 
 
 
-
-        Actions.runBlocking(moveToSubAction);
-
         robot.setPivotMotorPos(robot.getPIVOT_MOTOR_TO_HIGH_CHAMBER());
         robot.updatePivotMotorPos();
-
-        robot.delay(.1);
-
-        //robot.delay(1);
-        robot.setAxlePos(robot.getAXLE_SERVO_UP());
-        robot.updateAxleServoPos();
-        robot.delay(1.3);
-        //add delay
+        robot.delay(.6);
         robot.setSlidesPos(robot.getSLIDES_ABOVE_HIGH_RUNG());
         robot.updateSlidesPos();
-        robot.delay(1.4);
+        robot.setAxlePos(robot.getAXLE_SERVO_UP());
+        robot.updateAxleServoPos();
 
+        Action moveToSub = robot.drive.actionBuilder(robot.drive.pose)
+
+                .strafeToConstantHeading(new Vector2d(-8, -44))
+                .build();
+        Actions.runBlocking(moveToSub);//drive forward
+
+        telemetry.addData("pose", Math.toDegrees((robot.drive.pose.heading.toDouble())));
+        telemetry.update();
+
+
+        robot.delay(.3);
 
         robot.setSlidesPos(robot.getSLIDES_PUT_SP_ON_HIGH_RUNG());//clip specimen
         robot.updateSlidesPos();
-        robot.delay(1);
+        robot.delay(.5);
 
 
-        /*Action moveAnInch = robot.drive.actionBuilder(robot.drive.pose)
-                        .strafeToConstantHeading(new Vector2d(-12.5, -39.5))
-                                .build();
-        Actions.runBlocking(moveAnInch);
-        robot.delay(.2);
-        robot.setSlidesPos(robot.getSLIDES_PUT_SP_ON_HIGH_RUNG()-100);//clip specimen
-        robot.setPivotMotorPos(robot.getPIVOT_MOTOR_VERTICAL()+400);
-        robot.updateSlidesPos();
-        robot.updatePivotMotorPos();
-        robot.delay(1.3);
         robot.setGrasperPos(robot.getGRASPER_OPEN());//release specimen
         robot.updateGrasperPos();
-        robot.delay(.3);
-         */
+        //robot.delay(.2);
 
 
-
-
+        //moves sideways then back
+        //TODO: fix the way it moves sideways to prevent getting stuck on specimen
         Action moveBackAwayFromSub = robot.drive.actionBuilder(robot.drive.pose)
-                .strafeToConstantHeading(new Vector2d(-12.00, -41.00))
+                .strafeToConstantHeading(new Vector2d(-10, -44.9))
+                .strafeToConstantHeading(new Vector2d(-12, -53.00))
                 .build();
-
         Actions.runBlocking(moveBackAwayFromSub);
-
         robot.setSlidesPos(0);//slides down
         robot.updateSlidesPos();
         robot.delay(.7);
@@ -104,7 +99,7 @@ public final class RED_SP_1YHB extends LinearOpMode {
 
         Action moveToFirstYellowSample = robot.drive.actionBuilder(robot.drive.pose)
                 .strafeToConstantHeading(new Vector2d(-14, -48))
-                .strafeToConstantHeading(new Vector2d(-52.4, -54.5))//move to first yellow sample
+                .strafeToConstantHeading(new Vector2d(-51.6, -54.5))//move to first yellow sample
                 .build();
         Actions.runBlocking(moveToFirstYellowSample);
 
@@ -126,7 +121,7 @@ public final class RED_SP_1YHB extends LinearOpMode {
 
         Action moveToHighBucket1 = robot.drive.actionBuilder(robot.drive.pose)
                 .strafeToLinearHeading(new Vector2d(-48, -45), Math.toRadians(-90))
-                .strafeToLinearHeading(new Vector2d(-49.5, -49.5), Math.toRadians(225))
+                .strafeToLinearHeading(new Vector2d(-49, -49), Math.toRadians(225))
                 .build();
         Actions.runBlocking(moveToHighBucket1);
 

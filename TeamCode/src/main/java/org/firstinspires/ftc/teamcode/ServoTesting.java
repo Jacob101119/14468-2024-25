@@ -45,10 +45,10 @@ public class ServoTesting extends LinearOpMode {
                 robot.changeGrasperPos(-.03);
             }
             if(gamepad1.x){
-                robot.changeAxlePos(.03);
+                robot.changeAxlePos(.001);
             }
             if(gamepad1.b){
-                robot.changeAxlePos(-.03);
+                robot.changeAxlePos(-.001);
             }
             if(gamepad1.dpad_up){
                 robot.changeGimbalPos(.03);

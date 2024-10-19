@@ -43,10 +43,10 @@ public class BaseRobot{
     double GRASPER_WIDE_OPEN = .7;
     double GRASPER_HALF_OPEN = .6;
     double GRASPER_CLOSED = .4;
-    double AXLE_SERVO_BACK = .3;
-    double AXLE_SERVO_UP = .7;
-    double AXLE_SERVO_DOWN = 1;
-    double AXLE_SERVO_GRAB_FROM_WALL = .38;//may need minor adjustments
+    double AXLE_SERVO_BACK = 0;
+    double AXLE_SERVO_UP = .323;
+    double AXLE_SERVO_DOWN = .7;
+    double AXLE_SERVO_GRAB_FROM_WALL = .05;//may need minor adjustments
 
     double GIMBAL_BASKET_SCORING = .55;
     double GIMBAL_SPECIMEN_SCORING = .55;
@@ -139,7 +139,7 @@ public class BaseRobot{
 
 
         grasper = hwMap.servo.get("claw");
-        grasper.setPosition(GRASPER_CLOSED);
+        grasper.setPosition(GRASPER_WIDE_OPEN);
 
         rightGrasper = hwMap.servo.get("rightGrasper");
         //rightGrasper.setPosition(RIGHT_GRASPER_OPEN);
@@ -151,7 +151,7 @@ public class BaseRobot{
         grasperGimbal.setPosition(GIMBAL_RESTING_POS);
 
         axleRotation = hwMap.servo.get("axleRotation");
-        axleRotation.setPosition(AXLE_SERVO_DOWN);
+        axleRotation.setPosition(AXLE_SERVO_UP);
         //end servos
 
 
@@ -234,6 +234,9 @@ public class BaseRobot{
         if(axlePos < 0){
             axlePos = 0;
         }
+        if(pivotMotorPos < PIVOT_MOTOR_VERTICAL -400 && axlePos < AXLE_SERVO_DOWN) {
+            setAxlePos(AXLE_SERVO_DOWN);
+        }
         axleRotation.setPosition(axlePos);
     }
     public void setAxlePos(double newPos){
@@ -281,13 +284,23 @@ public class BaseRobot{
         if (leftSliderPos < SLIDES_MIN){
             leftSliderPos = SLIDES_MIN;
         }
-        if(pivotMotorPos > PIVOT_MOTOR_VERTICAL + 400 && leftSliderPos > 400){
+        if(pivotMotorPos > PIVOT_MOTOR_VERTICAL +50 && leftSliderPos > 400){
             leftSliderPos = 400;//slides cant go far when pivot motor down
             rightSliderPos = 400;
         }
-        if(pivotMotorPos < getPIVOT_MOTOR_VERTICAL()-1000 && leftSliderPos > 0){
-            leftSliderPos = 0;//slides cant go up when pivot motor is back
+        if (pivotMotorPos < 600 && leftSliderPos > 0){
+            leftSliderPos = 0;
             rightSliderPos = 0;
+        }
+        /*if(pivotMotorPos < PIVOT_MOTOR_VERTICAL + 800 && pivotMotorPos > PIVOT_MOTOR_VERTICAL-1000 && leftSliderPos > 2000){
+             leftSliderPos = 2400;
+             rightSliderPos = ;
+        }
+
+         */
+        if(pivotMotorPos < getPIVOT_MOTOR_VERTICAL()-800 && leftSliderPos > 300){
+            leftSliderPos = 300;//slides cant go up when pivot motor is back
+            rightSliderPos = 300;
         }
 
 

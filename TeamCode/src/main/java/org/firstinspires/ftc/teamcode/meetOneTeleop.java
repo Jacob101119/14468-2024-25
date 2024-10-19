@@ -48,60 +48,89 @@ public class meetOneTeleop extends LinearOpMode {
 
             //slides
             //robot.changeSlidesPos((int)(-gamepad2.right_stick_y * 10));
-            robot.changeSlidesPos((int)(gamepad1.right_trigger - gamepad1.left_trigger) * 10);
+            robot.changeSlidesPos((int)(gamepad2.right_trigger - gamepad2.left_trigger) * 10);
             robot.changeSlidesPos((int)(-gamepad2.right_stick_y) * 10);
             //slides position changes from inputs gamepad1 triggers and gamepad 2 right stick
 
 
             //pivot motor
-            if (gamepad1.right_bumper){
+            /*if (gamepad1.right_bumper){
                 robot.changePivotMotorPos(10);
             }
             if (gamepad1.left_bumper){
                 robot.changePivotMotorPos(-10);
             }
 
-            robot.changePivotMotorPos((int) (-gamepad2.left_stick_y * 10));
-            robot.changeHangArmPos((int) ((gamepad2.right_trigger-gamepad2.left_trigger) * 10));
+             */
+
+            robot.changePivotMotorPos((int) (gamepad2.left_stick_y * 12));
+            //robot.changeHangArmPos((int) ((gamepad2.right_trigger-gamepad2.left_trigger) * 10));
 
 
-            if(gamepad2.dpad_right){
+            /*if(gamepad1.dpad_right){
                 robot.setGrasperPos(robot.GRASPER_WIDE_OPEN);
             }
 
+             */
 
-            if(gamepad2.dpad_left){
+            if (gamepad1.x){
+                robot.setGrasperPos(robot.getGRASPER_OPEN());
+            }
+            if(gamepad1.a){
                 robot.setGrasperPos(robot.GRASPER_CLOSED);
             }
 
-            if(gamepad2.dpad_down){
+            if(gamepad1.dpad_up){
                 robot.setAxlePos(robot.getAXLE_SERVO_UP());
             }
-            if(gamepad2.dpad_up){
-                robot.setAxlePos(robot.getAXLE_SERVO_DOWN());
+            if(gamepad1.dpad_down){
+                //robot.setAxlePos(robot.getAXLE_SERVO_DOWN());
+            }
+            if (gamepad1.dpad_right){
+                robot.setAxlePos(robot.getAXLE_SERVO_BACK());
             }
 
-            if(gamepad2.left_bumper){
-                robot.changeGimbalPos(-.01);
-            }
-            if(gamepad2.right_bumper){
+            if(gamepad1.left_bumper){
                 robot.changeGimbalPos(.01);
             }
-            if(gamepad2.left_bumper && gamepad2.right_bumper){
+            if(gamepad1.right_bumper){
+                robot.changeGimbalPos(-.01);
+            }
+            if(gamepad1.left_bumper && gamepad2.right_bumper){
                 robot.setGimbalPos(robot.GIMBAL_RESTING_POS);
             }
 
             if (gamepad2.a){
-                robot.setPivotMotorPos(0);
-            }
-            if (gamepad2.x){
+                robot.setAxlePos(robot.getAXLE_SERVO_GRAB_FROM_WALL());
+                robot.setGimbalPos(robot.getGIMBAL_RESTING_POS());
+                robot.setSlidesPos(0);//slides down
+
+                robot.setPivotMotorPos(robot.getPIVOT_MOTOR_GRAB_FROM_WALL()-80);
+
 
             }
+            if (gamepad2.x){
+                robot.setPivotMotorPos(robot.getPIVOT_MOTOR_HORIZONTAL()-200);
+            }
             if (gamepad2.y){
-                robot.setPivotMotorPos(robot.PIVOT_MOTOR_VERTICAL);
+                robot.setPivotMotorPos(robot.PIVOT_MOTOR_VERTICAL-100);
+                robot.setGrasperPos(robot.getGRASPER_CLOSED());
+                //robot.setAxlePos(robot.getAXLE_SERVO_UP());
             }
             if (gamepad2.b && !gamepad1.start && !gamepad2.start){
                 robot.setPivotMotorPos(robot.PIVOT_MOTOR_HORIZONTAL);
+                robot.setAxlePos(robot.getAXLE_SERVO_UP());
+                robot.setGimbalPos(robot.getGIMBAL_RESTING_POS());
+            }
+            if(gamepad1.right_stick_button){
+                robot.setGimbalPos(robot.getGIMBAL_RESTING_POS());
+            }
+
+            if (gamepad2.dpad_up){
+                robot.setSlidesPos(robot.getSLIDES_MAX());
+            }
+            if (gamepad2.dpad_down){
+                robot.setSlidesPos(robot.getSLIDES_PUT_SP_ON_HIGH_RUNG()+50);
             }
 
 
@@ -154,12 +183,13 @@ public class meetOneTeleop extends LinearOpMode {
             telemetry.addLine();
             telemetry.addLine();
 
+            /*
             telemetry.addLine("controls: ");
             telemetry.addLine();
 
             telemetry.addLine("Gamepad1:");
             telemetry.addLine("right/left stick: drive");
-            telemetry.addLine("right/left trigger: slides");
+            //telemetry.addLine("right/left trigger: slides");
             telemetry.addLine();
 
             telemetry.addLine("Gamepad2:");
@@ -172,10 +202,12 @@ public class meetOneTeleop extends LinearOpMode {
             telemetry.addLine("b: pivot motor horizontal");
             telemetry.addLine("left/right bumper: change gimbal pos");
             telemetry.addLine("left&right bumper at the same time: reset gimbal pos");
-
-
+             */
             telemetry.update();
             //end telemetry
+
+
+
             //_____________________________________________________________________________________
         }
     }
