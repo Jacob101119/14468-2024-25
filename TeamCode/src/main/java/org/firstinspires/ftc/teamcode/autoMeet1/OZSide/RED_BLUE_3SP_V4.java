@@ -181,29 +181,18 @@ public final class RED_BLUE_3SP_V3 extends LinearOpMode {
                 .strafeToConstantHeading(new Vector2d(-6, -53))
                 .strafeToConstantHeading(new Vector2d(36, -53))
                 .strafeToConstantHeading(new Vector2d(36, -10))
-                .strafeToLinearHeading(new Vector2d(48, - 8 ), Math.toRadians(-90))
+                .strafeToLinearHeading(new Vector2d(48, - 8), Math.toRadians(-90))
+                .strafeToLinearHeading(new Vector2d(48, - 56), Math.toRadians(-90))
+                .strafeToLinearHeading(new Vector2d(48, - 8), Math.toRadians(-90))
+                .strafeToLinearHeading(new Vector2d(52, - 8), Math.toRadians(-90))
+                .strafeToLinearHeading(new Vector2d(48, - 56), Math.toRadians(-90))
+
 
                 .build();
         Actions.runBlocking(moveBackAwayFromSub2ToRED);
 
         //robot.setPivotMotorPos(4500);
         //robot.updatePivotMotorPos();
-        robot.delay(.2);
-
-        robot.setAxlePos(robot.getAXLE_SERVO_UP());
-        robot.updateAxleServoPos();
-        //robot.delay(3);
-
-
-
-
-
-        Action bringRed1ToOZ = robot.drive.actionBuilder(robot.drive.pose)
-                //.strafeToLinearHeading(new Vector2d(47.8, -36), Math.toRadians(-90))
-                .strafeToLinearHeading(new Vector2d(46.8, -53.8), Math.toRadians(90))
-                .build();
-        Actions.runBlocking(bringRed1ToOZ);
-        robot.delay(.2);
 
 
 
