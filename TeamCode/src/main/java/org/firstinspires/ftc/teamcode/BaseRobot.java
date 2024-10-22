@@ -234,7 +234,7 @@ public class BaseRobot{
         if(axlePos < 0){
             axlePos = 0;
         }
-        if(pivotMotorPos < PIVOT_MOTOR_VERTICAL -400 && axlePos < AXLE_SERVO_DOWN) {
+        if(pivotMotorPos < PIVOT_MOTOR_VERTICAL -1200 && axlePos < AXLE_SERVO_DOWN) {
             setAxlePos(AXLE_SERVO_DOWN);
         }
         axleRotation.setPosition(axlePos);
@@ -284,9 +284,9 @@ public class BaseRobot{
         if (leftSliderPos < SLIDES_MIN){
             leftSliderPos = SLIDES_MIN;
         }
-        if(pivotMotorPos > PIVOT_MOTOR_VERTICAL +50 && leftSliderPos > 400){
-            leftSliderPos = 400;//slides cant go far when pivot motor down
-            rightSliderPos = 400;
+        if(pivotMotorPos > PIVOT_MOTOR_VERTICAL +50 && leftSliderPos > 650){
+            leftSliderPos = 650;//slides cant go far when pivot motor down
+            rightSliderPos = 650;
         }
         if (pivotMotorPos < 600 && leftSliderPos > 0){
             leftSliderPos = 0;
