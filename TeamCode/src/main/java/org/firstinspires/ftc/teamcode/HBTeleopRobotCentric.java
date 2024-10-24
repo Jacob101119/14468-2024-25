@@ -10,7 +10,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import org.firstinspires.ftc.teamcode.Drive.MecanumDrive;
 
 @TeleOp
-public class OZTeleopRobotCentric extends LinearOpMode {
+public class HBTeleopRobotCentric extends LinearOpMode {
 
     private com.qualcomm.robotcore.hardware.HardwareMap HardwareMap;
     BaseRobot robot;
@@ -73,9 +73,9 @@ public class OZTeleopRobotCentric extends LinearOpMode {
 
              */
 
-            if(gamepad2.dpad_up){
-                robot.setPivotMotorPos(robot.getPIVOT_MOTOR_HORIZONTAL()-1000);
-            }
+            //if(gamepad2.dpad_up){
+              //  robot.setPivotMotorPos(robot.getPIVOT_MOTOR_HORIZONTAL()-1000);
+            //}
             if (gamepad1.x){
                 robot.setGrasperPos(robot.getGRASPER_OPEN());
             }
@@ -93,9 +93,12 @@ public class OZTeleopRobotCentric extends LinearOpMode {
                 robot.setAxlePos(robot.getAXLE_SERVO_BACK());
             }
 
-            //if (gamepad1.dpad_up){
-              //  robot.setPivotMotorPos(robot.getPIVOT_MOTOR_VERTICAL());
-            //}
+            if (gamepad2.dpad_up){//reach to wall
+                robot.setAxlePos(robot.getAXLE_SERVO_GRAB_FROM_WALL());
+                robot.setGimbalPos(robot.getGIMBAL_RESTING_POS());
+                robot.setSlidesPos(0);//slides down
+                robot.setPivotMotorPos(robot.getPIVOT_MOTOR_GRAB_FROM_WALL()-180);
+            }
             if(gamepad1.left_bumper){
                 robot.changeGimbalPos(.01);
             }
@@ -107,27 +110,30 @@ public class OZTeleopRobotCentric extends LinearOpMode {
             }
 
             if (gamepad2.a){
-                //grab specimen from wall
-                robot.setAxlePos(robot.getAXLE_SERVO_GRAB_FROM_WALL());
-                robot.setGimbalPos(robot.getGIMBAL_RESTING_POS());
-                robot.setSlidesPos(0);//slides down
-                robot.setPivotMotorPos(robot.getPIVOT_MOTOR_GRAB_FROM_WALL()-180);
+                robot.setPivotMotorPos(robot.getPIVOT_MOTOR_VERTICAL());
+                robot.setSlidesPos(0);
+                robot.setAxlePos(robot.getAXLE_SERVO_BACK());
+
 
             }
             if (gamepad2.x){
-                robot.setPivotMotorPos(3800);
+                robot.setPivotMotorPos(robot.getPIVOT_MOTOR_HORIZONTAL()+ 50);
+                robot.setAxlePos(robot.getAXLE_SERVO_UP());
+                robot.setGrasperPos(robot.getGRASPER_OPEN());
 
 
             }
             if (gamepad2.y){
-                robot.setPivotMotorPos(robot.PIVOT_MOTOR_VERTICAL+100);
-                robot.setSlidesPos(robot.getSLIDES_ABOVE_HIGH_RUNG());
-                //robot.setAxlePos(robot.getAXLE_SERVO_UP());
+                robot.setPivotMotorPos(2079);
+                robot.setSlidesPos(robot.getSLIDES_MAX());
+                robot.setAxlePos(robot.getAXLE_SERVO_UP());
+
                 //robot.setAxlePos(robot.getAXLE_SERVO_UP());
             }
             if (gamepad2.b && !gamepad1.start && !gamepad2.start){
-                robot.setPivotMotorPos(2248);
-                robot.setSlidesPos(1850);
+                robot.setPivotMotorPos(robot.PIVOT_MOTOR_VERTICAL+100);
+                robot.setSlidesPos(robot.getSLIDES_ABOVE_HIGH_RUNG());
+                robot.setAxlePos(robot.getAXLE_SERVO_UP());
             }
             if(gamepad2.dpad_right){
                 robot.setPivotMotorPos(robot.PIVOT_MOTOR_HORIZONTAL);
@@ -139,10 +145,10 @@ public class OZTeleopRobotCentric extends LinearOpMode {
             }
 
             //if (gamepad2.dpad_up){
-              //  robot.setSlidesPos(robot.getSLIDES_MAX());
+            //  robot.setSlidesPos(robot.getSLIDES_MAX());
             //}
             //if (gamepad2.dpad_down){
-              //  robot.setSlidesPos(robot.getSLIDES_PUT_SP_ON_HIGH_RUNG()+50);
+            //  robot.setSlidesPos(robot.getSLIDES_PUT_SP_ON_HIGH_RUNG()+50);
             //}
 
 
@@ -224,3 +230,5 @@ public class OZTeleopRobotCentric extends LinearOpMode {
         }
     }
 }
+
+//2079 pivot

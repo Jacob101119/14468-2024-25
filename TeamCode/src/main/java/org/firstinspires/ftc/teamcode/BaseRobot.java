@@ -72,7 +72,7 @@ public class BaseRobot{
     //int PIVOT_MOTOR_VERTICAL = 2248;//old before gearbox change, should be the same
     int PIVOT_MOTOR_VERTICAL = 2848;//after gearbox change
     int PIVOT_MOTOR_HORIZONTAL = 5003;
-    int PIVOT_MOTOR_GRAB_FROM_WALL = 5243;
+    int PIVOT_MOTOR_GRAB_FROM_WALL = 5100;
     int PIVOT_MOTOR_TO_HIGH_CHAMBER = 3148;//maybe 3148
     //end motor constants
 
@@ -374,7 +374,7 @@ public class BaseRobot{
     }
 
     public void resetAll(){
-        setGrasperPos(GRASPER_CLOSED);
+        setGrasperPos(GRASPER_WIDE_OPEN);
         setSlidesPos(SLIDES_MIN);
         setGimbalPos(GIMBAL_RESTING_POS);
         setAxlePos(AXLE_SERVO_DOWN);

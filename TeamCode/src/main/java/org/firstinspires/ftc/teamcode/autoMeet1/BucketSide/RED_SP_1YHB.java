@@ -60,7 +60,7 @@ public final class RED_SP_1YHB extends LinearOpMode {
 
         Action moveToSub = robot.drive.actionBuilder(robot.drive.pose)
 
-                .strafeToConstantHeading(new Vector2d(-8, -44))
+                .strafeToConstantHeading(new Vector2d(-8, -42.8))
                 .build();
         Actions.runBlocking(moveToSub);//drive forward
 
@@ -78,6 +78,7 @@ public final class RED_SP_1YHB extends LinearOpMode {
         robot.setGrasperPos(robot.getGRASPER_OPEN());//release specimen
         robot.updateGrasperPos();
         //robot.delay(.2);
+
 
 
         //moves sideways then back
@@ -99,7 +100,7 @@ public final class RED_SP_1YHB extends LinearOpMode {
 
         Action moveToFirstYellowSample = robot.drive.actionBuilder(robot.drive.pose)
                 .strafeToConstantHeading(new Vector2d(-14, -48))
-                .strafeToConstantHeading(new Vector2d(-51.6, -54.5))//move to first yellow sample
+                .strafeToConstantHeading(new Vector2d(-51.6, -52.5))//move to first yellow sample
                 .build();
         Actions.runBlocking(moveToFirstYellowSample);
 
@@ -120,8 +121,8 @@ public final class RED_SP_1YHB extends LinearOpMode {
         robot.delay(.8);
 
         Action moveToHighBucket1 = robot.drive.actionBuilder(robot.drive.pose)
-                .strafeToLinearHeading(new Vector2d(-48, -45), Math.toRadians(-90))
-                .strafeToLinearHeading(new Vector2d(-49, -49), Math.toRadians(225))
+                //.strafeToLinearHeading(new Vector2d(-48, -45), Math.toRadians(-90))
+                .strafeToLinearHeading(new Vector2d(-47, -47), Math.toRadians(225))
                 .build();
         Actions.runBlocking(moveToHighBucket1);
 
@@ -147,7 +148,7 @@ public final class RED_SP_1YHB extends LinearOpMode {
         robot.setAxlePos(robot.getAXLE_SERVO_BACK());
         robot.updateAxleServoPos();
         Action moveBackFromHB = robot.drive.actionBuilder(robot.drive.pose)
-                .strafeToConstantHeading(new Vector2d(-49, -49))
+                .strafeToConstantHeading(new Vector2d(-46, -46))
                 .build();
         Actions.runBlocking(moveBackFromHB);//move back from net zone a bit
         robot.delay(.2);

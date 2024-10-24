@@ -3,6 +3,8 @@ package org.firstinspires.ftc.teamcode.autoMeet1.OZSide;
 
 import com.acmerobotics.roadrunner.Action;
 import com.acmerobotics.roadrunner.Pose2d;
+import com.acmerobotics.roadrunner.ProfileAccelConstraint;
+import com.acmerobotics.roadrunner.TranslationalVelConstraint;
 import com.acmerobotics.roadrunner.Vector2d;
 import com.acmerobotics.roadrunner.ftc.Actions;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
@@ -15,7 +17,7 @@ import org.firstinspires.ftc.teamcode.Drive.MecanumDrive;
 
 
 @Autonomous
-public final class RED_BLUE_3SP_V3 extends LinearOpMode {
+public final class RED_BLUE_2SP_2S_V2 extends LinearOpMode {
 
     BaseRobot robot;
     MecanumDrive drive;
@@ -107,7 +109,7 @@ public final class RED_BLUE_3SP_V3 extends LinearOpMode {
         robot.updateAxleServoPos();
         robot.setSlidesPos(0);//slides down
         robot.updateSlidesPos();
-        robot.setPivotMotorPos(robot.getPIVOT_MOTOR_GRAB_FROM_WALL()-80);
+        robot.setPivotMotorPos(robot.getPIVOT_MOTOR_GRAB_FROM_WALL()-140);
         robot.updatePivotMotorPos();
 
 
@@ -120,8 +122,8 @@ public final class RED_BLUE_3SP_V3 extends LinearOpMode {
 
 
         Action updatedMoveToOZ = robot.drive.actionBuilder(robot.drive.pose)
-                .strafeToLinearHeading(new Vector2d(46.9, -38), Math.toRadians(-90))
-                .strafeToLinearHeading(new Vector2d(46.9, -43.6), Math.toRadians(-90))
+                .strafeToLinearHeading(new Vector2d(44.7, -38), Math.toRadians(-90) )
+                .strafeToLinearHeading(new Vector2d(44.7, -43.8), Math.toRadians(-90))
                 .build();
         Actions.runBlocking(updatedMoveToOZ);
         robot.delay(.5);
@@ -140,10 +142,10 @@ public final class RED_BLUE_3SP_V3 extends LinearOpMode {
                 .strafeToLinearHeading(new Vector2d(50.95, -41.00), Math.toRadians(-90.00))
                 .strafeToLinearHeading(new Vector2d(30.17, -49.34), Math.toRadians(180.00))
                 .strafeToLinearHeading(new Vector2d(9, -55), Math.toRadians(90))
-                .strafeToLinearHeading(new Vector2d(6, -46.4), Math.toRadians(90.00))
+                .strafeToLinearHeading(new Vector2d(6, -46), Math.toRadians(90.00))
                 .build();
         Action updatedMoveToSub2 = robot.drive.actionBuilder(robot.drive.pose)
-                .strafeToLinearHeading(new Vector2d(2, -46.4), Math.toRadians(90))
+                .strafeToLinearHeading(new Vector2d(2, -46), Math.toRadians(90))
                 .build();
         Actions.runBlocking(updatedMoveToSub2);//TODO: see if new path is ok
         robot.setPivotMotorPos(robot.getPIVOT_MOTOR_TO_HIGH_CHAMBER());
@@ -177,15 +179,19 @@ public final class RED_BLUE_3SP_V3 extends LinearOpMode {
 
 
         Action moveBackAwayFromSub2ToRED = robot.drive.actionBuilder(robot.drive.pose)
-                .strafeToConstantHeading(new Vector2d(-4, -46))
-                .strafeToConstantHeading(new Vector2d(-6, -53))
-                .strafeToConstantHeading(new Vector2d(36, -53))
-                .strafeToConstantHeading(new Vector2d(36, -10))
-                .strafeToLinearHeading(new Vector2d(48, - 8), Math.toRadians(-90))
-                .strafeToLinearHeading(new Vector2d(48, - 56), Math.toRadians(-90))
-                .strafeToLinearHeading(new Vector2d(48, - 8), Math.toRadians(-90))
-                .strafeToLinearHeading(new Vector2d(52, - 8), Math.toRadians(-90))
-                .strafeToLinearHeading(new Vector2d(48, - 56), Math.toRadians(-90))
+                .strafeToConstantHeading(new Vector2d(4, -46))
+                //.strafeToConstantHeading(new Vector2d(8, -53))
+                .strafeToConstantHeading(new Vector2d(35.3, -46))
+                //.strafeToConstantHeading(new Vector2d(35.3, -7), new TranslationalVelConstraint(70), new ProfileAccelConstraint(-70,70))
+                .strafeToConstantHeading(new Vector2d(35.3, -7))
+
+                .strafeToLinearHeading(new Vector2d(48, - 8), Math.toRadians(-90))//move to sample 1
+                .strafeToLinearHeading(new Vector2d(49, - 55), Math.toRadians(-90), new TranslationalVelConstraint(70), new ProfileAccelConstraint(-70, 70))//push to OZ
+                .strafeToLinearHeading(new Vector2d(48, - 8), Math.toRadians(-90), new TranslationalVelConstraint(70), new ProfileAccelConstraint(-70,70))//move to sample 2)//move to sample 2
+                .strafeToLinearHeading(new Vector2d(54, - 8), Math.toRadians(-90))//move to sample 2
+                .strafeToLinearHeading(new Vector2d(48, - 55), Math.toRadians(-90), new TranslationalVelConstraint(100), new ProfileAccelConstraint(-100,100))//move to sample 2
+                //push to OZ
+
 
 
                 .build();
