@@ -3,8 +3,6 @@ package org.firstinspires.ftc.teamcode.autoMeet1.OZSide;
 
 import com.acmerobotics.roadrunner.Action;
 import com.acmerobotics.roadrunner.Pose2d;
-import com.acmerobotics.roadrunner.ProfileAccelConstraint;
-import com.acmerobotics.roadrunner.TranslationalVelConstraint;
 import com.acmerobotics.roadrunner.Vector2d;
 import com.acmerobotics.roadrunner.ftc.Actions;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
@@ -17,7 +15,7 @@ import org.firstinspires.ftc.teamcode.Drive.MecanumDrive;
 
 
 @Autonomous
-public final class RED_BLUE_2SP_2S extends LinearOpMode {
+public final class USE_2SP_2S extends LinearOpMode {
 
     BaseRobot robot;
     MecanumDrive drive;
