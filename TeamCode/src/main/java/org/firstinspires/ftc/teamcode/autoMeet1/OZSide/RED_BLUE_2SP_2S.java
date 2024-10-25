@@ -131,7 +131,7 @@ public final class RED_BLUE_2SP_2S extends LinearOpMode {
         robot.setGrasperPos(robot.getGRASPER_CLOSED());
         robot.updateGrasperPos();
         robot.delay(.2);
-        robot.setPivotMotorPos(robot.getPIVOT_MOTOR_VERTICAL());
+        robot.setPivotMotorPos(robot.getPIVOT_MOTOR_VERTICAL() + 40);
         robot.updatePivotMotorPos();
         robot.delay(.2);//TODO: see if this is too little
 
@@ -145,7 +145,7 @@ public final class RED_BLUE_2SP_2S extends LinearOpMode {
                 .strafeToLinearHeading(new Vector2d(6, -46), Math.toRadians(90.00))
                 .build();
         Action updatedMoveToSub2 = robot.drive.actionBuilder(robot.drive.pose)
-                .strafeToLinearHeading(new Vector2d(2, -46), Math.toRadians(90))
+                .strafeToLinearHeading(new Vector2d(2, -45.5), Math.toRadians(90))
                 .build();
         Actions.runBlocking(updatedMoveToSub2);//TODO: see if new path is ok
         robot.setPivotMotorPos(robot.getPIVOT_MOTOR_TO_HIGH_CHAMBER());
@@ -187,7 +187,7 @@ public final class RED_BLUE_2SP_2S extends LinearOpMode {
 
                 .strafeToLinearHeading(new Vector2d(48, - 8), Math.toRadians(-90))//move to sample 1
                 .strafeToLinearHeading(new Vector2d(49, - 55), Math.toRadians(-90))//push to OZ
-                .strafeToLinearHeading(new Vector2d(48, - 8), Math.toRadians(-90))//move to sample 2
+                .strafeToLinearHeading(new Vector2d(45, - 8), Math.toRadians(-90))//move to sample 2
                 .strafeToLinearHeading(new Vector2d(54, - 8), Math.toRadians(-90))//move to sample 2
                 .strafeToLinearHeading(new Vector2d(48, - 55), Math.toRadians(-90))//push to OZ
 
