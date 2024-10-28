@@ -3,6 +3,8 @@ package org.firstinspires.ftc.teamcode.autoMeet1.OZSide;
 
 import com.acmerobotics.roadrunner.Action;
 import com.acmerobotics.roadrunner.Pose2d;
+import com.acmerobotics.roadrunner.ProfileAccelConstraint;
+import com.acmerobotics.roadrunner.TranslationalVelConstraint;
 import com.acmerobotics.roadrunner.Vector2d;
 import com.acmerobotics.roadrunner.ftc.Actions;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
@@ -80,13 +82,17 @@ public final class USE_2SP_2S extends LinearOpMode {
 
         robot.setGrasperPos(robot.getGRASPER_OPEN());//release specimen
         robot.updateGrasperPos();
+
+        robot.setPivotMotorPos(robot.getPIVOT_MOTOR_TO_HIGH_CHAMBER());
+        robot.updatePivotMotorPos();
+        robot.delay(.2);
         //robot.delay(.2);
 
 
         //moves sideways then back
         //TODO: fix the way it moves sideways to prevent getting stuck on specimen
         Action moveBackAwayFromSub = robot.drive.actionBuilder(robot.drive.pose)
-                .strafeToConstantHeading(new Vector2d(4, -42.6))
+                .strafeToConstantHeading(new Vector2d(2, -41.4))
                 .strafeToConstantHeading(new Vector2d(2, -53.00))
                 .build();
         Actions.runBlocking(moveBackAwayFromSub);
@@ -107,7 +113,7 @@ public final class USE_2SP_2S extends LinearOpMode {
         robot.updateAxleServoPos();
         robot.setSlidesPos(0);//slides down
         robot.updateSlidesPos();
-        robot.setPivotMotorPos(robot.getPIVOT_MOTOR_GRAB_FROM_WALL());
+        robot.setPivotMotorPos(robot.getPIVOT_MOTOR_GRAB_FROM_WALL()-300);
         robot.updatePivotMotorPos();
 
 
@@ -120,8 +126,8 @@ public final class USE_2SP_2S extends LinearOpMode {
 
 
         Action updatedMoveToOZ = robot.drive.actionBuilder(robot.drive.pose)
-                .strafeToLinearHeading(new Vector2d(45.5, -40), Math.toRadians(-90))
-                .strafeToLinearHeading(new Vector2d(45.5, -46.5), Math.toRadians(-90))
+                .strafeToLinearHeading(new Vector2d(46.8, -40), Math.toRadians(-90))
+                .strafeToLinearHeading(new Vector2d(46.8, -44), Math.toRadians(-90))
                 .build();
         Actions.runBlocking(updatedMoveToOZ);
         robot.delay(.5);
@@ -143,7 +149,7 @@ public final class USE_2SP_2S extends LinearOpMode {
                 .strafeToLinearHeading(new Vector2d(6, -46), Math.toRadians(90.00))
                 .build();
         Action updatedMoveToSub2 = robot.drive.actionBuilder(robot.drive.pose)
-                .strafeToLinearHeading(new Vector2d(2, -45.5), Math.toRadians(90))
+                .strafeToLinearHeading(new Vector2d(2, -45.3), Math.toRadians(90))
                 .build();
         Actions.runBlocking(updatedMoveToSub2);//TODO: see if new path is ok
         robot.setPivotMotorPos(robot.getPIVOT_MOTOR_TO_HIGH_CHAMBER());
@@ -156,7 +162,7 @@ public final class USE_2SP_2S extends LinearOpMode {
         robot.updateSlidesPos();
         robot.delay(.4);
 
-        robot.setPivotMotorPos(robot.getPIVOT_MOTOR_TO_HIGH_CHAMBER()+100);
+        robot.setPivotMotorPos(robot.getPIVOT_MOTOR_TO_HIGH_CHAMBER());
         robot.updatePivotMotorPos();
         robot.delay(.5);
 
@@ -171,6 +177,7 @@ public final class USE_2SP_2S extends LinearOpMode {
         robot.setGrasperPos(robot.getGRASPER_OPEN());
         robot.updateGrasperPos();
         //robot.delay(.2);
+
 
         robot.resetAll();
         //robot.setAxlePos(robot.getAXLE_SERVO_BACK());
@@ -187,7 +194,7 @@ public final class USE_2SP_2S extends LinearOpMode {
                 .strafeToLinearHeading(new Vector2d(49, - 55), Math.toRadians(-90))//push to OZ
                 .strafeToLinearHeading(new Vector2d(45, - 8), Math.toRadians(-90))//move to sample 2
                 .strafeToLinearHeading(new Vector2d(54, - 8), Math.toRadians(-90))//move to sample 2
-                .strafeToLinearHeading(new Vector2d(48, - 55), Math.toRadians(-90))//push to OZ
+                .strafeToLinearHeading(new Vector2d(48, - 55), Math.toRadians(-90), new TranslationalVelConstraint(90), new ProfileAccelConstraint(-90 , 90))//push to OZ
 
 
                 .build();

@@ -44,8 +44,8 @@ public class BaseRobot{
     double GRASPER_HALF_OPEN = .6;
     double GRASPER_CLOSED = .4;
     double AXLE_SERVO_BACK = 0;
-    double AXLE_SERVO_UP = .323;
-    double AXLE_SERVO_DOWN = .7;
+    double AXLE_SERVO_UP = .343;
+    double AXLE_SERVO_DOWN = .664;
     double AXLE_SERVO_GRAB_FROM_WALL = .05;//may need minor adjustments
 
     double GIMBAL_BASKET_SCORING = .55;
@@ -234,7 +234,7 @@ public class BaseRobot{
         if(axlePos < 0){
             axlePos = 0;
         }
-        if(pivotMotorPos < PIVOT_MOTOR_VERTICAL -1200 && axlePos < AXLE_SERVO_DOWN) {
+        if(pivotMotorPos < 1489 && axlePos < AXLE_SERVO_DOWN) {
             setAxlePos(AXLE_SERVO_DOWN);
         }
         axleRotation.setPosition(axlePos);
