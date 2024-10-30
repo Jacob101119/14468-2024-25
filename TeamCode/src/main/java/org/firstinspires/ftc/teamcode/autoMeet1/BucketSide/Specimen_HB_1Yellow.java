@@ -15,7 +15,7 @@ import org.firstinspires.ftc.teamcode.Drive.MecanumDrive;
 
 
 @Autonomous
-public final class RED_SP_1YHB extends LinearOpMode {
+public final class Specimen_HB_1Yellow extends LinearOpMode {
 
     BaseRobot robot;
     MecanumDrive drive;
@@ -84,7 +84,7 @@ public final class RED_SP_1YHB extends LinearOpMode {
         //moves sideways then back
         //TODO: fix the way it moves sideways to prevent getting stuck on specimen
         Action moveBackAwayFromSub = robot.drive.actionBuilder(robot.drive.pose)
-                .strafeToConstantHeading(new Vector2d(-10, -44.9))
+                .strafeToConstantHeading(new Vector2d(-10, -40))
                 .strafeToConstantHeading(new Vector2d(-12, -53.00))
                 .build();
         Actions.runBlocking(moveBackAwayFromSub);
@@ -93,14 +93,10 @@ public final class RED_SP_1YHB extends LinearOpMode {
         robot.delay(.7);
 
 
-        //*note* delete these 3 lines once specimen works
-        //robot.setPivotMotorPos(0);//pivot motor back
-        //robot.updatePivotMotorPos();
-        //end note
 
         Action moveToFirstYellowSample = robot.drive.actionBuilder(robot.drive.pose)
                 //.strafeToConstantHeading(new Vector2d(-14, -48))
-                .strafeToConstantHeading(new Vector2d(-51.6, -53.5))//move to first yellow sample
+                .strafeToConstantHeading(new Vector2d(-53, -54.4))//move to first yellow sample
                 .build();
         Actions.runBlocking(moveToFirstYellowSample);
 
@@ -148,7 +144,7 @@ public final class RED_SP_1YHB extends LinearOpMode {
         robot.setAxlePos(robot.getAXLE_SERVO_BACK());
         robot.updateAxleServoPos();
         Action moveBackFromHB = robot.drive.actionBuilder(robot.drive.pose)
-                .strafeToConstantHeading(new Vector2d(-46, -46))
+                .strafeToConstantHeading(new Vector2d(-45, -45))
                 .build();
         Actions.runBlocking(moveBackFromHB);//move back from net zone a bit
         robot.delay(.2);

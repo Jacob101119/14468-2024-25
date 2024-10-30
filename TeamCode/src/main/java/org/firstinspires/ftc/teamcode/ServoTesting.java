@@ -29,6 +29,7 @@ public class ServoTesting extends LinearOpMode {
 
         while(!isStopRequested() && opModeIsActive()){
 
+            //robot.setAxlePos(robot.getAXLE_SERVO_UP());
 
 
             robot.updateAxleServoPos();
@@ -39,10 +40,10 @@ public class ServoTesting extends LinearOpMode {
             robot.changeGrasperPos(gamepad1.left_stick_y * 0.01);
 
             if(gamepad1.y){
-                robot.changeGrasperPos(.03);
+                robot.changeGrasperPos(.001);
             }
             if(gamepad1.a){
-                robot.changeGrasperPos(-.03);
+                robot.changeGrasperPos(-.001);
             }
             if(gamepad1.x){
                 robot.changeAxlePos(.001);
@@ -51,10 +52,14 @@ public class ServoTesting extends LinearOpMode {
                 robot.changeAxlePos(-.001);
             }
             if(gamepad1.dpad_up){
-                robot.changeGimbalPos(.03);
+                robot.changeGimbalPos(.001);
             }
             if(gamepad1.dpad_down){
-                robot.changeGimbalPos(-.03);
+                robot.changeGimbalPos(-.001);
+            }
+
+            if(gamepad2.a){
+                robot.setAxlePos(robot.getAXLE_SERVO_UP());
             }
 
             //telemetry

@@ -50,7 +50,7 @@ public class BaseRobot{
 
     double GIMBAL_BASKET_SCORING = .55;
     double GIMBAL_SPECIMEN_SCORING = .55;
-    double GIMBAL_RESTING_POS = .55;
+    double GIMBAL_RESTING_POS = .407;
 
     //double LEFT_GRASPER_OPEN = 0;//change
     //double LEFT_GRASPER_CLOSED = 0;//change
@@ -64,7 +64,7 @@ public class BaseRobot{
     //motor constants
     int SLIDES_ABOVE_HIGH_RUNG = 900;//change
     int SLIDES_PUT_SP_ON_HIGH_RUNG = 50;//change
-    int SLIDES_MAX = 3000;//change
+    int SLIDES_MAX = 3110;//change
     int SLIDES_MIN = 0;
     int SLIDES_TO_SUB = 60;//change
 
@@ -234,9 +234,11 @@ public class BaseRobot{
         if(axlePos < 0){
             axlePos = 0;
         }
-        if(pivotMotorPos < 1489 && axlePos < AXLE_SERVO_DOWN) {
+        /*if(pivotMotorPos < 1489 && axlePos < AXLE_SERVO_DOWN) {
             setAxlePos(AXLE_SERVO_DOWN);
         }
+
+         */
         axleRotation.setPosition(axlePos);
     }
     public void setAxlePos(double newPos){
@@ -278,6 +280,7 @@ public class BaseRobot{
         if (leftSliderPos > SLIDES_MAX){
             leftSliderPos = SLIDES_MAX;
         }
+
         if(rightSliderPos < SLIDES_MIN){
             rightSliderPos = SLIDES_MIN;
         }
