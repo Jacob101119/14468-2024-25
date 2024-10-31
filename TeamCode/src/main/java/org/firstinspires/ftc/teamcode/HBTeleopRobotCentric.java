@@ -83,7 +83,7 @@ public class HBTeleopRobotCentric extends LinearOpMode {
                 robot.setGrasperPos(robot.GRASPER_CLOSED);
             }
 
-            if(gamepad1.dpad_up || gamepad2.dpad_up){
+            if(gamepad1.dpad_up){
                 robot.setAxlePos(robot.getAXLE_SERVO_UP());
             }
             if(gamepad2.dpad_down){
@@ -123,9 +123,18 @@ public class HBTeleopRobotCentric extends LinearOpMode {
 
 
             }
+
+            telemetry.addLine("2-y-HB scoring");
+            telemetry.addLine("2-a-pivot vertical slides down");
+            telemetry.addLine("2-x-grab from ground");
+            telemetry.addLine("2-b-specimen scoring");
+            telemetry.addLine("2-dpadUP - grab from wall");
+            telemetry.addLine("the rest is similar to other teleop you guys can figure it out");
+
+
             if (gamepad2.y){
                 robot.setPivotMotorPos(2079);
-                robot.setSlidesPos(robot.getSLIDES_MAX());
+                robot.setSlidesPos(robot.getSLIDES_MAX());//HB
                 robot.setAxlePos(robot.getAXLE_SERVO_UP());
 
                 //robot.setAxlePos(robot.getAXLE_SERVO_UP());
@@ -165,6 +174,8 @@ public class HBTeleopRobotCentric extends LinearOpMode {
 
 
 
+
+
             telemetry.addLine("robot position (starting at x: 0, y: 0, heading: 0)");
             telemetry.addData("x:", drive.pose.position.x);
             telemetry.addData("y:", drive.pose.position.y);
@@ -200,6 +211,7 @@ public class HBTeleopRobotCentric extends LinearOpMode {
 
             telemetry.addLine();
             telemetry.addLine();
+
 
             /*
             telemetry.addLine("controls: ");

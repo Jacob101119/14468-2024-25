@@ -32,7 +32,7 @@ public class OZTeleopRobotCentric extends LinearOpMode {
 
 
             robot.drive.setDrivePowers(new PoseVelocity2d(new Vector2d(-gamepad1.left_stick_y, -gamepad1.left_stick_x), -gamepad1.right_stick_x));
-            //hi from grayson
+
 
             //updates
             robot.updateGimbalPos();
@@ -138,16 +138,6 @@ public class OZTeleopRobotCentric extends LinearOpMode {
                 robot.setGimbalPos(robot.getGIMBAL_RESTING_POS());
             }
 
-            //if (gamepad2.dpad_up){
-              //  robot.setSlidesPos(robot.getSLIDES_MAX());
-            //}
-            //if (gamepad2.dpad_down){
-              //  robot.setSlidesPos(robot.getSLIDES_PUT_SP_ON_HIGH_RUNG()+50);
-            //}
-
-
-            //end slides
-            //_____________________________________________________________________________________
 
 
 
@@ -159,10 +149,21 @@ public class OZTeleopRobotCentric extends LinearOpMode {
 
 
 
-            telemetry.addLine("robot position (starting at x: 0, y: 0, heading: 0)");
-            telemetry.addData("x:", drive.pose.position.x);
-            telemetry.addData("y:", drive.pose.position.y);
-            telemetry.addData("heading (deg):", Math.toDegrees(drive.pose.heading.toDouble()));
+           // telemetry.addLine("robot position (starting at x: 0, y: 0, heading: 0)");
+            //telemetry.addData("x:", drive.pose.position.x);
+            //telemetry.addData("y:", drive.pose.position.y);
+
+
+
+            telemetry.addData("Position", robot.drive.pose);
+            telemetry.addData("x: ", robot.drive.pose.position.x);
+            telemetry.addData("y: ", robot.drive.pose.position.y);
+            telemetry.addData("Heading: ", Math.toDegrees(robot.drive.pose.heading.toDouble()));
+
+
+
+
+
             telemetry.addLine();
             telemetry.addLine();
 
@@ -194,6 +195,10 @@ public class OZTeleopRobotCentric extends LinearOpMode {
 
             telemetry.addLine();
             telemetry.addLine();
+
+            telemetry.addLine("2-a: grab from wall");
+            telemetry.addLine("2-y: specimen scoring");
+            telemetry.addLine("2-x: grab from ground");
 
             /*
             telemetry.addLine("controls: ");
