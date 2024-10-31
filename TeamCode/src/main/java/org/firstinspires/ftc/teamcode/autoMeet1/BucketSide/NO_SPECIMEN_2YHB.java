@@ -53,14 +53,16 @@ public final class NO_SPECIMEN_2YHB extends LinearOpMode {
 
 
 
-        robot.setPivotMotorPos(robot.getPIVOT_MOTOR_VERTICAL()-180);
+        robot.setPivotMotorPos(robot.getPIVOT_MOTOR_VERTICAL()-560);
         robot.updatePivotMotorPos();
 
         Action moveToHighBucket1 = robot.drive.actionBuilder(robot.drive.pose)
                 .strafeToLinearHeading(new Vector2d(-55, -55), Math.toRadians(225))
                 .build();
         //Actions.runBlocking(moveToHighBucket1);
-
+        robot.delay(1.7);
+        robot.setAxlePos(robot.getAXLE_SERVO_BACK());
+        robot.updateAxleServoPos();
         robot.setSlidesPos(robot.getSLIDES_MAX());
         robot.updateSlidesPos();
         robot.delay(.2);
@@ -76,28 +78,25 @@ public final class NO_SPECIMEN_2YHB extends LinearOpMode {
         robot.setAxlePos(robot.getAXLE_SERVO_UP());
         robot.updateAxleServoPos();
         //move forward?
-        robot.delay(1.5);
+        robot.delay(.4);
         robot.setGrasperPos(robot.getGRASPER_OPEN());
         robot.updateGrasperPos();
-        robot.delay(.6);
+        robot.delay(.4);
         robot.setAxlePos(robot.getAXLE_SERVO_BACK());
         robot.updateAxleServoPos();
-        robot.delay(1);
-        robot.setSlidesPos(robot.getSLIDES_MAX());
-        robot.setAxlePos(robot.getAXLE_SERVO_BACK());
-        robot.updateAll();
 
+        robot.updateAll();
+        robot.delay(.2);
         Action moveBackFromHB = robot.drive.actionBuilder(robot.drive.pose)
                 .strafeToConstantHeading(new Vector2d(-40, -62.8))
                 .build();
         Actions.runBlocking(moveBackFromHB);//move back from net zone a bit
         robot.delay(.2);
 
-        robot.setAxlePos(robot.getAXLE_SERVO_UP());
-        robot.updateAxleServoPos();
+
         robot.setSlidesPos(0);
         robot.updateSlidesPos();
-        robot.delay(3);
+        robot.delay(1.3);
 
 
 
@@ -113,11 +112,13 @@ public final class NO_SPECIMEN_2YHB extends LinearOpMode {
 
         Action moveToFirstYellowSample = robot.drive.actionBuilder(robot.drive.pose)
                 //.strafeToConstantHeading(new Vector2d(-14, -48))
-                .strafeToConstantHeading(new Vector2d(-48.5, -54.4))//move to first yellow sample
+                .strafeToLinearHeading(new Vector2d(-53.4, -54.6), Math.toRadians(90))//move to first yellow sample
                 .build();
         Actions.runBlocking(moveToFirstYellowSample);
+        robot.setAxlePos(robot.getAXLE_SERVO_UP());
+        robot.updateAxleServoPos();
 
-        robot.setPivotMotorPos(5151);
+        robot.setPivotMotorPos(4660);
         robot.updatePivotMotorPos();
         robot.delay(.2);
 
@@ -129,7 +130,7 @@ public final class NO_SPECIMEN_2YHB extends LinearOpMode {
         robot.updateGrasperPos();
         robot.delay(.3);
 
-        robot.setPivotMotorPos(robot.getPIVOT_MOTOR_VERTICAL()-180);
+        robot.setPivotMotorPos(robot.getPIVOT_MOTOR_VERTICAL()-600);
         robot.updatePivotMotorPos();
         robot.delay(.8);
 
@@ -148,7 +149,7 @@ public final class NO_SPECIMEN_2YHB extends LinearOpMode {
 
         Action moveForwardAtHB2 = robot.drive.actionBuilder(robot.drive.pose)
                 //.strafeToLinearHeading(new Vector2d(-48, -45), Math.toRadians(-90))
-                .strafeToLinearHeading(new Vector2d(-52, -52), Math.toRadians(225))
+                .strafeToLinearHeading(new Vector2d(-50.5, -50.5), Math.toRadians(225))
                 .build();
         Actions.runBlocking(moveForwardAtHB2);
         robot.setAxlePos(robot.getAXLE_SERVO_UP());
