@@ -113,7 +113,7 @@ public final class Specimen_OZ_Side extends LinearOpMode {
         robot.updateAxleServoPos();
         robot.setSlidesPos(0);//slides down
         robot.updateSlidesPos();
-        robot.setPivotMotorPos(robot.getPIVOT_MOTOR_GRAB_FROM_WALL()-150);
+        robot.setPivotMotorPos(robot.getPIVOT_MOTOR_GRAB_FROM_WALL()-340);
         robot.updatePivotMotorPos();
 
 
@@ -149,7 +149,7 @@ public final class Specimen_OZ_Side extends LinearOpMode {
                 .strafeToLinearHeading(new Vector2d(6, -46), Math.toRadians(90.00))
                 .build();
         Action updatedMoveToSub2 = robot.drive.actionBuilder(robot.drive.pose)
-                .strafeToLinearHeading(new Vector2d(2, -44.5), Math.toRadians(90))
+                .strafeToLinearHeading(new Vector2d(0, -44.5), Math.toRadians(90))
                 .build();
         Actions.runBlocking(updatedMoveToSub2);//TODO: see if new path is ok
         robot.setPivotMotorPos(robot.getPIVOT_MOTOR_TO_HIGH_CHAMBER());
@@ -184,7 +184,7 @@ public final class Specimen_OZ_Side extends LinearOpMode {
 
 
         Action moveBackAwayFromSub2ToRED = robot.drive.actionBuilder(robot.drive.pose)
-                .strafeToConstantHeading(new Vector2d(4, -41.5))
+                .strafeToConstantHeading(new Vector2d(-2, -41.5))
                 //.strafeToConstantHeading(new Vector2d(8, -53))
                 .strafeToConstantHeading(new Vector2d(35.3, -46))
                 //.strafeToConstantHeading(new Vector2d(35.3, -7), new TranslationalVelConstraint(70), new ProfileAccelConstraint(-70,70))
