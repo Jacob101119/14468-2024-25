@@ -60,7 +60,7 @@ public final class Specimen_HB_1Yellow extends LinearOpMode {
 
         Action moveToSub = robot.drive.actionBuilder(robot.drive.pose)
 
-                .strafeToConstantHeading(new Vector2d(-8, -42.8))
+                .strafeToConstantHeading(new Vector2d(-10, -42.8))
                 .build();
         Actions.runBlocking(moveToSub);//drive forward
 
@@ -84,8 +84,8 @@ public final class Specimen_HB_1Yellow extends LinearOpMode {
         //moves sideways then back
         //TODO: fix the way it moves sideways to prevent getting stuck on specimen
         Action moveBackAwayFromSub = robot.drive.actionBuilder(robot.drive.pose)
-                .strafeToConstantHeading(new Vector2d(-10, -40))
-                .strafeToConstantHeading(new Vector2d(-12, -53.00))
+                .strafeToConstantHeading(new Vector2d(-12, -40))
+                .strafeToConstantHeading(new Vector2d(-13, -53.00))
                 .build();
         Actions.runBlocking(moveBackAwayFromSub);
         robot.setSlidesPos(0);//slides down
