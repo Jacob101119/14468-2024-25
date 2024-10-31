@@ -32,14 +32,17 @@ public class ResetTeleop extends LinearOpMode {
 
 
             //updates
-            robot.updatePivotMotorPos();
+            robot.RESETUpdatePivotMotorPos();
             robot.updateSlidesPos();
             //end
 
+            robot.setGimbalPos(robot.getGIMBAL_RESTING_POS());
+            robot.setAxlePos(robot.getAXLE_SERVO_DOWN());
+            robot.setGrasperPos(robot.getGRASPER_OPEN());
+            robot.updateAxleServoPos();
+            robot.updateGimbalPos();
+            robot.updateGrasperPos();
 
-            //gimbal servo
-
-            //end gimbal servo
 
 
             //slides
@@ -75,7 +78,7 @@ public class ResetTeleop extends LinearOpMode {
             telemetry.addLine("Positions:");
             telemetry.addData("left slides position: ", robot.getLeftSliderPos());
             telemetry.addData("right slides position: ", robot.getRightSliderPos());
-            telemetry.addData("hang arm position: ", robot.getHangArmPos());
+
             telemetry.addData("right slides position: ", robot.getRightSliderPos());
             telemetry.addData("pivot motor position: ", robot.getPivotMotorPos());
             telemetry.addData("gimbal servo position:", robot.getGimbalPos());

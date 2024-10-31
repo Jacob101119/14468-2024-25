@@ -189,6 +189,13 @@ public class BaseRobot{
         pivotMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         pivotMotor.setPower(PIVOT_MOTOR_POWER);
     }
+
+    public void RESETUpdatePivotMotorPos(){
+        //pivot motor position updating that has no limits, used for resetting the robot when value needs to be <0
+        pivotMotor.setTargetPosition(pivotMotorPos);
+        pivotMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        pivotMotor.setPower(PIVOT_MOTOR_POWER);
+    }
     public void setPivotMotorPos(int newPos) {
         //if (newPos < 0){
           //  newPos = 0;
@@ -234,11 +241,11 @@ public class BaseRobot{
         if(axlePos < 0){
             axlePos = 0;
         }
-        /*if(pivotMotorPos < 1489 && axlePos < AXLE_SERVO_DOWN) {
+        if(pivotMotorPos < 1489 && axlePos < AXLE_SERVO_DOWN) {
             setAxlePos(AXLE_SERVO_DOWN);
         }
 
-         */
+
         axleRotation.setPosition(axlePos);
     }
     public void setAxlePos(double newPos){
