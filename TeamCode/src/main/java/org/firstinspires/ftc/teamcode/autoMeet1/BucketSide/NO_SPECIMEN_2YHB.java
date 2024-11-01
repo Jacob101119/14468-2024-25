@@ -115,6 +115,7 @@ public final class NO_SPECIMEN_2YHB extends LinearOpMode {
                 .strafeToLinearHeading(new Vector2d(-52.6, -53.8), Math.toRadians(90))//move to first yellow sample
                 .build();
         Actions.runBlocking(moveToFirstYellowSample);
+
         robot.setAxlePos(robot.getAXLE_SERVO_UP());
         robot.updateAxleServoPos();
 
