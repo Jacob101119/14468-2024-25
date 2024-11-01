@@ -112,13 +112,13 @@ public final class NO_SPECIMEN_2YHB extends LinearOpMode {
 
         Action moveToFirstYellowSample = robot.drive.actionBuilder(robot.drive.pose)
                 //.strafeToConstantHeading(new Vector2d(-14, -48))
-                .strafeToLinearHeading(new Vector2d(-53.4, -54.6), Math.toRadians(90))//move to first yellow sample
+                .strafeToLinearHeading(new Vector2d(-52.6, -53.8), Math.toRadians(90))//move to first yellow sample
                 .build();
         Actions.runBlocking(moveToFirstYellowSample);
         robot.setAxlePos(robot.getAXLE_SERVO_UP());
         robot.updateAxleServoPos();
 
-        robot.setPivotMotorPos(4660);
+        robot.setPivotMotorPos(4720);
         robot.updatePivotMotorPos();
         robot.delay(.2);
 
