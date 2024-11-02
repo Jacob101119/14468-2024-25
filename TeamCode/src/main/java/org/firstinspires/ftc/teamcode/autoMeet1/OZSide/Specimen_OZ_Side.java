@@ -75,6 +75,11 @@ public final class Specimen_OZ_Side extends LinearOpMode {
 
         robot.delay(.3);
 
+        //new
+        telemetry.addLine("clip clip clip");
+        telemetry.update();
+        //end new
+
         robot.setSlidesPos(robot.getSLIDES_PUT_SP_ON_HIGH_RUNG());//clip specimen
         robot.updateSlidesPos();
         robot.delay(.35);
@@ -132,6 +137,19 @@ public final class Specimen_OZ_Side extends LinearOpMode {
         Actions.runBlocking(updatedMoveToOZ);
         robot.delay(.5);
         //grab specimen, pivot motor up
+
+        //new
+        telemetry.addLine("let the local boy cook");
+        telemetry.addLine();
+        telemetry.addLine();
+        telemetry.addLine();
+        telemetry.addData("x:", robot.drive.pose.position.x);
+        telemetry.addData("y:", robot.drive.pose.position.y);
+        telemetry.addData("heading:", robot.drive.pose.heading.toDouble());
+
+        telemetry.update();
+        //end new
+
         robot.setGrasperPos(robot.getGRASPER_CLOSED());
         robot.updateGrasperPos();
         robot.delay(.2);
@@ -169,6 +187,11 @@ public final class Specimen_OZ_Side extends LinearOpMode {
         robot.setAxlePos(robot.getAXLE_SERVO_UP());
         robot.updateAxleServoPos();
         robot.delay(.8);
+
+        //new
+        telemetry.addLine("clip clip clip");
+        telemetry.update();
+        //end new
 
         robot.setSlidesPos(robot.getSLIDES_PUT_SP_ON_HIGH_RUNG());//clip specimen
         robot.updateSlidesPos();
