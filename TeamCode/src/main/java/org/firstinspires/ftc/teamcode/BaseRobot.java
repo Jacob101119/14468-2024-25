@@ -422,7 +422,15 @@ public class BaseRobot{
     //____________________________________________________________________________________________________________________
 
 
+        public void resetSliderEncoders(){
 
+            leftSlider.setPower(0);
+            rightSlider.setPower(0);
+            leftSliderPos=0;
+            rightSliderPos=0;
+            leftSlider.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            rightSlider.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        }
 
 
 

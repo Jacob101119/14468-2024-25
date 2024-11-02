@@ -73,6 +73,10 @@ public class OZTeleopRobotCentric extends LinearOpMode {
 
              */
 
+            if(gamepad2.right_bumper){
+                robot.resetSliderEncoders();
+            }
+
             if(gamepad2.dpad_up){
                 robot.setPivotMotorPos(robot.getPIVOT_MOTOR_HORIZONTAL()-1000);
             }
