@@ -178,11 +178,11 @@ public class BaseRobot{
     //pivot motor pos ------------------
     public void updatePivotMotorPos() {
         if (pivotMotorPos < 0){
-
+            pivotMotorPos = 0;
         }
 
-        if (pivotMotorPos > PIVOT_MOTOR_HORIZONTAL + 400){
-            pivotMotorPos = PIVOT_MOTOR_HORIZONTAL + 400;
+        if (pivotMotorPos > 4769){
+            pivotMotorPos = 4769;
         }
 
         pivotMotor.setTargetPosition(pivotMotorPos);

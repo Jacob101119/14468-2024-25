@@ -96,6 +96,9 @@ public class OZTeleopRobotCentric extends LinearOpMode {
             if (gamepad1.dpad_right){
                 robot.setAxlePos(robot.getAXLE_SERVO_BACK());
             }
+            if(gamepad1.dpad_down){
+                robot.setAxlePos(robot.getAXLE_SERVO_DOWN());
+            }
 
             //if (gamepad1.dpad_up){
               //  robot.setPivotMotorPos(robot.getPIVOT_MOTOR_VERTICAL());
